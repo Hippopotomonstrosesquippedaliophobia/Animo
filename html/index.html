@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+	<head> 
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+		<link rel="stylesheet" href="../css/styles.css">
+		<script src="../js/game_audio.js"></script>
+		<script src="../js/game_logic.js"></script>
+		<title>Learning Game</title> 
+	</head> 
+	<body onload="startGame()"> 
+		<div id="game_container" class="center-div rounded_corners">			
+			<div id="mute_unmute">
+				<img id="muted_audio" src="../img/audio.png" onclick="changeAudioImage()" style="height:25px; width:25px"></img>
+			</div>
+			<div id="inner_content">
+				<div id="loader"></div>
+				<div id="start_page" class="animate-bottom">
+					<img id="play_button" src="../img/play.png" onclick="continueGame()" class="center"></img>
+				</div>
+				<div id="home_page">
+					<div class="flip-card">
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
+							</div>
+							<div class="flip-card-back">
+							  <h1>John Doe</h1> 
+							  <p>Architect & Engineer</p> 
+							  <p>We love that guy</p>
+							</div>
+						</div>
+					</div>
+					<div class="flip-card">
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
+							</div>
+							<div class="flip-card-back">
+							  <h1>John Doe</h1> 
+							  <p>Architect & Engineer</p> 
+							  <p>We love that guy</p>
+							</div>
+						</div>
+					</div>
+					<div class="flip-card">
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
+							</div>
+							<div class="flip-card-back">
+							  <h1>John Doe</h1> 
+							  <p>Architect & Engineer</p> 
+							  <p>We love that guy</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="1">
+				
+				</div>
+				<div id="2">
+				
+				</div>
+			</div>
+		</div>
+		<br>
+		<audio id="background_music" src="../music/background_music.mp3"  autoplay="true" controls loop="loop">
+			<p>If you are reading this, it is because your browser does not support the audio element.</p>
+		</audio		
+		<!--fix audio autoplay on this-->
+	</body> 
+</html>
+
+
