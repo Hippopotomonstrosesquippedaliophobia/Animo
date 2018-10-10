@@ -1,6 +1,12 @@
 function startGame(){
-	var divCount = 2; //Set this to the amount of divs there are (levels)
+	var divCount = 3; //Set this to the amount of divs there are (levels)
+	
+	var Users = getJson(`Users`);	
+	for(i = 0; i<3; i++)
+		document.getElementById(`Game${i}`).innerHTML = Users[i].Name;
+	
 	autoplay(); // start music
+	
 	hideAll(divCount); //Clear all from screen
 	
 	var myVar;
@@ -8,20 +14,41 @@ function startGame(){
 	
 }
 
+function playGame(index){	
+	var gameName = getJson(`Users`);
+	console.log(`Playing ${gameName[index].Name} game..`);
+	document.getElementById(`home_page`).style.display = "none";	
+	document.getElementById(`gameArea${index}`).style.display = "block";
+	
+	var gameInstruction = getJson(`Users`);
+	console.log(`Instructions: ${gameInstruction[index].Instructions}`);
+	
+	document.getElementById(`instruction${index}`).innerHTML = gameInstruction[index].Instructions;
+	gameZeroLoad();
+}
+
+function getJson(link){
+	//Http Request HERE
+	//=============================================================
+	url = `https://test-project-3d104.firebaseio.com/${link}.json`;
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); 
+	xmlHttp.send( null );
+	//--------------------------------------------------------------
+	return  JSON.parse (xmlHttp.responseText);
+}
+
 //hides everything in game area
 function hideAll(divCount){
 	//hides start and home page
 	document.getElementById("home_page").style.display = "none";	
-	
-	//Hides all other levels using increment
-	for (i = 1; i <= divCount; i++) {
-		hide(i);
-	}
 }
 
 //function hides based on element id
 function hide(id){
-	document.getElementById(id).style.display = "none";
+	id-1; //Fix Offset to the counter
+	var divNames = "gameArea" + id;
+	document.getElementById(divNames).style.display = "none";
 }
 
 function showPage() {
@@ -37,6 +64,10 @@ function continueGame(){
 	
 	document.getElementById("start_page").style.display = "none";
 	document.getElementById("home_page").style.display = "block";	
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
 //Functions to load before HTML loads

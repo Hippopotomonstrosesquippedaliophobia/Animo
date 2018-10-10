@@ -30,10 +30,10 @@ audio {
     margin: 0 auto;
     width: 100px; 
 }
-.center
-{
-    margin: 0 auto;
-    width: 100px; 
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
 }
 .center-audio
 {
@@ -107,6 +107,51 @@ audio {
 }
 /**HOMEPAGE SECTION*/
 
+/**Game0 SECTION*/
+#gameArea0{
+	display: none;
+}
+#overlay {
+    display: block;
+	width: 1080px;
+	height: 585px;
+	margin-top: -45px; 
+	margin-left: -35px;
+	margin-right: -55px;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+#gameContainer0{
+	display: none;
+	width: 1080px;
+	height: 585px;
+	margin-top: -45px; 
+	margin-left: -35px;
+	margin-right: -55px;	
+}
+#question0{
+	width:  900px;
+	height: 400px;
+	margin-top: 100px; 
+	margin-left: 50px;
+	margin-right: -55px;
+	background-color: rgba(255,255,255,0.9);
+	padding-top: 20px;
+}
+/**Game0 SECTION*/
+
+/**Game1 SECTION*/
+#gameArea1{
+	display: none;
+}
+/**Game1 SECTION*/
+
+/**Game2 SECTION*/
+#gameArea2{
+	display: none;
+}
+/**Game2 SECTION*/
 
 /**Miscellaneous*/
 /* Center the loader */
