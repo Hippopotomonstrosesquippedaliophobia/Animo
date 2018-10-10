@@ -5,6 +5,9 @@
 		<link rel="stylesheet" href="../css/styles.css">
 		<script src="../js/game_audio.js"></script>
 		<script src="../js/game_logic.js"></script>
+		<script src="../js/game_level0.js"></script>
+		<script src="../js/game_level1.js"></script>
+		<script src="../js/game_level2.js"></script>
 		<title>Learning Game</title> 
 	</head> 
 	<body onload="startGame()"> 
@@ -18,48 +21,62 @@
 					<img id="play_button" src="../img/play.png" onclick="continueGame()" class="center"></img>
 				</div>
 				<div id="home_page">
-					<div class="flip-card">
+					<div class="flip-card" onClick="playGame(0)">
 						<div class="flip-card-inner">
 							<div class="flip-card-front">
 							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
 							</div>
 							<div class="flip-card-back">
-							  <h1 id="Name0"></h1> 
+							  <h1 id="Game0"></h1> 
 							  <p>Architect & Engineer</p> 
 							  <p>We love that guy</p>
 							</div>
 						</div>
 					</div>
-					<div class="flip-card">
+					<div class="flip-card" onClick="playGame(1)">
 						<div class="flip-card-inner">
 							<div class="flip-card-front">
 							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
 							</div>
 							<div class="flip-card-back">
-							  <h1 id="Name1"></h1> 
+							  <h1 id="Game1"></h1> 
 							  <p>Architect & Engineer</p> 
 							  <p>We love that guy</p>
 							</div>
 						</div>
 					</div>
-					<div class="flip-card">
+					<div class="flip-card" onClick="playGame(2)">
 						<div class="flip-card-inner">
 							<div class="flip-card-front">
 							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
 							</div>
 							<div class="flip-card-back">
-							  <h1 id="Name2"></h1> 
+							  <h1 id="Game2"></h1> 
 							  <p>Architect & Engineer</p> 
 							  <p>We love that guy</p>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div id="1">
-				
+				<div id="gameArea0">
+					<div id="overlay" class="rounded_corners" onclick="offOverlay()">		
+						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
+						<center>
+							<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
+							<p id="instruction0" style="font-family: Verdana,sans-serif; color: lightgrey; padding-left: 50px; padding-right: 50px"></p>
+						</center>						
+					</div>
+					<div id="gameContainer0" class="rounded_corners">
+						<div id="question0" class="rounded_corners"> 
+							<h1 id="questionText0"></h1>
+						</div>
+					</div>
+				</div>				
+				<div id="gameArea1">
+				1
 				</div>
-				<div id="2">
-				
+				<div id="gameArea2">
+				2
 				</div>
 			</div>
 		</div>
