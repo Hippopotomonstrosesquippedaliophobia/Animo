@@ -15,3 +15,8 @@ function changeAudioImage(){
 		document.getElementById('muted_audio').src="../img/audio.png";
 	}
 }
+
+function flipSound(){
+	var flip = document.getElementById("flipcardSound");	
+	flip.play();	
+}
