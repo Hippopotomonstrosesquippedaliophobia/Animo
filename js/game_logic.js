@@ -1,11 +1,26 @@
 function startGame(){
 	var divCount = 2; //Set this to the amount of divs there are (levels)
+	var Users = getUsers();
+	for(i = 0; i<3; i++)
+		document.getElementById(`Name${i}`).innerHTML = Users[i].Name;
 	autoplay(); // start music
 	hideAll(divCount); //Clear all from screen
-	
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
 	
+}
+
+function getUsers(){
+	//Http Request HERE
+	//=============================================================
+	url = `https://test-project-3d104.firebaseio.com/Users.json`;
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); 
+	xmlHttp.send( null );
+	//--------------------------------------------------------------
+	
+
+	return  JSON.parse (xmlHttp.responseText);
 }
 
 //hides everything in game area
