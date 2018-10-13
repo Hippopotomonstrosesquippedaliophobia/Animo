@@ -10,6 +10,7 @@ function startGame(){
 	
 }
 
+//Returns an array of users in json
 function getUsers(){
 	//Http Request HERE
 	//=============================================================
@@ -17,10 +18,10 @@ function getUsers(){
 	var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", url, false ); 
 	xmlHttp.send( null );
-	//--------------------------------------------------------------
-	
+	//--------------------------------------------------------------	
 
-	return  JSON.parse (xmlHttp.responseText);
+	console.log(JSON.parse(xmlHttp.responseText));
+	return JSON.parse (xmlHttp.responseText);
 }
 
 //hides everything in game area
