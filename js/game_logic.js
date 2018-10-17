@@ -12,6 +12,9 @@ function startGame(){
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
 	
+	balloonPopup();
+	
+	
 }
 
 function playGame(index){	
@@ -64,6 +67,22 @@ function continueGame(){
 	
 	document.getElementById("start_page").style.display = "none";
 	document.getElementById("home_page").style.display = "block";	
+}
+
+function balloonPopup(){
+	//document.getElementById("moveBalloon").style.display = "block";
+	var elem = document.getElementById("moveBalloon");   
+	var pos = 0;
+	var id = setInterval(frame, 2);
+	function frame() {
+		if (pos == 350) {
+		  clearInterval(id);
+		} else {
+		  pos--; 
+		  elem.style.top = pos + 'px'; 
+		  //elem.style.left = pos + 'px'; 
+		}
+	}
 }
 
 function getRandomInt(max) {

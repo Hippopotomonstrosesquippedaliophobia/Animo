@@ -3,6 +3,7 @@
 	<head> 
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
 		<link rel="stylesheet" href="../css/styles.css">
+		<link href='https://fonts.googleapis.com/css?family=Wendy+One' rel='stylesheet' type='text/css'>
 		<script src="../js/game_audio.js"></script>
 		<script src="../js/game_logic.js"></script>
 		<script src="../js/game_level0.js"></script>
@@ -10,9 +11,9 @@
 		<script src="../js/game_level2.js"></script>
 		<title>Learning Game</title> 
 	</head> 
-	<body onload="startGame()"> 
-		<div id="game_container" class="center-div rounded_corners">			
-			<div id="mute_unmute">
+	<body onload="startGame()" class="noselect"> 
+		<div id="game_container" class="center-div rounded_corners">	
+			<div id="mute_unmute" class="pointer">
 				<img id="muted_audio" src="../img/audio.png" onclick="changeAudioImage()" style="height:25px; width:25px"></img>
 			</div>
 			<div id="inner_content">
@@ -24,24 +25,24 @@
 					<div class="flip-card pointer" onmouseover="flipSound()" onClick="playGame(0)">
 						<div class="flip-card-inner">
 							<div class="flip-card-front">
-							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
+							  <img src="../img/phonics.png" alt="Avatar" style="width:275px;height:300px;">
 							</div>
 							<div class="flip-card-back">
 							  <h1 id="Game0"></h1> 
-							  <p>Architect & Engineer</p> 
-							  <p>We love that guy</p>
+							  <p>Learn about how to use Phonics!</p> 
+							  <p style="margin: 0 auto; width: 90%">Fill in the blank spaces with the correct phonetical phrase to finish sentences and gain points! </p>
 							</div>
 						</div>
 					</div>
 					<div class="flip-card pointer" onmouseover="flipSound()" onClick="playGame(1)">
 						<div class="flip-card-inner">
 							<div class="flip-card-front">
-							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
+							  <img src="../img/math.png" alt="Avatar" style="width:275px;height:300px;">
 							</div>
 							<div class="flip-card-back">
 							  <h1 id="Game1"></h1> 
-							  <p>Architect & Engineer</p> 
-							  <p>We love that guy</p>
+							  <p>Solve Math problems!</p> 
+							  <p style="margin: 0 auto; width: 90%">Addition, subtraction, multiplication; Solve equations and get the high score!</p>
 							</div>
 						</div>
 					</div>
@@ -53,7 +54,7 @@
 							<div class="flip-card-back">
 							  <h1 id="Game2"></h1> 
 							  <p>Architect & Engineer</p> 
-							  <p>We love that guy</p>
+							  <p style="margin: 0 auto; width: 90%">We love that guy</p>
 							</div>
 						</div>
 					</div>
@@ -80,6 +81,16 @@
 				</div>
 			</div>
 		</div>
+		<div class="containerBalloon">
+			  <div id="moveBalloon" class="balloon">
+				<div><span class="balloonSpan">N</span></div>
+				<div><span class="balloonSpan" >I</span></div>
+				<div><span class="balloonSpan">C</span></div>
+				<div><span class="balloonSpan">E</span></div>
+				<div><span class="balloonSpan">!</span></div>
+				<div><span class="balloonSpan">!</span></div>
+			  </div>
+			</div>		
 		<br>
 		<audio id="background_music" src="../music/background_music.mp3"  autoplay="true" controls loop="loop">
 			<p>If you are reading this, it is because your browser does not support the audio element.</p>
