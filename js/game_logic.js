@@ -1,10 +1,5 @@
 function startGame(){
-	var divCount = 3; //Set this to the amount of divs there are (levels)
-	
-	var Users = getJson(`Users`);	
-	for(i = 0; i<3; i++)
-		document.getElementById(`Game${i}`).innerHTML = Users[i].Name;
-	
+	var divCount = 2; //Set this to the amount of divs there are (levels)
 	autoplay(); // start music
 	
 	hideAll(divCount); //Clear all from screen
