@@ -8,8 +8,8 @@ function autoplay(){
 	});
 }  
 function changeAudioImage(){  
-	document.getElementById('background_music').muted=!document.getElementById('background_music').muted;	
-	if (document.getElementById('background_music').muted){
+	document.getElementById('background_music2').muted=!document.getElementById('background_music2').muted;	
+	if (document.getElementById('background_music2').muted){
 		document.getElementById('muted_audio').src="../img/mute.png";
 	}else{
 		document.getElementById('muted_audio').src="../img/audio.png";

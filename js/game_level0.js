@@ -9,7 +9,7 @@ function offOverlay(){
 
 function gameZeroLoad(){
 	var questions = getQuestions();		
-	document.getElementById(`questionText0`).innerHTML = questions[0].Question;
+	document.getElementById(`questionText0`).innerHTML = questions[0].Question.replace('{_}', '________');
 	document.getElementById('question0Options').appendChild(makeUL(questions[0].Options));
 	//When the person answers the question, the array could be incremented but I'm tired.
 	//Imma tag you in Brons  
