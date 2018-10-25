@@ -152,6 +152,15 @@ audio {
 	background-color: rgba(255,255,255,0.9);
 	padding-top: 20px;
 }
+#question0Options li {
+  list-style: none;
+  padding: 10px;
+}
+#question0Options button {
+  width: 160px;
+  height: 70px;
+  
+}
 /**Game0 SECTION*/
 
 /**Game1 SECTION*/
