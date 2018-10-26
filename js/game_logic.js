@@ -1,3 +1,5 @@
+var activeDivId;
+
 function startGame(){
 	var divCount = 2; //Set this to the amount of divs there are (levels)
 	autoplay(); // start music
@@ -6,10 +8,7 @@ function startGame(){
 	
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
-	
-	balloonPopup();
-	
-	
+		
 }
 
 function playGame(index){	
@@ -17,12 +16,20 @@ function playGame(index){
 	console.log(`Playing ${gameName[index].Name} game..`);
 	document.getElementById(`home_page`).style.display = "none";	
 	document.getElementById(`gameArea${index}`).style.display = "block";
-	
-	var gameInstruction = getJson(`Users`);
-	console.log(`Instructions: ${gameInstruction[index].Instructions}`);
-	
-	document.getElementById(`instruction${index}`).innerHTML = gameInstruction[index].Instructions;
-	gameZeroLoad();
+
+	activeDivId = index;
+	console.log(index);
+	switch (activeDivId){
+		case 0:
+			gameZeroLoad();
+			break;
+		case 1:
+			gameOneLoad();
+			break;
+		case 2:
+			gameTwoLoad();
+			break;
+	}
 }
 
 function getJson(link){
@@ -64,24 +71,29 @@ function continueGame(){
 	document.getElementById("home_page").style.display = "block";	
 }
 
-function balloonPopup(){
-	//document.getElementById("moveBalloon").style.display = "block";
-	var elem = document.getElementById("moveBalloon");   
-	var pos = 0;
-	var id = setInterval(frame, 2);
-	function frame() {
-		if (pos == 350) {
-		  clearInterval(id);
-		} else {
-		  pos--; 
-		  elem.style.top = pos + 'px'; 
-		  //elem.style.left = pos + 'px'; 
-		}
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function reset(id){
+	switch(id){
+		case 0:
+			gameZeroReset();
+			break;
+		case 1:
+			gameOneReset();
+			break;
+		case 2:
+			gameTwoReset();
+			break;
 	}
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+//Hides active div and goes to home page
+function goHome(){
+	hide(activeDivId);
+	reset(activeDivId);
+	continueGame();
 }
 
 //Functions to load before HTML loads

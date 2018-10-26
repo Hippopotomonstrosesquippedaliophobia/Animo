@@ -1,8 +1,8 @@
 const NumberOfGameQuestions = 5;
 const NumberOfAllQuestions = 10;
 
-function offOverlay(){
-	document.getElementById(`overlay`).style.display = "none";
+function offOverlay0(){
+	document.getElementById(`overlay0`).style.display = "none";
 	document.getElementById(`gameContainer0`).style.display = "block";
 
 }
@@ -72,6 +72,11 @@ function makeUL(array) {
 
     // Finally, return the constructed list:
     return list;
+}
+
+function gameZeroReset(){
+	document.getElementById(`overlay0`).style.display = "block";
+	document.getElementById(`gameContainer0`).style.display = "none";
 }
 
 

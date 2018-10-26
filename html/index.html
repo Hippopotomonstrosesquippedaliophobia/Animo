@@ -2,6 +2,7 @@
 <html lang="en"> 
 	<head> 
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" href="../css/styles.css">
 		<link href='https://fonts.googleapis.com/css?family=Wendy+One' rel='stylesheet' type='text/css'>
 		<script src="../js/game_audio.js"></script>
@@ -9,13 +10,20 @@
 		<script src="../js/game_level0.js"></script>
 		<script src="../js/game_level1.js"></script>
 		<script src="../js/game_level2.js"></script>
-		<title>Learning Game</title> 
+		<link rel="icon" href="../img/title.png" sizes="16x16" type="image/png" />
+		<title>Animo</title> 
 	</head> 
 	<body onload="startGame()" class="noselect"> 
-		<div id="game_container" class="center-div rounded_corners">	
-			<div id="mute_unmute" class="pointer">
-				<img id="muted_audio" src="../img/audio.png" onclick="changeAudioImage()" style="height:25px; width:25px"></img>
-			</div>
+		<div id="game_container" class="center-div rounded_corners">		
+			<div id="top_controls">
+					<div id="home_button" class="pointer">
+							<i class="fas fa-home" onclick="goHome()"></i>
+					</div>
+					<div id="mute_unmute" class="pointer">
+							<img id="muted_audio" src="../img/audio.png" onclick="changeAudioImage()" style="height:25px; width:25px"></img>
+					</div>
+					
+			</div>		
 			<div id="inner_content">
 				<div id="loader"></div>
 				<div id="start_page" class="animate-bottom">
@@ -28,8 +36,7 @@
 							  <img src="../img/phonics.png" alt="Avatar" style="width:275px;height:300px;">
 							</div>
 							<div class="flip-card-back">
-							  <h1 id="Game0"></h1> 
-							  <p>Learn about how to use Phonics!</p> 
+							  <h1 id="Game0">Fantastic Phonics</h1> 
 							  <p style="margin: 0 auto; width: 90%">Fill in the blank spaces with the correct phonetical phrase to finish sentences and gain points! </p>
 							</div>
 						</div>
@@ -40,9 +47,8 @@
 							  <img src="../img/math.png" alt="Avatar" style="width:275px;height:300px;">
 							</div>
 							<div class="flip-card-back">
-							  <h1 id="Game1"></h1> 
-							  <p>Solve Math problems!</p> 
-							  <p style="margin: 0 auto; width: 90%">Addition, subtraction, multiplication; Solve equations and get the high score!</p>
+							  <h1 id="Game1">Fractioin Build Blast</h1>
+							  <p style="margin: 0 auto; width: 90%">YAY FRACTIONS >W< </p>
 							</div>
 						</div>
 					</div>
@@ -52,19 +58,25 @@
 							  <img src="../img/img_avatar.png" alt="Avatar" style="width:275px;height:300px;">
 							</div>
 							<div class="flip-card-back">
-							  <h1> Multiplication</h1> 
+							  <h1> Balloon Catcher </h1> 
 							  <p>Architect & Engineer</p> 
-							  <p style="margin: 0 auto; width: 90%">We love that guy</p>
+							  <p style="margin: 0 auto; width: 90%">Addition, subtraction, multiplication; Solve equations and get the high score!</p>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<!-- MINIGAMES-->
+				<!-- Debronni-->
+				<!---------------------------------------------------------------------------------->
 				<div id="gameArea0">
-					<div id="overlay" class="rounded_corners fade-in" onclick="offOverlay()">		
+					<div id="overlay0" class="rounded_corners fade-in overlay" onclick="offOverlay0()">		
 						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 						<center>
 							<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
-							<p id="instruction0" style="font-family: Verdana,sans-serif; color: lightgrey; padding-left: 50px; padding-right: 50px"></p>
+							<p id="instruction0" style="font-family: Verdana,sans-serif; color: lightgrey; padding-left: 50px; padding-right: 50px">
+								These are Debronni's Instructions
+							</p>
 						</center>						
 					</div>
 					<div id="gameContainer0" class="rounded_corners">
@@ -73,25 +85,57 @@
 							<div id="question0Options"></div>
 						</div>
 					</div>
-				</div>				
+				</div>
+				<!---------------------------------------------------------------------------------->
 				<div id="gameArea1">
-				1
+						<div id="overlay1" class="rounded_corners fade-in overlay" onclick="offOverlay1()">		
+								<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
+								<center>
+									<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
+									<p id="instruction1" style="font-family: Verdana,sans-serif; color: lightgrey; padding-left: 50px; padding-right: 50px">
+										These are Chris' Instructions
+									</p>
+								</center>						
+							</div>
+							<div id="gameContainer1"></div>
+							<!--CHRIS-->
+							<!---------------------------------------------------------------------------------->		
+							
+							
+							<!---------------------------------------------------------------------------------->
+							</div>
 				</div>
-				<div id="gameArea2"><!--CHRIS-->
-				2
+					
+
+				<!--D'Shon-->
+				<!---------------------------------------------------------------------------------->
+				<div id="gameArea2">
+						<div id="overlay2" class="rounded_corners fade-in overlay" onclick="offOverlay2()">		
+							<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
+							<center>
+								<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
+								<p id="instruction2" style="font-family: Verdana,sans-serif; color: lightgrey; padding-left: 50px; padding-right: 50px">
+									These are D'Shon's Instructions
+								</p>
+							</center>						
+						</div>
+						<div id="gameContainer2">
+							<div class="containerBalloon">
+								<div id="moveBalloon" class="balloon">
+								<div><span class="balloonSpan">N</span></div>
+								<div><span class="balloonSpan" >I</span></div>
+								<div><span class="balloonSpan">C</span></div>
+								<div><span class="balloonSpan">E</span></div>
+								<div><span class="balloonSpan">!</span></div>
+								<div><span class="balloonSpan">!</span></div>
+							</div>
+						</div>
+					</div>		
 				</div>
+				<!---------------------------------------------------------------------------------->
 			</div>
 		</div>
-		<div class="containerBalloon">
-			  <div id="moveBalloon" class="balloon">
-				<div><span class="balloonSpan">N</span></div>
-				<div><span class="balloonSpan" >I</span></div>
-				<div><span class="balloonSpan">C</span></div>
-				<div><span class="balloonSpan">E</span></div>
-				<div><span class="balloonSpan">!</span></div>
-				<div><span class="balloonSpan">!</span></div>
-			  </div>
-			</div>		
+	
 		<br>
 		<audio id="background_music" src="../music/background_music2.mp3"  autoplay="true" controls loop="loop">
 			<p>If you are reading this, it is because your browser does not support the audio element.</p>

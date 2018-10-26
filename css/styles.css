@@ -26,17 +26,27 @@ audio {
 	background-size: 100%;
 	z-index: 0;
 }
+#top_controls{
+	padding-top: 15px; 
+}
 #mute_unmute {
 	text-align: right;
-	padding-top: 15px; 
 	padding-right: 35px;
-	z-index: 1000;
+  z-index: 1000;
+  width: 70px;
+  float: right;
 }
+
 #inner_content {
 	z-index: 10;
 	width: 1080px;
 	height: 580px;
 	margin-top: -10px;
+}
+#home_button{
+  font-size: 20px;
+  width: 70px;
+  float: left;
 }
 .center-div
 {
@@ -124,17 +134,6 @@ audio {
 #gameArea0{
 	display: none;
 }
-#overlay {
-    display: block;
-	width: 1080px;
-	height: 585px;
-	margin-top: -45px; 
-	margin-left: -35px;
-	margin-right: -55px;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 2;
-    cursor: pointer;
-}
 #gameContainer0{
 	display: none;
 	width: 1080px;
@@ -164,10 +163,12 @@ audio {
 /**Game0 SECTION*/
 
 /**Game1 SECTION*/
+/**CHRIS**/
 #gameArea1{
 	display: none;
 }
 /**Game1 SECTION*/
+
 
 /**Game2 SECTION*/
 #gameArea2{
@@ -192,6 +193,18 @@ audio {
   height: 100px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 0.9s linear infinite;
+}
+
+.overlay {
+  display: block;
+width: 1080px;
+height: 585px;
+margin-top: -20px; 
+margin-left: -35px;
+margin-right: -55px;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
 }
 
 @-webkit-keyframes spin {
