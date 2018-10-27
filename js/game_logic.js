@@ -11,9 +11,7 @@ function startGame(){
 		
 }
 
-function playGame(index){	
-	var gameName = getJson(`Users`);
-	console.log(`Playing ${gameName[index].Name} game..`);
+function playGame(index){
 	document.getElementById(`home_page`).style.display = "none";	
 	document.getElementById(`gameArea${index}`).style.display = "block";
 
@@ -91,7 +89,8 @@ function reset(id){
 
 //Hides active div and goes to home page
 function goHome(){
-	hide(activeDivId);
+	var divName = "gameArea" + activeDivId;
+	document.getElementById(divName).style.display = "none";
 	reset(activeDivId);
 	continueGame();
 }
