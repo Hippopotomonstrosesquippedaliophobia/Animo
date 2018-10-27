@@ -46,7 +46,9 @@ audio {
 #home_button{
   font-size: 20px;
   width: 70px;
+  z-index: 1000;
   float: left;
+  position: absolute;
 }
 .center-div
 {
@@ -84,7 +86,7 @@ audio {
 
 /**HOMEPAGE SECTION*/
 #home_page {
-	padding-top: 65px;
+	padding-top: 130px;
 	padding-left:55px;
 }
 .flip-card {
