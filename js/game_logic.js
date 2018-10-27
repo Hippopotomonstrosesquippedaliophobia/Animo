@@ -16,7 +16,6 @@ function playGame(index){
 	document.getElementById(`gameArea${index}`).style.display = "block";
 
 	activeDivId = index;
-	console.log(index);
 	switch (activeDivId){
 		case 0:
 			gameZeroLoad();

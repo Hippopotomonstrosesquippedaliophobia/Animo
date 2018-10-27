@@ -120,14 +120,7 @@
 						</center>						
 					</div>
 					<div id="gameContainer2" class="rounded_corners">
-						<div id="answerField2">
-							<form>
-								<textarea></textarea>
-								<button> Submit</button>
-							</form>
-							<button onclick="balloonFloat()">Float</button>
-							<button onclick="balloonFall()">Sink</button>
-						</div>
+						
 						<div id="containerBalloon" style="display:none;">
 							<div id="moveBalloon" class="balloon">
 								<div><span class="balloonSpan">
@@ -135,6 +128,11 @@
 									<p id="mathYO"></p>
 								</span></div>
 							</div>
+						</div>
+						<div id="answerField2">
+							<form onsubmit="return checkMathAnswer()" autocomplete="off">
+								<input type="text" id="userMathAnswer" autocomplete="off"></input>
+							</form>
 						</div>
 					</div>		
 				</div>
