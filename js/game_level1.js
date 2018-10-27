@@ -1,7 +1,7 @@
 function offOverlay1(){
 	document.getElementById(`overlay1`).style.display = "none";
-	document.getElementById(`gameContainer1`).style.display = "block";
-
+	document.getElementById(`gameContainer1`).style.display = "block";	
+	document.getElementById("home_button").style.display = "block";
 }
 //CHRIS
 function gameOneLoad(){
