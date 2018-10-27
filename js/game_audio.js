@@ -6,6 +6,8 @@ function autoplay(){
 		audio.play();
 	  }, 2000);
 	});
+
+	audio.volume = 0.3;
 }  
 function changeAudioImage(){  
 	document.getElementById('background_music').muted=!document.getElementById('background_music').muted;	
@@ -17,6 +19,7 @@ function changeAudioImage(){
 }
 
 function flipSound(){
-	var flip = document.getElementById("flipcardSound");	
+	var flip = document.getElementById("flipcardSound");
+	flip.volume = 0.3;	
 	flip.play();	
 }

@@ -4,6 +4,7 @@ const FALL_DISTANCE = 60;
 const MAX_HEIGHT = 450;
 const UP_SPEED = 20;//smaller = faster
 const DOWN_SPEED = 15;//smaller = faster
+var music2 = new Audio("../music/game2BackgroundMusic.mp3")
 
 var mathQuestion = {
 	operator:'',
@@ -16,14 +17,22 @@ function gameTwoLoad(){
 	document.getElementById(`game_container`).style.backgroundImage ="url(../img/game2Background.gif)"
 	document.getElementById(`overlay2`).style.marginTop = "-590px";
 	document.getElementById(`gameContainer2`).style.marginTop = "-590px";	
-	document.getElementById("moveBalloon").style.transform="translateY(200px)"; 
+	document.getElementById("moveBalloon").style.transform="translateY(300px)";
+	document.getElementById("background_music").muted = true; 
+	music2.volume = 0.3;
+	music2.play();
 	newMathQuestion();
 }
 
 function gameTwoReset(){
 	document.getElementById(`overlay2`).style.display = "block";
 	document.getElementById(`gameContainer2`).style.display = "none";
-	document.getElementById(`game_container`).style.backgroundImage ="url(../img/background_waterfall.gif)"
+	document.getElementById(`game_container`).style.backgroundImage ="url(../img/background_waterfall.gif)";
+	music2.pause();
+	music2.currentTime = 0;
+	
+	document.getElementById("background_music").muted = false; 
+
 	balloonReset();
 }
 
@@ -35,8 +44,8 @@ function offOverlay2(){
 
 //Question Logic----------------------------------------------------------------------
 function newMathQuestion(){
-	var question = generateMathQuestion();
-	injectMathQuestion(question);
+	generateMathQuestion();
+	injectMathQuestion(mathQuestion);
 }
 
 function injectMathQuestion(question){
@@ -64,9 +73,7 @@ function generateMathQuestion(){
 			question.answer = question.x - question.y;
 			break;
 	}
-	console.log(question);
 	mathQuestion = question;
-	return question;
 }
 
 function checkMathAnswer(){
@@ -76,6 +83,7 @@ function checkMathAnswer(){
 	if(userAnswer==question.answer) balloonFall();
 	return false;
 }
+
 //Balloon Logic----------------------------------------------------------------------
 function balloonReset(){	
 	pos = 0;
