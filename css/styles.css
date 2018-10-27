@@ -178,7 +178,13 @@ audio {
 }
 
 #answerField2{
-  
+  position: absolute;
+}
+
+#userMathAnswer{
+  border-radius: 6px;
+  background: #ffffffc0;
+  border: none;
 }
 /**Game2 SECTION*/
 

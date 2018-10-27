@@ -17,9 +17,10 @@ function gameTwoLoad(){
 	document.getElementById(`game_container`).style.backgroundImage ="url(../img/game2Background.gif)"
 	document.getElementById(`overlay2`).style.marginTop = "-590px";
 	document.getElementById(`gameContainer2`).style.marginTop = "-590px";	
-	document.getElementById("moveBalloon").style.transform="translateY(300px)";
+	document.getElementById("moveBalloon").style.transform="translate(-100px,300px)";
 	document.getElementById("background_music").muted = true; 
 	music2.volume = 0.3;
+	music2.loop = true;
 	music2.play();
 	newMathQuestion();
 }
