@@ -1,11 +1,12 @@
 const NumberOfGameQuestions = 5;
 const NumberOfAllQuestions = 10;
 var currentQuestion;
-var currentQCount = 0;
+var currentQCount;
 
 function resetcounters(){
-	var currentQuestion = null;
+	var currentQuestion = 0;
 	var currentQCount = 0;
+	console.log("Cleared currentQuestion: "+currentQuestion+ " and currentQCount: "+currentQCount);
 }
 
 function offOverlay0(){
@@ -15,14 +16,17 @@ function offOverlay0(){
 }
 
 function gameZeroLoad(){
+	currentQCount = 0;
+	resetcounters();
 	var questions = getQuestions();	
 	currentQuestion = questions[currentQCount];
 	incrementQuestions(questions);
 }
 
 function incrementQuestions(questions){
-	currentQuestion = questions[currentQCount++];
 	nextQuestion(currentQuestion);
+	currentQuestion = questions[currentQCount++];
+	console.log(currentQuestion);
 }
 function nextQuestion(thequestion){	
 	console.log(thequestion);
