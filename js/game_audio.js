@@ -1,3 +1,5 @@
+
+
 function autoplay(){  
 	var audio = document.getElementById("background_music");
 
@@ -16,6 +18,18 @@ function changeAudioImage(){
 	}else{
 		document.getElementById('muted_audio').src="../img/audio.png";
 	}
+}
+
+function setBackgroundMusic(newAudioSrc){
+	var backgroundMusic = document.getElementById("background_music");
+	backgroundMusic.pause();
+	backgroundMusic.currentTime = 0;
+	backgroundMusic.src = newAudioSrc;
+	backgroundMusic.play();
+}
+
+function resetBackgroundMusic(){
+	setBackgroundMusic("../music/background_music2.mp3");
 }
 
 function flipSound(){

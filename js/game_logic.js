@@ -64,7 +64,7 @@ function continueGame(){
 	//If music isnt playing already, play music
 	var audio = document.getElementById("background_music");
 	audio.play();
-	
+	//openFullscreen();
 	document.getElementById("start_page").style.display = "none";
 	document.getElementById("home_page").style.display = "block";	
 }
@@ -95,6 +95,18 @@ function goHome(){
 	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
 }
 
+function openFullscreen() {
+	var elem = document.getElementById("game_container"); 
+	if (elem.requestFullscreen) {
+	  elem.requestFullscreen();
+	} else if (elem.mozRequestFullScreen) { /* Firefox */
+	  elem.mozRequestFullScreen();
+	} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+	  elem.webkitRequestFullscreen();
+	} else if (elem.msRequestFullscreen) { /* IE/Edge */
+	  elem.msRequestFullscreen();
+	}
+  }
 //Functions to load before HTML loads
 window.onload = function() {
 	

@@ -23,7 +23,7 @@
 							<img id="muted_audio" src="../img/audio.png" onclick="changeAudioImage()" style="height:25px; width:25px"></img>
 					</div>					
 			</div>		
-			<div id="inner_content">
+			<div id="inner_content" style="height:inherit; width:inherit">
 				<div id="loader"></div>
 				<div id="start_page" class="animate-bottom">
 					<img id="play_button" src="../img/play.png" onclick="continueGame()" class="center pointer"></img>
@@ -68,7 +68,7 @@
 				<!-- MINIGAMES-->
 				<!-- Debronni-->
 				<!---------------------------------------------------------------------------------->
-				<div id="gameArea0">
+				<div id="gameArea0" style="height: inherit; width:inherit">
 					<div id="overlay0" class="rounded_corners fade-in overlay" onclick="offOverlay0()">		
 						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 						<center>
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 				<!---------------------------------------------------------------------------------->
-				<div id="gameArea1">
+				<div id="gameArea1" style="height: inherit; width:inherit">
 						<div id="overlay1" class="rounded_corners fade-in overlay" onclick="offOverlay1()">		
 								<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 								<center>
@@ -108,7 +108,7 @@
 
 				<!--D'Shon-->
 				<!---------------------------------------------------------------------------------->
-				<div id="gameArea2">
+				<div id="gameArea2" style="height: inherit; width:inherit">
 					<div id="overlay2" class="rounded_corners fade-in overlay" onclick="offOverlay2()">		
 						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 						<center>
@@ -120,7 +120,7 @@
 					</div>
 					<div id="gameContainer2" class="rounded_corners">
 						
-						<div id="containerBalloon" style="display:none; background:red; width: 150px;">
+						<div id="containerBalloon" style="display:none; width: 150px;">
 							<div id="moveBalloon" class="balloon" style=" width:50px;">
 								<div><span class="balloonSpan">
 									<p id="mathX"></p>
@@ -128,7 +128,7 @@
 								</span></div>
 							</div>
 						</div>
-						<form onsubmit="return checkMathAnswer()" autocomplete="off" style="float:right; background:blue;">
+						<form onsubmit="return checkMathAnswer()" autocomplete="off" style="float:right;">
 							<input type="text" id="userMathAnswer" autocomplete="off"></input>
 						</form>
 					</div>		

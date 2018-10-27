@@ -203,8 +203,8 @@ audio {
 
 .overlay {
   display: block;
-  width: 1080px;
-  height: 585px;
+  width: inherit;
+  height: inherit;
   margin-top: -20px; 
   margin-left: -35px;
   margin-right: -55px;

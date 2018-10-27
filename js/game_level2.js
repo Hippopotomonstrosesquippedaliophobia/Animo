@@ -4,7 +4,7 @@ const FALL_DISTANCE = 60;
 const MAX_HEIGHT = 450;
 const UP_SPEED = 20;//smaller = faster
 const DOWN_SPEED = 15;//smaller = faster
-var music2 = new Audio("../music/game2BackgroundMusic.mp3")
+var music2 = "../music/game2BackgroundMusic.mp3";
 
 var mathQuestion = {
 	operator:'',
@@ -15,12 +15,8 @@ var mathQuestion = {
 
 function gameTwoLoad(){	
 	document.getElementById(`game_container`).style.backgroundImage ="url(../img/game2Background.gif)"
-	document.getElementById(`overlay2`).style.marginTop = "-590px";
-	document.getElementById(`gameContainer2`).style.marginTop = "-590px";	
 	document.getElementById("moveBalloon").style.transform="translateY(300px)";
-	document.getElementById("background_music").muted = true; 
-	music2.volume = 0.3;
-	music2.play();
+	setBackgroundMusic(music2);
 	newMathQuestion();
 }
 
@@ -28,8 +24,7 @@ function gameTwoReset(){
 	document.getElementById(`overlay2`).style.display = "block";
 	document.getElementById(`gameContainer2`).style.display = "none";
 	document.getElementById(`game_container`).style.backgroundImage ="url(../img/background_waterfall.gif)";
-	music2.pause();
-	music2.currentTime = 0;
+	resetBackgroundMusic();
 	
 	document.getElementById("background_music").muted = false; 
 
@@ -40,6 +35,7 @@ function offOverlay2(){
 	document.getElementById(`overlay2`).style.display = "none";
 	document.getElementById(`gameContainer2`).style.display = "block";
 	document.getElementById("containerBalloon").style.display = "block"; 
+	document.getElementById("home_button").style.display = "block";
 }
 
 //Question Logic----------------------------------------------------------------------
