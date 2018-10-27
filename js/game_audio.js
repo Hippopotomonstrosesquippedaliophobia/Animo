@@ -22,10 +22,8 @@ function changeAudioImage(){
 
 function setBackgroundMusic(newAudioSrc){
 	var backgroundMusic = document.getElementById("background_music");
-	backgroundMusic.pause();
 	backgroundMusic.currentTime = 0;
 	backgroundMusic.src = newAudioSrc;
-	backgroundMusic.play();
 }
 
 function resetBackgroundMusic(){

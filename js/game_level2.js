@@ -15,7 +15,7 @@ var mathQuestion = {
 
 function gameTwoLoad(){	
 	document.getElementById(`game_container`).style.backgroundImage ="url(../img/game2Background.gif)"
-	document.getElementById("moveBalloon").style.transform="translateY(300px)";
+	document.getElementById("moveBalloon").style.transform="translateY(200px)";
 	setBackgroundMusic(music2);
 	newMathQuestion();
 }
