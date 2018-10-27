@@ -3,6 +3,11 @@ const NumberOfAllQuestions = 10;
 var currentQuestion;
 var currentQCount = 0;
 
+function resetcounters(){
+	var currentQuestion = null;
+	var currentQCount = 0;
+}
+
 function offOverlay0(){
 	document.getElementById(`overlay0`).style.display = "none";
 	document.getElementById(`gameContainer0`).style.display = "block";	

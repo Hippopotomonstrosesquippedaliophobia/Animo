@@ -95,6 +95,7 @@ function goHome(){
 	hide(activeDivId); //Hides gameArea0-2 
 	reset(activeDivId); // Resets overlay to block and hides gameContainer0-2
 	continueGame();
+	resetcounters();
 	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
 }
 
