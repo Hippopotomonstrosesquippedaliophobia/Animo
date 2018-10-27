@@ -18,7 +18,7 @@ audio {
     background-color: #f1f1f1;
 }
 #game_container {
-  margin-top: 6%;
+  margin-top: 4%;
 	width: 1080px;
 	height: 580px;
 	border: 3px solid black;
@@ -80,7 +80,7 @@ audio {
 	height:105px; 
 	width:105px;
 	margin-left: 460px;
-	margin-top: 180px;
+	margin-top: 210px;
 }
 /**START PAGE SECTION*/
 

@@ -3,8 +3,8 @@ const NumberOfAllQuestions = 10;
 
 function offOverlay0(){
 	document.getElementById(`overlay0`).style.display = "none";
-	document.getElementById(`gameContainer0`).style.display = "block";
-
+	document.getElementById(`gameContainer0`).style.display = "block";	
+	document.getElementById("home_button").style.display = "block";
 }
 
 function gameZeroLoad(){

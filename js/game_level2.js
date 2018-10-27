@@ -10,8 +10,8 @@ function gameTwoReset(){
 
 function offOverlay2(){
 	document.getElementById(`overlay2`).style.display = "none";
-	document.getElementById(`gameContainer2`).style.display = "block";
-
+	document.getElementById(`gameContainer2`).style.display = "block";	
+	document.getElementById("home_button").style.display = "block";
 }
 
 function balloonReset(){
