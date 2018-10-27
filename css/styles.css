@@ -18,7 +18,7 @@ audio {
     background-color: #f1f1f1;
 }
 #game_container {
-  margin-top: 6%;
+  margin-top: 4%;
 	width: 1080px;
 	height: 580px;
 	border: 3px solid black;
@@ -80,7 +80,7 @@ audio {
 	height:105px; 
 	width:105px;
 	margin-left: 460px;
-	margin-top: 180px;
+	margin-top: 210px;
 }
 /**START PAGE SECTION*/
 
@@ -210,9 +210,9 @@ audio {
 
 .overlay {
   display: block;
-  width: 1080px;
-  height: 585px;
-  margin-top: -20px; 
+  width: inherit;
+  height: inherit;
+  margin-top: -18px; 
   margin-left: -35px;
   margin-right: -55px;
   background-color: rgba(0,0,0,0.5);
@@ -291,7 +291,7 @@ audio {
 @gps-yellow:         rgba(242, 194, 58, 0.9);
 
 span {
-  font-family: 'Press Start 2P', sans-serif;  
+  font-family: 'Press Start 2P', cursive;  
 }
 
 span {
@@ -315,10 +315,10 @@ span {
   position: relative;
 }
 .balloonSpan {
-  font-size: 30px;
+  font-size: 40px;
 }
 .balloonSpan > p{
-  margin: 10px 0px 0px -20px;
+  margin: 2px 0px 0px -25px;
 }
 .balloon > div {
    width:104px;

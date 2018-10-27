@@ -1,10 +1,11 @@
 var activeDivId;
 
 function startGame(){
-	var divCount = 2; //Set this to the amount of divs there are (levels)
+	var divCount = 2; //Set this to the amount of divs there are (levels) (-1 because starts at 0)
 	autoplay(); // start music
 	
-	hideAll(divCount); //Clear all from screen
+	hideAll(divCount); //Clear all from screen		
+	document.getElementById("home_button").style.display = "none"; // Hides Home button 
 	
 	
 	var myVar;
@@ -44,7 +45,7 @@ function getJson(link){
 //hides everything in game area
 function hideAll(divCount){
 	//hides start and home page
-	document.getElementById("home_page").style.display = "none";	
+	document.getElementById("home_page").style.display = "none";
 }
 
 //function hides based on element id
@@ -65,7 +66,7 @@ function continueGame(){
 	var audio = document.getElementById("background_music");
 	openFullscreen();
 	audio.play();
-	
+	//openFullscreen();
 	document.getElementById("start_page").style.display = "none";
 	document.getElementById("home_page").style.display = "block";	
 }
@@ -90,25 +91,36 @@ function reset(id){
 
 //Hides active div and goes to home page
 function goHome(){
-	var divName = "gameArea" + activeDivId;
-	document.getElementById(divName).style.display = "none";
-	reset(activeDivId);
+	hide(activeDivId); //Hides gameArea0-2 
+	reset(activeDivId); // Resets overlay to block and hides gameContainer0-2
 	continueGame();
+	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
 }
 
 function openFullscreen() {
+<<<<<<< HEAD
 	var elem = document.getElementById(`game_container`);
+=======
+	var elem = document.getElementById("game_container"); 
+>>>>>>> 9654b0ad12b41e8f6754cf844254e1837d43c333
 	if (elem.requestFullscreen) {
 	  elem.requestFullscreen();
 	} else if (elem.mozRequestFullScreen) { /* Firefox */
 	  elem.mozRequestFullScreen();
+<<<<<<< HEAD
 	} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+=======
+	} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+>>>>>>> 9654b0ad12b41e8f6754cf844254e1837d43c333
 	  elem.webkitRequestFullscreen();
 	} else if (elem.msRequestFullscreen) { /* IE/Edge */
 	  elem.msRequestFullscreen();
 	}
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9654b0ad12b41e8f6754cf844254e1837d43c333
 //Functions to load before HTML loads
 window.onload = function() {
 	

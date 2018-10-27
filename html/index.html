@@ -23,7 +23,7 @@
 							<img id="muted_audio" src="../img/audio.png" onclick="changeAudioImage()" style="height:25px; width:25px"></img>
 					</div>					
 			</div>		
-			<div id="inner_content">
+			<div id="inner_content" style="height:inherit; width:inherit">
 				<div id="loader"></div>
 				<div id="start_page" class="animate-bottom">
 					<img id="play_button" src="../img/play.png" onclick="continueGame()" class="center pointer"></img>
@@ -68,7 +68,7 @@
 				<!-- MINIGAMES-->
 				<!-- Debronni-->
 				<!---------------------------------------------------------------------------------->
-				<div id="gameArea0">
+				<div id="gameArea0" style="height: inherit; width:inherit">
 					<div id="overlay0" class="rounded_corners fade-in overlay" onclick="offOverlay0()">		
 						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 						<center>
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 				<!---------------------------------------------------------------------------------->
-				<div id="gameArea1">
+				<div id="gameArea1" style="height: inherit; width:inherit">
 						<div id="overlay1" class="rounded_corners fade-in overlay" onclick="offOverlay1()">		
 								<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 								<center>
@@ -95,20 +95,20 @@
 										These are Chris' Instructions
 									</p>
 								</center>						
-							</div>
-							<div id="gameContainer1"></div>
+						</div>
+						<div id="gameContainer1">
 							<!--CHRIS-->
 							<!---------------------------------------------------------------------------------->		
 							
 							
 							<!---------------------------------------------------------------------------------->
-							</div>
+						</div>							
 				</div>
 					
 
 				<!--D'Shon-->
 				<!---------------------------------------------------------------------------------->
-				<div id="gameArea2">
+				<div id="gameArea2" style="height: inherit; width:inherit">
 					<div id="overlay2" class="rounded_corners fade-in overlay" onclick="offOverlay2()">		
 						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 						<center>
@@ -118,18 +118,30 @@
 							</p>
 						</center>						
 					</div>
+<<<<<<< HEAD
 					<div id="gameContainer2" class="rounded_corners" style="display: none;">
 						
 						<div id="containerBalloon" style="display:none; width: 150px;">
 							<div id="moveBalloon" class="balloon" style="width:50px;">
+=======
+					<div id="gameContainer2" class="rounded_corners" style="display:none;">
+						
+						<div id="containerBalloon" style="display:none; width: 150px;">
+							<div id="moveBalloon" class="balloon" style=" width:50px;">
+>>>>>>> 9654b0ad12b41e8f6754cf844254e1837d43c333
 								<div><span class="balloonSpan">
 									<p id="mathX"></p>
 									<p id="mathYO"></p>
 								</span></div>
 							</div>
 						</div>
+<<<<<<< HEAD
 						<form id="answerField2" onsubmit="return checkMathAnswer()" autocomplete="off">
 							<input type="text" class="eightbit-btn" id="userMathAnswer" autocomplete="off"></input>
+=======
+						<form onsubmit="return checkMathAnswer()" autocomplete="off" style="float:right;">
+							<input type="text" id="userMathAnswer" autocomplete="off"></input>
+>>>>>>> 9654b0ad12b41e8f6754cf844254e1837d43c333
 						</form>
 					</div>		
 				</div>
@@ -147,6 +159,15 @@
 		<audio id = "flipcardSound" src="../music/flip_card.mp3" >
 			Your browser isn't invited for super fun audio time.
 		</audio>
+
+		<!--PHONICS GAME AUDIO-->
+		<audio id = "ah" src="../music/phonics/ah.mp3">
+		</audio>
+		<audio id = "eh" src="../music/phonics/eh.mp3">
+		</audio>
+		<audio id = "th" src="../music/phonics/th.mp3">
+		</audio>
+		<!--PHONICS GAME AUDIO-->
 	</body> 
 </html>
 
