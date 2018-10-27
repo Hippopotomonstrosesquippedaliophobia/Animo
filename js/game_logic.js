@@ -1,10 +1,11 @@
 var activeDivId;
 
 function startGame(){
-	var divCount = 2; //Set this to the amount of divs there are (levels)
+	var divCount = 2; //Set this to the amount of divs there are (levels) (-1 because starts at 0)
 	autoplay(); // start music
 	
-	hideAll(divCount); //Clear all from screen
+	hideAll(divCount); //Clear all from screen		
+	document.getElementById("home_button").style.display = "none"; // Hides Home button 
 	
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
@@ -43,7 +44,7 @@ function getJson(link){
 //hides everything in game area
 function hideAll(divCount){
 	//hides start and home page
-	document.getElementById("home_page").style.display = "none";	
+	document.getElementById("home_page").style.display = "none";
 }
 
 //function hides based on element id
@@ -88,10 +89,10 @@ function reset(id){
 
 //Hides active div and goes to home page
 function goHome(){
-	var divName = "gameArea" + activeDivId;
-	document.getElementById(divName).style.display = "none";
-	reset(activeDivId);
+	hide(activeDivId); //Hides gameArea0-2 
+	reset(activeDivId); // Resets overlay to block and hides gameContainer0-2
 	continueGame();
+	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
 }
 
 //Functions to load before HTML loads

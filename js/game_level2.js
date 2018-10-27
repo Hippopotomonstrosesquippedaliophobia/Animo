@@ -46,6 +46,7 @@ function offOverlay2(){
 function newMathQuestion(){
 	generateMathQuestion();
 	injectMathQuestion(mathQuestion);
+
 }
 
 function injectMathQuestion(question){
