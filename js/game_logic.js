@@ -6,6 +6,7 @@ function startGame(){
 	
 	hideAll(divCount); //Clear all from screen
 	
+	
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
 		
@@ -62,6 +63,7 @@ function showPage() {
 function continueGame(){
 	//If music isnt playing already, play music
 	var audio = document.getElementById("background_music");
+	openFullscreen();
 	audio.play();
 	
 	document.getElementById("start_page").style.display = "none";
@@ -93,6 +95,19 @@ function goHome(){
 	reset(activeDivId);
 	continueGame();
 }
+
+function openFullscreen() {
+	var elem = document.getElementById(`game_container`);
+	if (elem.requestFullscreen) {
+	  elem.requestFullscreen();
+	} else if (elem.mozRequestFullScreen) { /* Firefox */
+	  elem.mozRequestFullScreen();
+	} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+	  elem.webkitRequestFullscreen();
+	} else if (elem.msRequestFullscreen) { /* IE/Edge */
+	  elem.msRequestFullscreen();
+	}
+  }
 
 //Functions to load before HTML loads
 window.onload = function() {
