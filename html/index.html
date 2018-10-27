@@ -109,26 +109,28 @@
 				<!--D'Shon-->
 				<!---------------------------------------------------------------------------------->
 				<div id="gameArea2">
-						<div id="overlay2" class="rounded_corners fade-in overlay" onclick="offOverlay2()">		
-							<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
-							<center>
-								<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
-								<p id="instruction2" style="font-family: Verdana,sans-serif; color: lightgrey; padding-left: 50px; padding-right: 50px">
-									These are D'Shon's Instructions
-								</p>
-							</center>						
-						</div>
-						<div id="gameContainer2">
-							<div class="containerBalloon">
-								<div id="moveBalloon" class="balloon">
-								<div><span class="balloonSpan">N</span></div>
-								<div><span class="balloonSpan" >I</span></div>
-								<div><span class="balloonSpan">C</span></div>
-								<div><span class="balloonSpan">E</span></div>
-								<div><span class="balloonSpan">!</span></div>
-								<div><span class="balloonSpan">!</span></div>
+					<div id="overlay2" class="rounded_corners fade-in overlay" onclick="offOverlay2()">		
+						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
+						<center>
+							<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
+							<p id="instruction2" style="font-family: Verdana,sans-serif; color: lightgrey; padding-left: 50px; padding-right: 50px">
+								These are D'Shon's Instructions
+							</p>
+						</center>						
+					</div>
+					<div id="gameContainer2" class="rounded_corners">
+						
+						<div id="containerBalloon" style="display:none; background:red; width: 150px;">
+							<div id="moveBalloon" class="balloon" style=" width:50px;">
+								<div><span class="balloonSpan">
+									<p id="mathX"></p>
+									<p id="mathYO"></p>
+								</span></div>
 							</div>
 						</div>
+						<form onsubmit="return checkMathAnswer()" autocomplete="off" style="float:right; background:blue;">
+							<input type="text" id="userMathAnswer" autocomplete="off"></input>
+						</form>
 					</div>		
 				</div>
 				<!---------------------------------------------------------------------------------->
@@ -141,8 +143,9 @@
 		</audio>	
 		<!--fix audio autoplay on this-->
 		
+		
 		<!--AUDIO FILES LOCATION-->
-		<audio id = "flipcardSound" src="../music/flip_card.mp3">
+		<audio id = "flipcardSound" src="../music/flip_card.mp3" >
 			Your browser isn't invited for super fun audio time.
 		</audio>
 

@@ -12,14 +12,11 @@ function startGame(){
 		
 }
 
-function playGame(index){	
-	var gameName = getJson(`Users`);
-	console.log(`Playing ${gameName[index].Name} game..`);
+function playGame(index){
 	document.getElementById(`home_page`).style.display = "none";	
 	document.getElementById(`gameArea${index}`).style.display = "block";
 
 	activeDivId = index;
-	console.log(index);
 	switch (activeDivId){
 		case 0:
 			gameZeroLoad();
