@@ -1,7 +1,9 @@
 const NumberOfGameQuestions = 5;
 const NumberOfAllQuestions = 10;
 var currentQuestion;
-var currentQCount;
+var currentQCount = -1;
+var questionStore;
+
 
 function resetcounters(){
 	var currentQuestion = 0;
@@ -18,19 +20,19 @@ function offOverlay0(){
 function gameZeroLoad(){
 	currentQCount = 0;
 	resetcounters();
-	var questions = getQuestions();	
-	currentQuestion = questions[currentQCount];
-	incrementQuestions(questions);
+	questionStore = getQuestions();	
+	currentQuestion = questionStore[currentQCount];
+	incrementQuestions();
 }
 
-function incrementQuestions(questions){
+function incrementQuestions(){
+	questionReset();
+	currentQuestion = questionStore[++currentQCount];
 	nextQuestion(currentQuestion);
-	currentQuestion = questions[currentQCount++];
 	console.log(currentQuestion);
 }
 function nextQuestion(thequestion){	
 	console.log(thequestion);
-
 	document.getElementById(`questionText0`).innerHTML = thequestion.Question.replace('{_}', '___');
 	document.getElementById('question0Options').appendChild(makeUL(thequestion.Options));
 	//When the person answers the question, the array could be incremented but I'm tired.
@@ -75,7 +77,6 @@ function getRandomNumbers(){
 function makeUL(array) {
     // Create the list element:
 	var list = document.createElement('ul');
-
     for(var i = 0; i < array.length; i++) {
         // Create the list item:
 		var item = document.createElement('li');
@@ -108,31 +109,44 @@ function makeUL(array) {
     return list;
 }
 function checkAnswer(id){
-	answer = document.getElementById(id).innerText;
+	chosenAnswer = document.getElementById(id).innerText;
+	console.log("Button clicked is " +chosenAnswer);	
+
+	//get answer from global variable of current Question
+	answer = currentQuestion.Answer;
+
+	if (chosenAnswer == currentQuestion.Options[answer]) {
+		//Correct Answer
+		console.log("Ding!");
+	}else{
+		//Wrong Answer
+		console.log("bleeehh");
+	}
+	//Next Question
+	incrementQuestions();
 }
 
 function playPhoneticSound(bttnsID){
 	var elem = document.getElementById(bttnsID);
 	var txt =  elem.innerText;
-	console.log(txt);
 	switch(txt){
 		case "a":
-			console.log("AH");
+			console.log("AH hovered");
 			var audio = document.getElementById("ah");
 			audio.play();
 		break;
 		case "e":
-			console.log("EH");
+			console.log("EH hovered");
 			var audio = document.getElementById("eh");
 			audio.play();
 		break;
 		case "th":
-			console.log("TH");
+			console.log("TH hovered");
 			var audio = document.getElementById("th");
 			audio.play();
 		break;
 		default:
-			console.log("No response to hover");
+			//console.log("No response to hover");
 	}
 }
 
@@ -140,6 +154,12 @@ function gameZeroReset(){
 	document.getElementById(`overlay0`).style.display = "block";
 	document.getElementById(`gameContainer0`).style.display = "none";
 
+	for (i = 0; i < NumberOfGameQuestions; i++){
+		document.getElementById("question0Options").innerHTML = ""; //CHANGE TO i or the game will go blank when a question is called
+	}
+}
+
+function questionReset(){
 	for (i = 0; i < NumberOfGameQuestions; i++){
 		document.getElementById("question0Options").innerHTML = ""; //CHANGE TO i or the game will go blank when a question is called
 	}
