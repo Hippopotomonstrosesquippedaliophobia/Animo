@@ -1,9 +1,10 @@
 const NumberOfGameQuestions = 5;
 const NumberOfAllQuestions = 10;
 var currentQuestion;
-var currentQCount = -1;
+var currentQCount;
 var questionStore;
-
+var rightAnswer
+var idd = 0;
 
 function resetcounters(){
 	var currentQuestion = 0;
@@ -18,7 +19,7 @@ function offOverlay0(){
 }
 
 function gameZeroLoad(){
-	currentQCount = 0;
+	currentQCount = -1;
 	resetcounters();
 	questionStore = getQuestions();	
 	currentQuestion = questionStore[currentQCount];
@@ -27,9 +28,24 @@ function gameZeroLoad(){
 
 function incrementQuestions(){
 	questionReset();
-	currentQuestion = questionStore[++currentQCount];
-	nextQuestion(currentQuestion);
-	console.log(currentQuestion);
+	if (currentQCount < NumberOfGameQuestions - 1) {
+		//Ensuring Questions are equal to the max set
+		currentQuestion = questionStore[++currentQCount];
+		nextQuestion(currentQuestion);
+		console.log(currentQuestion);
+		console.log(currentQCount); 
+	}else{
+		//Prepare Results area for text appending		
+		document.getElementById("resultsText0").style.display = "block";
+		document.getElementById("shortHR").style.display = "block";
+		document.getElementById("resultsReview").style.display = "block"; 
+		document.getElementById("resultsReview").style.opacity = 1;
+		document.getElementById("resultsReview").style.overflowY = "scroll";
+		
+		//Clear text and show results
+		setTimeout(showResults, 300);
+		
+	}
 }
 function nextQuestion(thequestion){	
 	console.log(thequestion);
@@ -150,6 +166,23 @@ function playPhoneticSound(bttnsID){
 	}
 }
 
+function showResults(){	
+	document.getElementById("questionText0").innerHTML = "";
+	document.getElementById("question0Options").innerHTML = "";
+	questionArea = document.getElementById("question0");
+	questionArea.style.width = "300px";
+	questionArea.style.marginLeft = "32%";
+	
+	headerResults = document.getElementById("resultsText0");
+	headerResults.innerHTML = "Results";
+	headerResults.style.opacity = 1;
+
+	document.getElementById("shortHR").style.width = "150px";
+
+	//the area of results is resultsReview
+
+}
+
 function gameZeroReset(){
 	document.getElementById(`overlay0`).style.display = "block";
 	document.getElementById(`gameContainer0`).style.display = "none";
@@ -160,8 +193,20 @@ function gameZeroReset(){
 }
 
 function questionReset(){
+	//Hide Results
+	resultsText = document.getElementById("resultsText0");
+	resultsText.style.opacity = 0;
+	resultsText.style.display = "none";
+	hr = document.getElementById("shortHR");
+	hr.style.width = "0px";
+	hr.style.display = "none";
+	review = document.getElementById("resultsReview");
+	review.style.opacity = 0;
+	review.style.display = "none"; 
+	
+
 	for (i = 0; i < NumberOfGameQuestions; i++){
-		document.getElementById("question0Options").innerHTML = ""; //CHANGE TO i or the game will go blank when a question is called
+		document.getElementById("question0Options").innerHTML = ""; 
 	}
 }
 

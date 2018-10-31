@@ -151,8 +151,35 @@ audio {
 	margin-left: 50px;
 	margin-right: -55px;
 	background-color: rgba(255,255,255,0.9);
-	padding-top: 20px;
+  padding-top: 20px;
+  transition:all 1s ease-in-out;
 }
+#resultsText0{
+  opacity : 0;
+  transition: opacity 6s; 
+}
+
+#resultsReview{
+  opacity : 0;
+}
+#resultsReview:nth-child(0) {
+  background: red;  
+  transition: opacity 1s;
+}
+#resultsReview:nth-child(1) {
+  background: red;  
+  transition: opacity 1s;
+}
+#resultsReview:nth-child(2) {
+  background: red;  
+  transition: opacity 1s;
+}
+#shortHR{
+  width: 0px;
+  transition:all 1.5s ease-in-out;
+}
+
+
 #question0Options li {
   list-style: none;
   padding: 10px;
