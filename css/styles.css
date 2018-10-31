@@ -18,16 +18,19 @@ audio {
     background-color: #f1f1f1;
 }
 #game_container {
-  margin-top: 4%;
+  padding: 0px;
+  margin-top: 7%;
 	width: 1080px;
 	height: 580px;
 	border: 3px solid black;
-    background-image: url("../img/background_waterfall.gif");
+  background-image: url("../img/background_waterfall.gif");
 	background-size: 100%;
 	z-index: 0;
 }
 #top_controls{
-	padding-top: 15px; 
+  padding-top: 15px; 
+  width: inherit;
+  position: absolute;
 }
 #mute_unmute {
 	text-align: right;
@@ -39,8 +42,8 @@ audio {
 
 #inner_content {
 	z-index: 10;
-	width: 1080px;
-	height: 580px;
+	/* width: 1080px;
+	height: 580px; */
 	margin-top: -10px;
 }
 #home_button{
@@ -48,7 +51,6 @@ audio {
   width: 70px;
   z-index: 1000;
   float: left;
-  position: absolute;
 }
 .center-div
 {
@@ -174,7 +176,12 @@ audio {
 
 /**Game2 SECTION*/
 #gameArea2{
-	display: none;
+  display: none;
+  padding:0px;
+  margin: 0px;
+  margin-top: 10px;
+  width: inherit;
+  height: inherit;
 }
 
 #answerField2{
@@ -183,9 +190,29 @@ audio {
 }
 
 #userMathAnswer{
-  border: none;
-  width:100px;
+  position: absolute;
+  border: transparent;
+  outline: none;
+  width:200px;
   height: 100px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 50px;
+  text-align: center;
+  z-index: 100;
+  left: 85%;
+  top: 25%;
+}
+
+#answerCloud{
+  position: absolute;
+  left: 65%;
+  top: 7%;
+  z-index: 1;
+}
+
+#countDownTimer{
+  font-family: 'Press Start 2P';
+  display: none;
 }
 /**Game2 SECTION*/
 
@@ -212,9 +239,7 @@ audio {
   display: block;
   width: inherit;
   height: inherit;
-  margin-top: -18px; 
-  margin-left: -35px;
-  margin-right: -55px;
+  margin:0px;
   background-color: rgba(0,0,0,0.5);
   z-index: 2;
   cursor: pointer;
@@ -315,14 +340,14 @@ span {
   position: relative;
 }
 .balloonSpan {
-  font-size: 40px;
+  font-size: 80px;
 }
 .balloonSpan > p{
-  margin: 2px 0px 0px -25px;
+  margin: 2px 0px 0px -100px;
 }
 .balloon > div {
-   width:104px;
-  height:140px; 
+  width:208px;
+  height:280px; 
   background: rgba(182, 15, 97, 0.9);
   border-radius:0;
   border-radius:80% 80% 80% 80%;
@@ -344,10 +369,10 @@ span {
 .balloon > div:before {
   color:rgba(182, 15, 97, 0.9);
   position:absolute;
-  bottom:-11px;
-  left: 52px;  
+  bottom: -32px;
+  left: 80px;  
   content:"▲";
-  font-size:1em;
+  font-size:2.5em;
 }
 
 span {
@@ -378,7 +403,8 @@ span {
 }
 
 /**Balloon stuff*/
-/**Miscellaneous*/
+
+/**Button stuff*/
 .eightbit-btn {
   background: #e76e55;
   display: inline-block;
@@ -420,4 +446,21 @@ span {
 
 *, *:before, *:after {
   box-sizing: border-box;
+}
+/**Button stuff*/
+
+/**Miscellaneous*/
+.pauseMenu{
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  margin: auto;
+  z-index: 1100;
+  background: #8c2022;
+  padding: 50px;
+  width: 400px;
+  height: 400px;
 }

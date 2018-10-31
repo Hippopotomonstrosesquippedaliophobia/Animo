@@ -1,5 +1,3 @@
-
-
 function autoplay(){  
 	var audio = document.getElementById("background_music");
 
@@ -9,7 +7,8 @@ function autoplay(){
 	  }, 2000);
 	});
 
-	audio.volume = 0.3;
+	audio.volume = 0.2;
+	audio.pause();
 }  
 function changeAudioImage(){  
 	document.getElementById('background_music').muted=!document.getElementById('background_music').muted;	
@@ -28,6 +27,10 @@ function setBackgroundMusic(newAudioSrc){
 
 function resetBackgroundMusic(){
 	setBackgroundMusic("../music/background_music2.mp3");
+}
+
+function lowerBackgroundMusic(){
+	document.getElementById("background_music").volume = 0.15;
 }
 
 function flipSound(){

@@ -1,10 +1,11 @@
 var float, fall;
 var pos = 0;
 const FALL_DISTANCE = 60;
-const MAX_HEIGHT = 450;
+const MAX_HEIGHT = 620;
 const UP_SPEED = 20;//smaller = faster
 const DOWN_SPEED = 15;//smaller = faster
 var music2 = "../music/game2BackgroundMusic.mp3";
+//var fallFX = new Audio("../music/game2/fall.wav");
 
 var mathQuestion = {
 	operator:'',
@@ -15,7 +16,7 @@ var mathQuestion = {
 
 function gameTwoLoad(){	
 	document.getElementById(`game_container`).style.backgroundImage ="url(../img/game2Background.gif)"
-	document.getElementById("moveBalloon").style.transform="translateY(200px)";
+	document.getElementById("moveBalloon").style.transform="translateY(600px)";
 	setBackgroundMusic(music2);
 	newMathQuestion();
 }
@@ -36,6 +37,21 @@ function offOverlay2(){
 	document.getElementById(`gameContainer2`).style.display = "block";
 	document.getElementById("containerBalloon").style.display = "block"; 
 	document.getElementById("home_button").style.display = "block";
+	startCountDown();
+}
+
+function startCountDown(){
+	var timeleft = 4;
+    var downloadTimer = setInterval(function(){
+	timeleft--;
+	document.getElementById("countDownTimer").style.display = "block";
+	document.getElementById("countDownTimer").textContent = timeleft;
+    if(timeleft <= 0){
+		clearInterval(downloadTimer);
+		document.getElementById("countDownTimer").style.display="none";
+		balloonFloat();
+	}
+    },1000);
 }
 
 //Question Logic----------------------------------------------------------------------
@@ -46,8 +62,8 @@ function newMathQuestion(){
 }
 
 function injectMathQuestion(question){
-	document.getElementById(`mathX`).innerHTML = question.x;
-	document.getElementById(`mathYO`).innerHTML = `${question.y}${question.operator}`;
+	document.getElementById(`mathX`).innerHTML = `&nbsp${question.x}`;
+	document.getElementById(`mathYO`).innerHTML = `${question.operator}${question.y}`;
 }
 
 function generateMathQuestion(){
@@ -77,12 +93,16 @@ function checkMathAnswer(){
 	var question = mathQuestion;
 	var userAnswer = document.getElementById("userMathAnswer").value;
 	document.getElementById("userMathAnswer").value ='';
-	if(userAnswer==question.answer) balloonFall();
+	if(userAnswer==question.answer) {
+		//fallFX.play();
+		balloonFall();
+	}
 	return false;
 }
 
 //Balloon Logic----------------------------------------------------------------------
 function balloonReset(){	
+	balloonStop();
 	pos = 0;
 	document.getElementById("moveBalloon").style.top = pos + 'px';
 	newMathQuestion();
@@ -123,6 +143,7 @@ function downAnimation(i){
 function upAnimation() {	
 	if (pos < -MAX_HEIGHT) {
 		balloonStop();
+		//mathGameOver();
 		balloonReset();
 	} 
 	else{
