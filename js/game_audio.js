@@ -6,7 +6,8 @@ function autoplay(){
 		audio.play();
 	  }, 2000);
 	});
-}  
+} 
+ 
 function changeAudioImage(){  
 	document.getElementById('background_music').muted=!document.getElementById('background_music').muted;	
 	if (document.getElementById('background_music').muted){

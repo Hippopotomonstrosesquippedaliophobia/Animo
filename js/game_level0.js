@@ -3,22 +3,38 @@ const NumberOfAllQuestions = 10;
 var currentQuestion;
 var currentQCount;
 var questionStore;
-var rightAnswer
-var idd = 0;
+var rightOrWrong = [];
+var chosenAnswer = [];
+var timeTaken = 0;
+var overAllScore;
 
 function resetcounters(){
 	var currentQuestion = 0;
 	var currentQCount = 0;
-	console.log("Cleared currentQuestion: "+currentQuestion+ " and currentQCount: "+currentQCount);
 }
 
 function offOverlay0(){
 	document.getElementById(`overlay0`).style.display = "none";
 	document.getElementById(`gameContainer0`).style.display = "block";	
-	document.getElementById("home_button").style.display = "block";
+	document.getElementById("home_button").style.display = "block";	
+
+	clearInterval(timeTaken);//Reset clock everytime 
+	timeTaken = window.setInterval((function(){
+						start = Date.now();
+						secondsCounter = document.getElementById('seconds');
+						return function() {
+							secondsCounter.innerHTML = Math.floor((Date.now()-start)/1000);
+						};
+					}()), 1000);	
 }
 
 function gameZeroLoad(){
+	//Aesthetic Setup
+	document.getElementById("game_container").style.backgroundImage = "url('../img/phonics/grassy3.gif')";
+	//musicChange = new Audio('../music/grassyZelda.mp3').play();
+
+	//Logical Setup
+	clearInterval(timeTaken);//Reset clock everytime 
 	currentQCount = -1;
 	resetcounters();
 	questionStore = getQuestions();	
@@ -32,23 +48,20 @@ function incrementQuestions(){
 		//Ensuring Questions are equal to the max set
 		currentQuestion = questionStore[++currentQCount];
 		nextQuestion(currentQuestion);
-		console.log(currentQuestion);
-		console.log(currentQCount); 
 	}else{
 		//Prepare Results area for text appending		
 		document.getElementById("resultsText0").style.display = "block";
 		document.getElementById("shortHR").style.display = "block";
 		document.getElementById("resultsReview").style.display = "block"; 
 		document.getElementById("resultsReview").style.opacity = 1;
-		document.getElementById("resultsReview").style.overflowY = "scroll";
-		
+		document.getElementById("resultsReview").style.overflowY = "auto";
+		document.getElementById("resultsReview").style.overflowX = "hidden";
 		//Clear text and show results
 		setTimeout(showResults, 300);
 		
 	}
 }
 function nextQuestion(thequestion){	
-	console.log(thequestion);
 	document.getElementById(`questionText0`).innerHTML = thequestion.Question.replace('{_}', '___');
 	document.getElementById('question0Options').appendChild(makeUL(thequestion.Options));
 	//When the person answers the question, the array could be incremented but I'm tired.
@@ -125,17 +138,18 @@ function makeUL(array) {
     return list;
 }
 function checkAnswer(id){
-	chosenAnswer = document.getElementById(id).innerText;
-	console.log("Button clicked is " +chosenAnswer);	
+	chosenAnswer[currentQCount] = document.getElementById(id).innerText;
 
 	//get answer from global variable of current Question
 	answer = currentQuestion.Answer;
 
-	if (chosenAnswer == currentQuestion.Options[answer]) {
+	if (chosenAnswer[currentQCount] == currentQuestion.Options[answer]) {
 		//Correct Answer
+		rightOrWrong[currentQCount] = 1;
 		console.log("Ding!");
 	}else{
 		//Wrong Answer
+		rightOrWrong[currentQCount] = 0;
 		console.log("bleeehh");
 	}
 	//Next Question
@@ -147,17 +161,14 @@ function playPhoneticSound(bttnsID){
 	var txt =  elem.innerText;
 	switch(txt){
 		case "a":
-			console.log("AH hovered");
 			var audio = document.getElementById("ah");
 			audio.play();
 		break;
 		case "e":
-			console.log("EH hovered");
 			var audio = document.getElementById("eh");
 			audio.play();
 		break;
 		case "th":
-			console.log("TH hovered");
 			var audio = document.getElementById("th");
 			audio.play();
 		break;
@@ -170,8 +181,8 @@ function showResults(){
 	document.getElementById("questionText0").innerHTML = "";
 	document.getElementById("question0Options").innerHTML = "";
 	questionArea = document.getElementById("question0");
-	questionArea.style.width = "300px";
-	questionArea.style.marginLeft = "32%";
+	questionArea.style.width = "400px";
+	questionArea.style.marginLeft = "29%";
 	
 	headerResults = document.getElementById("resultsText0");
 	headerResults.innerHTML = "Results";
@@ -180,10 +191,84 @@ function showResults(){
 	document.getElementById("shortHR").style.width = "150px";
 
 	//the area of results is resultsReview
+	review = document.getElementById("resultsReview");
+	review.style.display = "block"; 
+	review.style.opacity = 1;
 
+
+	//Display User's Score
+	var scoreReview = document.createElement('div');
+	scoreReview.className += "scoreInfo";
+	timeTaken = document.getElementById("seconds").textContent;
+
+	overAllScore = 0; 
+
+	for (i = 0; i < rightOrWrong.length; i++){
+		if (rightOrWrong[i] == 1){
+			overAllScore = overAllScore + 1;
+		}
+	}
+	scoreReview.innerHTML = '<div style="padding-bottom: 10px; height: 33px;"><h4 style="float:left">Your score is:</h4> <p style="float:right; padding-right: 35px;">'+overAllScore+'/'+NumberOfGameQuestions+' </p></div><br><div style="padding-bottom: 10px;"><h4 style="float: left">Time Taken: </h4> <p style="float: right; padding-right:35px">' +timeTaken+' seconds</p></div>' ;
+
+	review.appendChild(scoreReview);	
+
+	var openReview = document.createElement('div');
+	openReview.innerHTML = '<input type="checkbox" id="toggle" /><label for="toggle"><div class="expand" style="width: 100%; margin-top: 71px; margin-left: 19%; padding-bottom: 20px;"><div class="changeArrow arrow-up">↑</div><div class="changeArrow arrow-dn">↓</div><b>Click here to review your answers</b></div></label><div class="fieldsetContainer"><fieldset id="fdstLorem"></fieldset></div>';
+	review.appendChild(openReview);
+	
+	for (i = 0; i < NumberOfGameQuestions; i++){
+		var reviewQuestion = document.createElement('button'); //create reviewable node
+		reviewQuestion.className += "accordion"
+
+		var reviewableContent = document.createElement('div'); //create reviewable node
+		reviewableContent.className += "panel"
+
+		questionNum = i + 1;
+
+		var pointGiven;
+
+		if (rightOrWrong[i] == 1){
+			pointGiven = "Correct";
+		}else{
+			pointGiven = "Incorrect";
+		}		
+
+		var acc = document.getElementsByClassName("accordion");
+
+		reviewQuestion.innerHTML = '<p>Question ' + questionNum + ': ' + pointGiven + '</p>';
+		reviewableContent.innerHTML = '<p> ' + questionStore[i].Question + '</p> <br> Your answer: '+ chosenAnswer[i] +' <br> <p style="padding-bottom: 10px">Answer: ' + questionStore[i].Options[[questionStore[i].Answer]] +' </p>';
+		
+		//Show easily right questions and wrong ones
+		if (chosenAnswer[i] == questionStore[i].Options[[questionStore[i].Answer]]){
+			reviewQuestion.style.backgroundColor = "#e6ffcc"; // green
+		}else{
+			reviewQuestion.style.backgroundColor = "#ffcccc"; //red
+		}
+
+		reviewOpen = document.getElementById("fdstLorem");
+		//Add everything to list
+		reviewOpen.appendChild(reviewQuestion);		
+		reviewOpen.appendChild(reviewableContent);
+	}
+
+	//Create all the elements then append this to the accordion list
+	var z;
+	for (z = 0; z < acc.length; z++) {
+		acc[z].addEventListener("click", function() {
+		this.classList.toggle("active");
+		var panel = this.nextElementSibling;
+		
+		if (panel.style.maxHeight){
+			panel.style.maxHeight = null;
+		} else {
+			panel.style.maxHeight = panel.scrollHeight + "px";
+		} 
+	});
+	}
 }
 
 function gameZeroReset(){
+	document.getElementById("game_container").style.backgroundImage = "url('../img/background_waterfall.gif')";
 	document.getElementById(`overlay0`).style.display = "block";
 	document.getElementById(`gameContainer0`).style.display = "none";
 
@@ -202,8 +287,14 @@ function questionReset(){
 	hr.style.display = "none";
 	review = document.getElementById("resultsReview");
 	review.style.opacity = 0;
+	review.innerHTML = "";
 	review.style.display = "none"; 
-	
+
+	questionArea = document.getElementById("question0");
+	questionArea.style.width = "900px"
+	questionArea.style.marginLeft= "4.7%";
+		 	
+	document.getElementsByClassName("scoreInfo").innerHTML = ""; //Resets Result info
 
 	for (i = 0; i < NumberOfGameQuestions; i++){
 		document.getElementById("question0Options").innerHTML = ""; 

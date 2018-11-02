@@ -22,7 +22,7 @@ audio {
 	width: 1080px;
 	height: 580px;
 	border: 3px solid black;
-    background-image: url("../img/background_waterfall.gif");
+  background-image: url("../img/background_waterfall.gif");
 	background-size: 100%;
 	z-index: 0;
 }
@@ -152,6 +152,7 @@ audio {
 	margin-right: -55px;
 	background-color: rgba(255,255,255,0.9);
   padding-top: 20px;
+  overflow-x: hidden;
   transition:all 1s ease-in-out;
 }
 #resultsText0{
@@ -189,6 +190,71 @@ audio {
   height: 70px;
   
 }
+
+.accordion {
+  background-color: rgba(255,255,255,0.5);
+  /**#eee*/
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  font-size: 25px;
+  margin-top: -35px;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.fieldsetContainer {
+  height: 0;
+  width: 100%;
+  overflow: hidden;
+  transition: all 50ms linear;  
+}
+
+.expand{
+  cursor: pointer;
+}
+
+#toggle {
+  display: none;
+}
+
+#toggle:checked ~ .fieldsetContainer {
+  height: 100%;
+}
+
+label .arrow-dn { display: inline-block; }
+label .arrow-up { display: none; }
+
+#toggle:checked ~ label .arrow-dn { display: none; }
+#toggle:checked ~ label .arrow-up { display: inline-block; }
 /**Game0 SECTION*/
 
 /**Game1 SECTION*/
