@@ -133,6 +133,9 @@ audio {
 /**HOMEPAGE SECTION*/
 
 /**Game0 SECTION*/
+ul#question0AnsOptions li{
+  display:inline;
+}
 #gameArea0{
 	display: none;
 }
@@ -183,7 +186,7 @@ audio {
 
 #question0Options li {
   list-style: none;
-  padding: 10px;
+  margin-right: -10px
 }
 #question0Options button {
   width: 160px;

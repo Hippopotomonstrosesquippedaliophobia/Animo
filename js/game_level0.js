@@ -106,34 +106,62 @@ function getRandomNumbers(){
 function makeUL(array) {
     // Create the list element:
 	var list = document.createElement('ul');
+	list.id = "question0AnsOptions"
+
+	var item1 = document.createElement('li');
+	var head = document.createElement('img');
+	head.src= "../img/phonics/SegHead.png";
+	head.setAttribute('width', '220px');
+	head.style.marginTop = "-50px";
+	head.style.marginLeft= "-132px";
+	head.style.position= "absolute";
+	head.setAttribute('z-index', '1');
+	item1.appendChild(head);
+	list.appendChild(item1);
+	
     for(var i = 0; i < array.length; i++) {
         // Create the list item:
 		var item = document.createElement('li');
 
 		// I'm putting in a button but depending on the mechanics we agree on this is subject to change
 		// Feel free to experiment with flip cards and stuff
-		var button = document.createElement('button');
+		var button = document.createElement('img');
+		button.setAttribute('margin-right', '-10px');
 		button.setAttribute("id", "btnID" + i); //Adds id to button for referencing
 		button.classList.add('btnCLASS'+ i); //Adds class to button for referencing
+		button.style.width='200px';
+		bttnsID = "btnID" + i;
+		button.src = ""
 
 		//Adds sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
 		//-------------------------------------------------
-		bttnsID = "btnID" + i;
+		
 		button.addEventListener('mouseover', function(){
 			playPhoneticSound(this.id);			
 		});
 		button.onclick = function(){ checkAnswer(this.id);};
 		//Added sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
 		//-------------------------------------------------
+		
 		button.appendChild(document.createTextNode(array[i]));
-
+		
         // Set the list item's contents:
-        item.appendChild(button);
-
+		item.appendChild(button);
+		
         // Add it to the list:
-        list.appendChild(item);
+		list.appendChild(item);	
+
+		if (i%2){
+			button.src = "../img/phonics/SegGrn.png";
+			//document.getElementById(bttnsID).style.backgroundImage = 'url("../img/phonics/SegGrn.png")';
+		}else{
+			button.src = "../img/phonics/SegYel.png";
+			//document.getElementById(bttnsID).style.backgroundImage = 'url("../img/phonics/SegYel.png")';
+		}	
+		
     }
 
+	
     // Finally, return the constructed list:
     return list;
 }
