@@ -108,6 +108,7 @@ function getRandomNumbers(){
 function makeUL(array) {
     // Create the list element:
 	var list = document.createElement('ul');
+	list.style.marginTop = "70px";
 	list.id = "question0AnsOptions"
 
 	/**var head = document.createElement('img');
@@ -131,14 +132,16 @@ function makeUL(array) {
 		// Feel free to experiment with flip cards and stuff
 		var button = document.createElement('div');
 		button.style.marginleft = "-200px";
-		button.style.marginRight = "0px";
+		button.style.marginRight = "-10px";
 		button.setAttribute("id", "btnID" + i); //Adds id to button for referencing
 		button.classList.add('btnCLASS'+ i); //Adds class to button for referencing
+		button.classList.add('object' + i);
 		button.style.width='200px';
 		button.style.height='200px';
 		button.style.cssFloat = "left";		
 		button.style.cursor = "pointer";
-
+		index = 4000 - (100 + i);
+		button.style.zIndex = index;
         // Add it to the list:
 		list.appendChild(item);	
 				
@@ -173,10 +176,6 @@ function makeUL(array) {
 		textNode.style.marginLeft = "66px";
 		textNode.style.marginTop = "76px";
 		textNode.style.fontSize = "40px";
-		
-		/** margin-left: 66px;
-			margin-top: 76px;
-			font-size: 40px; */
 		button.appendChild(textNode);
 		//button.appendChild(document.createTextNode(array[i]));
 		// Set the list item's contents:
@@ -222,7 +221,7 @@ function animateNextQuestion(){
 	head = document.getElementById("caterpillarHead");
 	body = document.getElementById("question0AnsOptions");
 
-	var posHead = -110;
+	var posHead = -60;
 	var posBody = 0;
 	var id = setInterval(frame, 1);
 	
@@ -231,7 +230,7 @@ function animateNextQuestion(){
 			clearInterval(id);
 			
 			//Reset head
-			posHead = -110;
+			posHead = -60;
 			head.style.marginLeft = posHead + 'px';
 			incrementQuestions();
 		} else {

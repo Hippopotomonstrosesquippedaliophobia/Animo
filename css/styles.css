@@ -258,6 +258,38 @@ label .arrow-up { display: none; }
 
 #toggle:checked ~ label .arrow-dn { display: none; }
 #toggle:checked ~ label .arrow-up { display: inline-block; }
+
+.object0 {
+  animation: MoveUpDown 1s ease-in-out infinite;
+}
+.object1 {
+  animation: MoveUpDown 2s ease-in-out infinite;
+}
+.object2{
+  animation: MoveUpDown 1.5s ease-in-out infinite;
+}
+.object3 {
+  animation: MoveUpDown 2.5s ease-in-out infinite;
+}
+.object4 {
+  animation: MoveAround 1.5s ease-in-out infinite;
+}
+@keyframes MoveAround {
+  0%, 100% {
+    margin-top: 35px;
+  }
+  50% {
+    margin-top: 50px;
+  }
+} 
+@keyframes MoveUpDown {
+  0%, 100% {
+    margin-top: 0px;
+  }
+  50% {
+    margin-top: 15px;
+  }
+}
 /**Game0 SECTION*/
 
 /**Game1 SECTION*/
