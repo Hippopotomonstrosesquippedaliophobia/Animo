@@ -31,6 +31,7 @@ function offOverlay0(){
 function gameZeroLoad(){
 	//Aesthetic Setup
 	document.getElementById("game_container").style.backgroundImage = "url('../img/phonics/grassy3.gif')";
+	document.getElementById("caterpillarHead").style.display = "block";
 	//musicChange = new Audio('../music/grassyZelda.mp3').play();
 
 	//Logical Setup
@@ -45,11 +46,12 @@ function gameZeroLoad(){
 function incrementQuestions(){
 	questionReset();
 	if (currentQCount < NumberOfGameQuestions - 1) {
-		//Ensuring Questions are equal to the max set
+		//Ensuring Questions are not equal to the max set questions
 		currentQuestion = questionStore[++currentQCount];
 		nextQuestion(currentQuestion);
 	}else{
-		//Prepare Results area for text appending		
+		//Prepare Results area for text appending	
+		document.getElementById("caterpillarHead").style.display = "none";	
 		document.getElementById("resultsText0").style.display = "block";
 		document.getElementById("shortHR").style.display = "block";
 		document.getElementById("resultsReview").style.display = "block"; 
@@ -108,63 +110,84 @@ function makeUL(array) {
 	var list = document.createElement('ul');
 	list.id = "question0AnsOptions"
 
-	var item1 = document.createElement('li');
-	var head = document.createElement('img');
+	/**var head = document.createElement('img');
 	head.src= "../img/phonics/SegHead.png";
 	head.setAttribute('width', '220px');
-	head.style.marginTop = "-50px";
-	head.style.marginLeft= "-132px";
+	head.style.marginTop = "-50px";	
+	head.style.cssFloat = "left";
+	head.style.marginLeft= "-112px";
 	head.style.position= "absolute";
 	head.setAttribute('z-index', '1');
-	item1.appendChild(head);
-	list.appendChild(item1);
+	head.setAttribute("id", "caterpillarHead"); 
+	document.getElementById("question0Options").appendChild(head);*/
 	
-    for(var i = 0; i < array.length; i++) {
+	var randomizeColour = [];
+	
+	for(var i = 0; i < array.length; i++) {
         // Create the list item:
 		var item = document.createElement('li');
 
 		// I'm putting in a button but depending on the mechanics we agree on this is subject to change
 		// Feel free to experiment with flip cards and stuff
-		var button = document.createElement('img');
-		button.setAttribute('margin-right', '-10px');
+		var button = document.createElement('div');
+		button.style.marginleft = "-200px";
+		button.style.marginRight = "0px";
 		button.setAttribute("id", "btnID" + i); //Adds id to button for referencing
 		button.classList.add('btnCLASS'+ i); //Adds class to button for referencing
 		button.style.width='200px';
+		button.style.height='200px';
+		button.style.cssFloat = "left";		
+		button.style.cursor = "pointer";
+
+        // Add it to the list:
+		list.appendChild(item);	
+				
+		randomizeColour[i] = getRandomInt(2);
+		
+		//Randomize Caterpillar colour pallette 
+		console.log("randomizeColour["+i+"] "+randomizeColour[i]);
+
+		if (randomizeColour[i] == 1){
+			//button.src = "../img/phonics/SegGrn.png";
+			button.style.backgroundImage = 'url("../img/phonics/greenbody.png")';
+		}else{
+			//button.src = "../img/phonics/SegYel.png";
+			button.style.backgroundImage = 'url("../img/phonics/yellowbody.png")';
+		}	
+		
+		//button.style.backgroundColor= "red";
+		button.style.backgroundSize = "100% 100%";
 		bttnsID = "btnID" + i;
-		button.src = ""
 
 		//Adds sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
 		//-------------------------------------------------
-		
 		button.addEventListener('mouseover', function(){
 			playPhoneticSound(this.id);			
 		});
 		button.onclick = function(){ checkAnswer(this.id);};
 		//Added sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
 		//-------------------------------------------------
+		var textNode = document.createElement('p');
+		textNode.setAttribute('id','answerText'+i);
+		textNode.innerHTML = array[i];
+		textNode.style.marginLeft = "66px";
+		textNode.style.marginTop = "76px";
+		textNode.style.fontSize = "40px";
 		
-		button.appendChild(document.createTextNode(array[i]));
-		
-        // Set the list item's contents:
-		item.appendChild(button);
-		
-        // Add it to the list:
-		list.appendChild(item);	
-
-		if (i%2){
-			button.src = "../img/phonics/SegGrn.png";
-			//document.getElementById(bttnsID).style.backgroundImage = 'url("../img/phonics/SegGrn.png")';
-		}else{
-			button.src = "../img/phonics/SegYel.png";
-			//document.getElementById(bttnsID).style.backgroundImage = 'url("../img/phonics/SegYel.png")';
-		}	
-		
+		/** margin-left: 66px;
+			margin-top: 76px;
+			font-size: 40px; */
+		button.appendChild(textNode);
+		//button.appendChild(document.createTextNode(array[i]));
+		// Set the list item's contents:
+		item.appendChild(button);		
     }
 
 	
     // Finally, return the constructed list:
     return list;
 }
+
 function checkAnswer(id){
 	chosenAnswer[currentQCount] = document.getElementById(id).innerText;
 
@@ -181,7 +204,54 @@ function checkAnswer(id){
 		console.log("bleeehh");
 	}
 	//Next Question
-	incrementQuestions();
+	animateNextQuestion();
+}
+
+function animateNextQuestion(){
+	//Stops Clicking
+	for (i = 0; i < currentQuestion.Options.length; i ++){
+		buttonID = "btnID" + i;
+		document.getElementById(buttonID).style.cursor = "initial";
+		document.getElementById(buttonID).onclick = function() {
+		return false;
+	}
+	}
+	
+
+	//head = document.getElementById("testtttttttt"); //was testing why it was not moving
+	head = document.getElementById("caterpillarHead");
+	body = document.getElementById("question0AnsOptions");
+
+	var posHead = -110;
+	var posBody = 0;
+	var id = setInterval(frame, 1);
+	
+	function frame() {
+		if (posHead == -900) {
+			clearInterval(id);
+			
+			//Reset head
+			posHead = -110;
+			head.style.marginLeft = posHead + 'px';
+			incrementQuestions();
+		} else {
+			posHead--; 
+			posBody--;
+			head.style.marginLeft = posHead + 'px';
+			body.style.marginLeft = posBody + 'px';
+			console.log("head: "+posHead); 
+			console.log("body: "+posBody);
+
+		}
+	}
+}
+
+function getOffset(el) {
+  const rect = el.getBoundingClientRect();
+  return {
+    left: rect.left + window.scrollX,
+    top: rect.top + window.scrollY
+  };
 }
 
 function playPhoneticSound(bttnsID){
@@ -206,6 +276,8 @@ function playPhoneticSound(bttnsID){
 }
 
 function showResults(){	
+	head = document.getElementById("caterpillarHead");
+	head.style.display = "none";
 	document.getElementById("questionText0").innerHTML = "";
 	document.getElementById("question0Options").innerHTML = "";
 	questionArea = document.getElementById("question0");
