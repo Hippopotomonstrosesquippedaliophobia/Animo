@@ -1,3 +1,6 @@
+var muted = false;
+var volume = 0.3;
+
 function autoplay(){  
 	var audio = document.getElementById("background_music");
 
@@ -7,12 +10,18 @@ function autoplay(){
 	  }, 2000);
 	});
 
-	audio.volume = 0.2;
+	audio.volume = volume;
 	audio.pause();
-}  
+} 
+
+function resetVolume(){
+	document.getElementById("background_music").volume = volume;
+} 
+
 function changeAudioImage(){  
-	document.getElementById('background_music').muted=!document.getElementById('background_music').muted;	
-	if (document.getElementById('background_music').muted){
+	document.getElementById('background_music').muted=!document.getElementById('background_music').muted;
+	muted = !muted;	
+	if (muted){
 		document.getElementById('muted_audio').src="../img/mute.png";
 	}else{
 		document.getElementById('muted_audio').src="../img/audio.png";
@@ -23,6 +32,7 @@ function setBackgroundMusic(newAudioSrc){
 	var backgroundMusic = document.getElementById("background_music");
 	backgroundMusic.currentTime = 0;
 	backgroundMusic.src = newAudioSrc;
+	backgroundMusic.muted = muted;
 }
 
 function resetBackgroundMusic(){
@@ -37,4 +47,12 @@ function flipSound(){
 	var flip = document.getElementById("flipcardSound");
 	flip.volume = 0.3;	
 	flip.play();	
+}
+
+function playSFX(src, volume = 0.3){
+	var audio = new Audio(src);
+	if(!muted){
+		audio.volume = volume;
+		audio.play();
+	}
 }

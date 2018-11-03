@@ -1,15 +1,20 @@
 var activeDivId;
+var game2 = new gameArea2();
 
 function startGame(){
 	var divCount = 2; //Set this to the amount of divs there are (levels) (-1 because starts at 0)
 	autoplay(); // start music
 	hideAll(divCount); //Clear all from screen		
-	document.getElementById("home_button").style.display = "none"; // Hides Home button 
+	//document.getElementById("home_button").style.display = "none"; // Hides Home button 
 	
 	
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
 		
+}
+
+function offGameOverlay(){
+	game2.offOverlay();
 }
 
 function playGame(index){
@@ -26,7 +31,7 @@ function playGame(index){
 			gameOneLoad();
 			break;
 		case 2:
-			gameTwoLoad();
+			game2.load();
 			break;
 	}
 }
@@ -84,7 +89,7 @@ function reset(id){
 			gameOneReset();
 			break;
 		case 2:
-			gameTwoReset();
+			game2.reset();
 			break;
 	}
 }
@@ -96,6 +101,7 @@ function goHome(){
 	activeDivId = null;
 	continueGame();
 	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
+	document.getElementById("pause_button").style.display = "none";
 }
 
 function openFullscreen() {
@@ -115,8 +121,7 @@ function pauseGame(fullscreen=true) {
 	lowerBackgroundMusic();
 	//document.getElementById("game_container").style.zIndex = 1;
 	var menu = fullscreen ? "menu2" : "menu"
-	console.log(activeDivId);
-	if(fullscreen & activeDivId==2) balloonStop();
+	if(activeDivId==2) game2.pause();
 	document.getElementById(menu).style.display = "block";
 }
 
@@ -134,11 +139,22 @@ function continueBtnClick(fullscreen=true){
 	var menu = fullscreen ? "menu2" : "menu";	
 	document.getElementById(menu).style.display ="none";
 	document.getElementById(`game_container`).style.display = "block";
+	switch(activeDivId){
+		case 0:
+			
+			break;
+		case 1:
+			
+			break;
+		case 2:
+			game2.resume();
+			break;
+	}
+	resetVolume();
 	openFullscreen();
 }
 
-function homeBtnClick(fullscreen=true){
-	
+function homeBtnClick(fullscreen=true){	
 	continueBtnClick(fullscreen);
 	goHome();
 }

@@ -51,6 +51,12 @@ audio {
   width: 70px;
   z-index: 1000;
   float: left;
+  display: none;
+}
+#pause_button{
+  float: left;
+  font-size: 20px;
+  display: none;
 }
 .center-div
 {
@@ -198,22 +204,47 @@ audio {
   font-family: 'Press Start 2P', cursive;
   font-size: 50px;
   text-align: center;
-  z-index: 100;
   left: 85%;
   top: 25%;
+  z-index: 1;
 }
 
 #answerCloud{
   position: absolute;
   left: 65%;
   top: 7%;
-  z-index: 1;
 }
 
 #countDownTimer{
   font-family: 'Press Start 2P';
   display: none;
+  color:whitesmoke;
+  position: absolute;
+  top:50%;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  font-size: 70px;
 }
+
+#gameOverMenu2{
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /*display: none;*/
+  margin: auto;
+  z-index: 1100;
+  background: #8c2022;
+  padding: 50px;
+  width: 400px;
+  height: 400px;
+}
+
+/* #gameOverOcerlay2{
+
+} */
 /**Game2 SECTION*/
 
 /**Miscellaneous*/
@@ -241,7 +272,7 @@ audio {
   height: inherit;
   margin:0px;
   background-color: rgba(0,0,0,0.5);
-  z-index: 2;
+  z-index: 3;
   cursor: pointer;
 }
 

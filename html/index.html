@@ -6,10 +6,10 @@
 		<link rel="stylesheet" href="../css/styles.css">
 		<link href='https://fonts.googleapis.com/css?family=Wendy+One|Press+Start+2P' rel='stylesheet' type='text/css'>
 		<script src="../js/game_audio.js"></script>
-		<script src="../js/game_logic.js"></script>
 		<script src="../js/game_level0.js"></script>
 		<script src="../js/game_level1.js"></script>
 		<script src="../js/game_level2.js"></script>
+		<script src="../js/game_logic.js"></script>		
 		<link rel="icon" href="../img/title.png" sizes="16x16" type="image/png" />
 		<title>Animo</title> 
 	</head> 
@@ -23,7 +23,7 @@
 						<img id="muted_audio" src="../img/audio.png" onclick="changeAudioImage()" style="height:25px; width:25px"></img>
 					</div>
 					<div id="pause_button" class="pointer">
-						<i class="fas fa-pause"></i>
+						<i class="fas fa-pause" onclick="pauseGame()"></i>
 					</div>				
 			</div>		
 			<div id="inner_content" style="height:inherit; width:inherit">
@@ -112,7 +112,7 @@
 				<!--D'Shon-->
 				<!---------------------------------------------------------------------------------->
 				<div id="gameArea2">
-					<div id="overlay2" class="rounded_corners fade-in overlay" onclick="offOverlay2()">		
+					<div id="instructionsOverlay2" class="rounded_corners fade-in overlay" onclick="offGameOverlay()">		
 						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 						<center>
 							<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
@@ -121,8 +121,21 @@
 							</p>
 						</center>						
 					</div>
+
+					<div id="gameOverOverlay2" class="overlay" style="display:none;">
+						<div id="gameOverMenu2">
+							<h1 id="gameOverScore2"></h1>
+							<button class="eightbit-btn" onclick="game2.offOverlay()">Restart</button>
+							<button class="eightbit-btn" onclick="homeBtnClick()">Home</button>
+						</div>
+					</div>
+
+					<div id ="countDownOverlay2" class="overlay" style="display:none;">
+						<h1 id="countDownTimer"></h1>					
+					</div>
+
 					<div id="gameContainer2" class="rounded_corners" style="display:none;">
-						
+						<h1 id ="gameScore2"></h1>
 						<div id="containerBalloon" style="display:none; width: 150px;">
 							<div id="moveBalloon" class="balloon" style=" width:50px;">
 								<div><span class="balloonSpan">
@@ -131,13 +144,11 @@
 								</span></div>
 							</div>
 						</div>
-						<form  onsubmit="return checkMathAnswer()" autocomplete="off" style="float:right;">
+						<form  onsubmit="return game2.checkAnswer()" autocomplete="off" style="float:right;">
 							<input autofocus ="autofocus" type="text" id="userMathAnswer" autocomplete="off"></input>
 						</form>
 						<img id="answerCloud" src="../img/cloud.png"></img>
-						<h1 id="countDownTimer"></h1>
-						<button class="eightbit-btn" onclick="pauseGame()"> Pause</button>
-					</div>		
+					</div>
 				</div>
 				<!---------------------------------------------------------------------------------->
 				<div id="menu2" class="pauseMenu">
