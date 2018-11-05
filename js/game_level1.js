@@ -254,7 +254,7 @@ function gameOneLoad(){
 		//gets the width and height of the drop area of the type : element being dropped
 		var width = document.getElementById(id_p+"-drop").offsetWidth;
 		var height= document.getElementById(id_p+"-drop").offsetHeight;
-
+		var output = document.getElementById("stumpy-talk");
 		//if the drop area has either height or width of 0 then the output gives a correction message
 		if((width || height) != 0)
 		{
@@ -271,7 +271,7 @@ function gameOneLoad(){
 			
 			var current = (id_p+"-drop");
 
-			var output = document.getElementById("stumpy-talk");
+			
 
 
 			output.innerHTML="You good to go buddy";
@@ -316,7 +316,7 @@ function gameOneLoad(){
 			
 			if(wall==9)
 			{
-				return setTimeout(transition,300,finish);
+				return setTimeout(transition,300,'finish');
 			}
 
 			setTimeout(transition,2000,current);
@@ -379,7 +379,7 @@ function gameOneLoad(){
 		}
 	}
 
-	var wall=0;
+	var wall=7;
 	function chrisUpdateBackground()
 	{	
 		wall=wall+1;
@@ -394,8 +394,13 @@ function gameOneLoad(){
 	function chrisGameFinish()
 	{
 		document.getElementById('stumpy-talk').style.display="initial";
-		document.getElementById("ronaldo-talk").innerHTML="I see you finally finished";
-		document.getElementById("stumpy-talk").innerHTML="Good job worker";
+		setTimeout(function(){
+			document.getElementById("ronaldo-talk").innerHTML="I see you finally finished";
+		},2000);
+		setTimeout(function(){
+			document.getElementById("stumpy-talk").innerHTML="Good job worker";
+		},1000)
+		
 	}
 function gameOneReset(){
     //Function will be ran when the home button is clicked
