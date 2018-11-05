@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" href="../css/styles.css">
 		<link href='https://fonts.googleapis.com/css?family=Wendy+One|Press+Start+2P' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="../css/newStyle.css">
 		<script src="../js/game_audio.js"></script>
 		<script src="../js/game_logic.js"></script>
 		<script src="../js/game_level0.js"></script>
@@ -99,10 +100,119 @@
 						<div id="gameContainer1">
 							<!--CHRIS-->
 							<!---------------------------------------------------------------------------------->		
-							
-							
-							<!---------------------------------------------------------------------------------->
-						</div>							
+							<div class = "chris-wrapper">
+								<img id = "backwall" src="../img/christopher/Wall.png">
+								<img id="ronaldo" src="../img/christopher/ronaldo.png">
+								<span id="ronaldo-talk"></span>
+								<img id="stumpy" src="../img/christopher/stumpy1.png">
+								<span id="stumpy-talk"></span>
+								<div id="chris-gameplay">
+
+									<div class="chris-upper">
+										
+									</div>
+									<div class="chris-lower">
+										<div class="left">
+											<div class="above-items"></div>
+											<div class="chris-item-container">
+												<div class="sand" id="sand">
+												<div class="sandy">
+													<img id= "sand1" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="sn1"></sup> <sub class="s_denom"></sub></span>		
+												</div>
+												<div class="sandy">
+													<img id ="sand2" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="sn2"></sup> <sub class="s_denom"></sub></span>		
+												</div>
+												<div>
+													<img id ="sand3" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="sn3"></sup> <sub class="s_denom"></sub></span>		
+												</div>
+												<div>
+													<img id ="sand4" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="sn4"></sup> <sub class="s_denom"></sub></span>		
+												</div>
+											</div>
+											<div class="lime" id ="lime">
+												<div>
+													<img id ="lime1" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="ln1"></sup> <sub class="l_denom"></sub></span>
+												</div>
+												<div>
+													<img id ="lime2" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="ln2"></sup> <sub class="l_denom"></sub></span>
+												</div>
+												<div>
+													<img id ="lime3" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="ln3"></sup> <sub class="l_denom"></sub></span>
+												</div>
+												<div>
+													<img id ="lime4" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="ln4"></sup> <sub class="l_denom"></sub></span>
+												</div>
+												
+											</div>
+											<div class="cement" id="cement">
+												<div>
+													<img id = "cement1" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="cn1"></sup> <sub class="c_denom"></sub></span>
+												</div>
+												<div>
+													<img id = "cement2" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="cn2"></sup> <sub class="c_denom"></sub></span>
+												</div>
+												<div>
+													<img id = "cement3" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="cn3"></sup> <sub class="c_denom"></sub></span>
+												</div>
+												<div>
+													<img id = "cement4" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="chrisDragStart(event)">
+													<span class="chris-span"><sup id="cn4"></sup> <sub class="c_denom"></sub></span>
+												</div>
+											</div>
+											</div>
+											
+									</div>
+
+									<div class="right" id="right-side" ondragover="chrisAllowDrop(event)" ondrop="chrisDrop(event)">
+										<div>
+											<img id="chris-cart" src="../img/christopher/wheel_barrow_cropped.png">
+										</div>
+										<div id="answer-box">
+
+											<div id ="sand-drop" >
+												<span style ="margin:0px;"><sup id= "sand-known-n">?</sup> <sub id="sand-known-d"></sub></span>
+												<span style ="margin:0px;">+</span>
+												<span><sup id="sand-unknown-n">?</sup> <sub id="sand-unknown-d"></sub></span>
+												<span style ="margin:0px;">=</span>
+												<span><sup id="sand-answer-n">?</sup> <sub id="sand-answer-d"></sub></span>
+											</div>
+
+											<div id ="lime-drop" >
+												<span style ="margin:0px;"><sup id= "lime-known-n">?</sup> <sub id="lime-known-d"></sub></span>
+												<span style ="margin:0px;">+</span>
+												<span><sup id="lime-unknown-n">?</sup> <sub id="lime-unknown-d"></sub></span>
+												<span style ="margin:0px;">=</span>
+												<span><sup id="lime-answer-n">?</sup> <sub id="lime-answer-d"></sub></span>
+											</div>
+
+											<div id ="cement-drop" >
+												<span style ="margin:0px;"><sup id= "cement-known-n">?</sup> <sub id="cement-known-d"></sub></span>
+												<span style ="margin:0px;">+</span>
+												<span><sup id="cement-unknown-n">?</sup> <sub id="cement-unknown-d"></sub></span>
+												<span style ="margin:0px;">=</span>
+												<span><sup id="cement-answer-n">?</sup> <sub id="cement-answer-d"></sub></span>
+											</div>
+
+										</div>
+									</div>
+									</div>
+									
+								</div><!--chris-gameplay-->
+								</div> <!-- //wrapper-->
+								
+								<!---------------------------------------------------------------------------------->
+							</div>	<!--//gamecontainer1-->						
 				</div>
 					
 
@@ -159,5 +269,3 @@
 		<!--PHONICS GAME AUDIO-->
 	</body> 
 </html>
-
-
