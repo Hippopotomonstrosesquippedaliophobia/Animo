@@ -109,18 +109,26 @@ function convo()
 
 //stop the interval from repeating in the gameload after the dialog is complete
 function myStopFunction(text) {
-    clearInterval(text);
+	clearInterval(text);
+	document.getElementById('ronaldo').style.display="none";
+	document.getElementById('ronaldo-talk').style.display="none";
+	document.getElementById('stumpy-talk').style.display="none";
+	document.getElementById("gameContainer1").removeEventListener("click");
 }
 function gameOneLoad(){
 	
 	//setTimeout(convo,2000);
+	
 	var talk=setInterval(convo,3000);
+	document.getElementById("gameContainer1").addEventListener("click", function(){
+		myStopFunction(talk)});
 	setTimeout(myStopFunction,40000,talk);
-    //This is where the compiler will start when your game starts
+
     var s_denominator = Math.floor((Math.random()*10)+1);
 	var l_denominator = Math.floor((Math.random()*10)+1);
 	var c_denominator = Math.floor((Math.random()*10)+1);
 	var s_numerator ;
+	//
 	var s_L,c_L,l_L,s_U,l_U,c_U;
 
 	//sand denominators
