@@ -6,7 +6,7 @@ function startGame(){
 	autoplay(); // start music
 	hideAll(divCount); //Clear all from screen		
 	//document.getElementById("home_button").style.display = "none"; // Hides Home button 
-	
+	// muteAudio();
 	
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
@@ -133,12 +133,8 @@ if (document.addEventListener)
 	document.addEventListener('MSFullscreenChange', exitHandler, false);
 }
 
-function continueBtnClick(fullscreen=true){
-	var audio = new Audio("../music/game2/fall.wav");
-	audio.play();
-	var menu = fullscreen ? "menu2" : "menu";	
-	document.getElementById(menu).style.display ="none";
-	document.getElementById(`game_container`).style.display = "block";
+function continueBtnClick(fullscreen=true){	
+	btnClick(fullscreen);
 	switch(activeDivId){
 		case 0:
 			
@@ -150,15 +146,23 @@ function continueBtnClick(fullscreen=true){
 			game2.resume();
 			break;
 	}
-	resetVolume();
-	openFullscreen();
+	
 }
 
 function homeBtnClick(fullscreen=true){	
-	continueBtnClick(fullscreen);
+	btnClick(fullscreen);
+	//continueBtnClick(fullscreen);
 	goHome();
 }
 
+function btnClick(fullscreen){
+	playSFX("../music/game2/fall.wav");
+	var menu = fullscreen ? "menu2" : "menu";	
+	document.getElementById(menu).style.display ="none";
+	document.getElementById(`game_container`).style.display = "block";
+	resetVolume();
+	openFullscreen();
+}
 function exitHandler()
 {
 	if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)

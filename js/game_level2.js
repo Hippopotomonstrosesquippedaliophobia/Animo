@@ -30,7 +30,7 @@ class gameArea2 {
 		document.getElementById(`instructionsOverlay2`).style.display = "block";
 		document.getElementById(`gameContainer2`).style.display = "none";
 		document.getElementById(`game_container`).style.backgroundImage ="url(../img/background_waterfall.gif)";
-		document.getElementById(`gameOverMenu2`).style.display ="none";
+		document.getElementById(`gameOverOverlay2`).style.display ="none";
 
 		resetBackgroundMusic();		
 		//document.getElementById("background_music").muted = false; 
@@ -46,13 +46,15 @@ class gameArea2 {
 
 	resume(){		
 		document.getElementById(`gameContainer2`).style.display = "block";		
-		document.getElementById(`userMathAnswer`).focus = true;		
+		//document.getElementById("userMathAnswer").focus();		
 		if (this.wasFloating) this.balloonFloat();
 	}
 
 	gameOver(){
 		playSFX("../music/game2/GameOver.wav");
 		document.getElementById(`gameContainer2`).style.display = "none";
+		document.getElementById("home_button").style.display = "none";
+		document.getElementById("pause_button").style.display = "none";
 		document.getElementById("gameOverOverlay2").style.display="block";
 		document.getElementById("gameOverScore2").innerHTML = `Score: ${this.score}`;
 	}
@@ -62,8 +64,6 @@ class gameArea2 {
 		document.getElementById(`instructionsOverlay2`).style.display = "none";
 		document.getElementById(`gameContainer2`).style.display = "block";
 		document.getElementById("containerBalloon").style.display = "block"; 
-		document.getElementById("home_button").style.display = "block";
-		document.getElementById("pause_button").style.display = "block";
 		this.startCountDown();
 	}
 
@@ -76,13 +76,21 @@ class gameArea2 {
 			timeleft--;
 			document.getElementById("countDownTimer").style.display = "block";
 			document.getElementById("countDownTimer").textContent = timeleft;
+			
 			if(timeleft <= 0){
 				clearInterval(downloadTimer);
 				document.getElementById("countDownTimer").style.display="none";
 				document.getElementById("countDownOverlay2").style.display = "none";
 				document.getElementById(`gameContainer2`).style.display = "block";
 				document.getElementById("userMathAnswer").focus = true;
+				document.getElementById("home_button").style.display = "block";
+				document.getElementById("pause_button").style.display = "block";
+				//document.getElementById(`userMathAnswer`).focus();
+				playSFX("../music/game2/go.wav");
 				game2.balloonFloat();
+			}
+			else{
+				playSFX("../music/game2/tick.wav");
 			}
 		},1000);
 	}

@@ -18,7 +18,7 @@ function resetVolume(){
 	document.getElementById("background_music").volume = volume;
 } 
 
-function changeAudioImage(){  
+function muteAudio(){  
 	document.getElementById('background_music').muted=!document.getElementById('background_music').muted;
 	muted = !muted;	
 	if (muted){
@@ -43,13 +43,13 @@ function lowerBackgroundMusic(){
 	document.getElementById("background_music").volume = 0.15;
 }
 
-function flipSound(){
-	var flip = document.getElementById("flipcardSound");
-	flip.volume = 0.3;	
-	flip.play();	
-}
+// function flipSound(){
+// 	var flip = document.getElementById("flipcardSound");
+// 	flip.volume = 0.3;	
+// 	flip.play();	
+// }
 
-function playSFX(src, volume = 0.3){
+function playSFX(src, volume = 0.1){
 	var audio = new Audio(src);
 	if(!muted){
 		audio.volume = volume;

@@ -20,7 +20,7 @@
 						<i class="fas fa-home" onclick="goHome()"></i>
 					</div>
 					<div id="mute_unmute" class="pointer">
-						<img id="muted_audio" src="../img/audio.png" onclick="changeAudioImage()" style="height:25px; width:25px"></img>
+						<img id="muted_audio" src="../img/audio.png" onclick="muteAudio()" style="height:25px; width:25px"></img>
 					</div>
 					<div id="pause_button" class="pointer">
 						<i class="fas fa-pause" onclick="pauseGame()"></i>
@@ -32,7 +32,7 @@
 					<img id="play_button" src="../img/play.png" onclick="continueGame()" class="center pointer"></img>
 				</div>
 				<div id="home_page">
-					<div class="flip-card pointer" onmouseover="flipSound()" onClick="playGame(0)">
+					<div class="flip-card pointer" onmouseenter="playSFX(`../music/flip_card.mp3`,0.2)" onClick="playGame(0)">
 						<div class="flip-card-inner">
 							<div class="flip-card-front">
 							  <img src="../img/phonics.png" alt="Avatar" style="width:275px;height:300px;">
@@ -43,7 +43,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="flip-card pointer" onmouseover="flipSound()" onClick="playGame(1)">
+					<div class="flip-card pointer" onmouseenter="playSFX(`../music/flip_card.mp3`,0.2)" onClick="playGame(1)">
 						<div class="flip-card-inner">
 							<div class="flip-card-front">
 							  <img src="../img/math.png" alt="Avatar" style="width:275px;height:300px;">
@@ -54,7 +54,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="flip-card pointer" onmouseover="flipSound()" onClick="playGame(2)">
+					<div class="flip-card pointer" onmouseenter="playSFX(`../music/flip_card.mp3`,0.2)" onClick="playGame(2)">
 						<div class="flip-card-inner">
 							<div class="flip-card-front">
 							  <img src="../img/balloon.png" alt="Avatar" style="width:275px;height:300px;">
@@ -123,7 +123,7 @@
 					</div>
 
 					<div id="gameOverOverlay2" class="overlay" style="display:none;">
-						<div id="gameOverMenu2">
+						<div id="gameOverMenu2" style="display:block">
 							<h1 id="gameOverScore2"></h1>
 							<button class="eightbit-btn" onclick="game2.offOverlay()">Restart</button>
 							<button class="eightbit-btn" onclick="homeBtnClick()">Home</button>
@@ -144,8 +144,8 @@
 								</span></div>
 							</div>
 						</div>
-						<form  onsubmit="return game2.checkAnswer()" autocomplete="off" style="float:right;">
-							<input autofocus ="autofocus" type="text" id="userMathAnswer" autocomplete="off"></input>
+						<form onsubmit="return game2.checkAnswer()" autocomplete="off" style="float:right;">
+							<input type="text" id="userMathAnswer" autocomplete="off" autofocus="autofocus"></input>
 						</form>
 						<img id="answerCloud" src="../img/cloud.png"></img>
 					</div>
@@ -168,9 +168,9 @@
 		
 		
 		<!--AUDIO FILES LOCATION-->
-		<audio id = "flipcardSound" src="../music/flip_card.mp3" >
+		<!-- <audio id = "flipcardSound" src= >
 			Your browser isn't invited for super fun audio time.
-		</audio>
+		</audio> -->
 
 		<!--PHONICS GAME AUDIO-->
 		<audio id = "ah" src="../music/phonics/ah.mp3">
