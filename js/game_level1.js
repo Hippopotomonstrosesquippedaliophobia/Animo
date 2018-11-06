@@ -379,7 +379,7 @@ function gameOneLoad(){
 		}
 	}
 
-	var wall=7;
+	var wall=0;
 	function chrisUpdateBackground()
 	{	
 		wall=wall+1;
