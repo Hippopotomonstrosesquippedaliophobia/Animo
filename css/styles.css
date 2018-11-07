@@ -169,6 +169,36 @@ audio {
 #gameArea1{
 	display: none;
 }
+
+#chrisgamecontainer{
+
+}
+.wrapper{
+  position: relative;
+  display: grid;
+  grid-auto-rows: 1fr 5fr;
+  max-height: 90%;
+  grid-gap: 0.25em;
+
+
+  overflow-y: hidden;
+}
+
+.upper-nested{
+  border:1px solid black;
+  border-radius: 10px;
+
+}
+.lower-nested{
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  grid-gap: 0.75em;
+  background-image: url("dirt.png");
+  background-repeat: all;
+  
+}
+
+
 /**Game1 SECTION*/
 
 

@@ -1,0 +1,174 @@
+#gameContainer1{
+	height: 100%;
+	max-height: 100%;
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+
+
+	overflow-y: hidden;
+}
+
+.wrapper{
+	position: relative;
+	display: grid;
+	grid-auto-rows: 1fr 5fr;
+	max-height: 90%;
+	grid-gap: 0.25em;
+
+
+	overflow-y: hidden;
+}
+.wrapper > div >img{
+	user-drag:;
+}
+.upper-nested{
+	border:1px solid black;
+	border-radius: 10px;
+
+}
+.lower-nested{
+	display: grid;
+	grid-template-columns: 5fr 2fr;
+	grid-gap: 0.75em;
+	background-image: url("../img/christopher/dirt.png");
+	background-repeat: all;
+	
+}
+
+.left{
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr;
+	border:1px solid black;
+	grid-gap: 0.75em;
+	padding:1em 1em;
+	border-radius: 20px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	max-height: 100%;
+}
+
+.right{
+	grid-template-rows: 5fr 1fr;
+	position: relative;
+	display: grid;
+	border:1px solid black;
+	justify-content: center;
+	align-content:center; 
+	border-radius: 20px;
+	background-image: url("../img/christopher/grass.png");
+	background-repeat: all;
+	
+}
+#message
+{
+	position: relative;
+	display: inline;
+	left: 11%;
+}
+.right >div> img{
+	position: relative;
+	top: 0%;
+}
+.sand{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.sand > div{
+	background:#28C4D8;
+}
+
+.lime{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;	
+}
+.lime >div{
+	background:#EF5093;
+}
+.cement{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;	
+}
+.cement > div {
+	background:#21A1B1;
+}
+
+.left > div{
+	grid-gap: 1em;
+	max-height: 1fr 1fr 1fr;
+
+}
+.left > div > div {
+	border:1px solid black;
+	border-radius: 10px;
+	position: relative;
+	background-image: url("../img/christopher/grass.png");
+	background-repeat: all;
+	
+}
+
+content{
+	position: absolute;
+}
+
+.left > div > div >img{
+	display: block;
+	margin: auto;
+
+}
+
+span{
+	color: black;
+	position: relative;
+	margin-left: 8%;
+	float: left;
+	font-size: 100%;
+	top:-20%;
+	font-weight: bold;
+	left: -5%;
+}
+
+#answer-box{
+	position: relative;
+
+}
+#sand-drop{
+	position: absolute;
+	visibility: visible;
+	width: 100%;
+	height: 100%;
+}
+#lime-drop{
+	position: absolute;
+	visibility: hidden;
+	width: 0%;
+	height: 0%;
+}
+#cement-drop{
+	position: absolute;
+	visibility: hidden;
+	width: 0%;
+	height: 0%;
+}
+
+#sand-drop > span {
+	top:20%;
+	left: 5%;
+}
+#lime-drop > span {
+	top:20%;
+	left: 5%;
+}
+#cement-drop > span {
+	top:20%;
+	left: 5%;
+}
+
+.upper-nested > div {
+	    height: -webkit-fill-available;
+}
+
+.upper-nested > div > img 
+{
+	width: 10%;
+}

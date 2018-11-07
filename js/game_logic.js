@@ -64,7 +64,9 @@ function continueGame(){
 	//If music isnt playing already, play music
 	var audio = document.getElementById("background_music");
 	audio.play();
-	//openFullscreen();
+
+	openFullscreen();
+
 	document.getElementById("start_page").style.display = "none";
 	document.getElementById("home_page").style.display = "block";	
 }
