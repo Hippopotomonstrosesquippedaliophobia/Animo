@@ -115,14 +115,15 @@ function myStopFunction(text) {
 	document.getElementById('stumpy-talk').style.display="none";
 	document.getElementById("gameContainer1").removeEventListener("click");
 }
-function gameOneLoad(){
+function gameOneLoad(fisrtLoad=true){
 	
 	//setTimeout(convo,2000);
-	
-	var talk=setInterval(convo,3000);
-	document.getElementById("gameContainer1").addEventListener("click", function(){
-		myStopFunction(talk)});
-	setTimeout(myStopFunction,40000,talk);
+	if(fisrtLoad){
+		var talk=setInterval(convo,3000);
+		document.getElementById("gameContainer1").addEventListener("click", function(){
+			myStopFunction(talk)});
+		setTimeout(myStopFunction,40000,talk);
+	}
 
     var s_denominator = Math.floor((Math.random()*10)+1);
 	var l_denominator = Math.floor((Math.random()*10)+1);
@@ -309,7 +310,7 @@ function gameOneLoad(){
 			else
 			{
 				output.style.display="initial"
-				output.innerHTML="hmm idk if thats right";
+				output.innerHTML="hmm I don't know if thats right";
 			}
 
 			if (correct== 3&&wall<10)
@@ -376,7 +377,7 @@ function gameOneLoad(){
 
 				document.getElementById('chris-cart').src="../img/christopher/wheel_barrow_cropped_cement.png";
 
-				gameOneLoad();
+				gameOneLoad(false);
 			}
 
 		if(currentDisplay == "finish")
