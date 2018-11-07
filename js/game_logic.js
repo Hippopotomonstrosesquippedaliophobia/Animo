@@ -1,20 +1,26 @@
 var activeDivId;
+var game2 = new gameArea2();
 
 function startGame(){
 	var divCount = 2; //Set this to the amount of divs there are (levels) (-1 because starts at 0)
 	autoplay(); // start music
-	
 	hideAll(divCount); //Clear all from screen		
-	document.getElementById("home_button").style.display = "none"; // Hides Home button 
+	//document.getElementById("home_button").style.display = "none"; // Hides Home button 
+	// muteAudio();
 	
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
 		
 }
 
+function offGameOverlay(){
+	game2.offOverlay();
+}
+
 function playGame(index){
 	document.getElementById(`home_page`).style.display = "none";	
 	document.getElementById(`gameArea${index}`).style.display = "block";
+	openFullscreen();
 
 	activeDivId = index;
 	switch (activeDivId){
@@ -25,7 +31,7 @@ function playGame(index){
 			gameOneLoad();
 			break;
 		case 2:
-			gameTwoLoad();
+			game2.load();
 			break;
 	}
 }
@@ -63,6 +69,7 @@ function showPage() {
 function continueGame(){
 	//If music isnt playing already, play music
 	var audio = document.getElementById("background_music");
+	//openFullscreen();
 	audio.play();
 
 	openFullscreen();
@@ -84,7 +91,7 @@ function reset(id){
 			gameOneReset();
 			break;
 		case 2:
-			gameTwoReset();
+			game2.reset();
 			break;
 	}
 }
@@ -93,8 +100,10 @@ function reset(id){
 function goHome(){
 	hide(activeDivId); //Hides gameArea0-2 
 	reset(activeDivId); // Resets overlay to block and hides gameContainer0-2
+	activeDivId = null;
 	continueGame();
 	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
+	document.getElementById("pause_button").style.display = "none";
 }
 
 function openFullscreen() {
@@ -108,7 +117,62 @@ function openFullscreen() {
 	} else if (elem.msRequestFullscreen) { /* IE/Edge */
 	  elem.msRequestFullscreen();
 	}
-  }
+}
+
+function pauseGame(fullscreen=true) {
+	lowerBackgroundMusic();
+	//document.getElementById("game_container").style.zIndex = 1;
+	var menu = fullscreen ? "menu2" : "menu"
+	if(activeDivId==2) game2.pause();
+	document.getElementById(menu).style.display = "block";
+}
+
+if (document.addEventListener)
+{
+	document.addEventListener('webkitfullscreenchange', exitHandler, false);
+	document.addEventListener('mozfullscreenchange', exitHandler, false);
+	document.addEventListener('fullscreenchange', exitHandler, false);
+	document.addEventListener('MSFullscreenChange', exitHandler, false);
+}
+
+function continueBtnClick(fullscreen=true){	
+	btnClick(fullscreen);
+	switch(activeDivId){
+		case 0:
+			
+			break;
+		case 1:
+			
+			break;
+		case 2:
+			game2.resume();
+			break;
+	}
+	
+}
+
+function homeBtnClick(fullscreen=true){	
+	btnClick(fullscreen);
+	//continueBtnClick(fullscreen);
+	goHome();
+}
+
+function btnClick(fullscreen){
+	playSFX("../music/game2/fall.wav");
+	var menu = fullscreen ? "menu2" : "menu";	
+	document.getElementById(menu).style.display ="none";
+	document.getElementById(`game_container`).style.display = "block";
+	resetVolume();
+	openFullscreen();
+}
+function exitHandler()
+{
+	if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)
+	{
+		document.getElementById("game_container").style.display = "none";
+		pauseGame(fullscreen = false);			
+	}
+}
 //Functions to load before HTML loads
 window.onload = function() {
 	
