@@ -1,5 +1,6 @@
 var activeDivId;
 var game2 = new gameArea2();
+var game1 = new gameArea1();
 
 function startGame(){
 	var divCount = 2; //Set this to the amount of divs there are (levels) (-1 because starts at 0)
@@ -28,7 +29,7 @@ function playGame(index){
 			gameZeroLoad();
 			break;
 		case 1:
-			gameOneLoad();
+			game1.load();
 			break;
 		case 2:
 			game2.load();
@@ -88,7 +89,7 @@ function reset(id){
 			gameZeroReset();
 			break;
 		case 1:
-			gameOneReset();
+			game1.reset();
 			break;
 		case 2:
 			game2.reset();

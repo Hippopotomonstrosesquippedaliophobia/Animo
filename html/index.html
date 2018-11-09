@@ -91,7 +91,7 @@
 				</div>
 				<!---------------------------------------------------------------------------------->
 				<div id="gameArea1" style="height: inherit; width:inherit">
-						<div id="overlay1" class="rounded_corners fade-in overlay" onclick="offOverlay1()">		
+						<div id="overlay1" class="rounded_corners fade-in overlay" onclick="game1.offOverlay()">		
 								<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 								<center>
 									<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
@@ -120,56 +120,56 @@
 											<div class="chris-item-container">
 												<div class="sand" id="sand">
 												<div class="sandy">
-													<img id= "sand1" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="chrisDragStart(event)">
+													<img id= "sand1" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="sn1"></sup> <sub class="s_denom"></sub></span>		
 												</div>
 												<div class="sandy">
-													<img id ="sand2" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="chrisDragStart(event)">
+													<img id ="sand2" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="sn2"></sup> <sub class="s_denom"></sub></span>		
 												</div>
 												<div>
-													<img id ="sand3" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="chrisDragStart(event)">
+													<img id ="sand3" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="sn3"></sup> <sub class="s_denom"></sub></span>		
 												</div>
 												<div>
-													<img id ="sand4" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="chrisDragStart(event)">
+													<img id ="sand4" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="sn4"></sup> <sub class="s_denom"></sub></span>		
 												</div>
 											</div>
 											<div class="lime" id ="lime">
 												<div>
-													<img id ="lime1" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="chrisDragStart(event)">
+													<img id ="lime1" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="ln1"></sup> <sub class="l_denom"></sub></span>
 												</div>
 												<div>
-													<img id ="lime2" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="chrisDragStart(event)">
+													<img id ="lime2" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="ln2"></sup> <sub class="l_denom"></sub></span>
 												</div>
 												<div>
-													<img id ="lime3" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="chrisDragStart(event)">
+													<img id ="lime3" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="ln3"></sup> <sub class="l_denom"></sub></span>
 												</div>
 												<div>
-													<img id ="lime4" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="chrisDragStart(event)">
+													<img id ="lime4" class="chris-img" draggable="true" src="../img/christopher/lime_white_128px.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="ln4"></sup> <sub class="l_denom"></sub></span>
 												</div>
 												
 											</div>
 											<div class="cement" id="cement">
 												<div>
-													<img id = "cement1" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="chrisDragStart(event)">
+													<img id = "cement1" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="cn1"></sup> <sub class="c_denom"></sub></span>
 												</div>
 												<div>
-													<img id = "cement2" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="chrisDragStart(event)">
+													<img id = "cement2" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="cn2"></sup> <sub class="c_denom"></sub></span>
 												</div>
 												<div>
-													<img id = "cement3" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="chrisDragStart(event)">
+													<img id = "cement3" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="cn3"></sup> <sub class="c_denom"></sub></span>
 												</div>
 												<div>
-													<img id = "cement4" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="chrisDragStart(event)">
+													<img id = "cement4" class="chris-img" draggable="true" src="../img/christopher/cement_trimmed.png" ondragstart="game1.DragStart(event)">
 													<span class="chris-span"><sup id="cn4"></sup> <sub class="c_denom"></sub></span>
 												</div>
 											</div>
@@ -177,7 +177,7 @@
 											
 									</div>
 
-									<div class="right" id="right-side" ondragover="chrisAllowDrop(event)" ondrop="chrisDrop(event)">
+									<div class="right" id="right-side" ondragover="game1.AllowDrop(event)" ondrop="game1.Drop(event)">
 										<div>
 											<img id="chris-cart" src="../img/christopher/wheel_barrow_cropped.png">
 										</div>
@@ -271,7 +271,7 @@
 			<button id="ContinueBtn" class="eightbit-btn" style="margin:30px 10px;" onclick="continueBtnClick(false)">Continue</button><br>
 			<button class="eightbit-btn" style="margin:30px 70px;" onclick="homeBtnClick(false)">Home</button>
 		</div>
-		<audio id="background_music" src="../music/background_music2.mp3"  autoplay="true" controls loop="loop">
+		<audio id="background_music" src="../music/background.mp3"  autoplay="true" controls loop="loop">
 			<p>If you are reading this, it is because your browser does not support the audio element.</p>
 		</audio>	
 		<!--fix audio autoplay on this-->

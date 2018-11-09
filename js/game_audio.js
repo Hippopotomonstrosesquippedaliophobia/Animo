@@ -36,7 +36,7 @@ function setBackgroundMusic(newAudioSrc){
 }
 
 function resetBackgroundMusic(){
-	setBackgroundMusic("../music/background_music2.mp3");
+	setBackgroundMusic("../music/background.mp3");
 }
 
 function lowerBackgroundMusic(){
