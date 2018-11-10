@@ -108,6 +108,7 @@ function goHome(){
 	activeDivId = null;
 	resetBackgroundMusic();
 	continueGame();
+	resetcounters();
 	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
 	document.getElementById("pause_button").style.display = "none";
 }

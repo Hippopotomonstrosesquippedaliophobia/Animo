@@ -10,6 +10,10 @@ function autoplay(){
 	  }, 2000);
 	});
 
+} 
+ 
+
+
 	audio.volume = volume;
 	audio.pause();
 } 
