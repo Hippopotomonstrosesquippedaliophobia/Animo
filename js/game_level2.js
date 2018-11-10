@@ -6,7 +6,7 @@ class gameArea2 {
 		this.pos = 0;
 		this.FALL_DISTANCE = 60;
 		this.MAX_HEIGHT = 620;
-		this.UP_SPEED = 20;//smaller = faster
+		this.UP_SPEED = 2;//smaller = faster
 		this.DOWN_SPEED = 15;//smaller = faster
 		this.music2 = "../music/game2BackgroundMusic.mp3";
 		this.mathQuestion = {

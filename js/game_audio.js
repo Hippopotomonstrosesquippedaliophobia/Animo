@@ -18,7 +18,7 @@ function resetVolume(){
 	document.getElementById("background_music").volume = volume;
 } 
 
-function muteAudio(){  
+function toggleMute(){  
 	document.getElementById('background_music').muted=!document.getElementById('background_music').muted;
 	muted = !muted;	
 	if (muted){
@@ -36,7 +36,7 @@ function setBackgroundMusic(newAudioSrc){
 }
 
 function resetBackgroundMusic(){
-	setBackgroundMusic("../music/background.mp3");
+	setBackgroundMusic("../music/backdrop.mp3");
 }
 
 function lowerBackgroundMusic(){

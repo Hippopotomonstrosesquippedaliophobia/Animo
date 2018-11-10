@@ -8,7 +8,9 @@ function startGame(){
 	hideAll(divCount); //Clear all from screen		
 	//document.getElementById("home_button").style.display = "none"; // Hides Home button 
 	// muteAudio();
-	
+
+	var test = new Fraction(6);
+	console.log(test, test.generateAnswer());
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
 		
@@ -19,8 +21,10 @@ function offGameOverlay(){
 }
 
 function playGame(index){
+	playSFX("../music/select.wav");
 	document.getElementById(`home_page`).style.display = "none";	
 	document.getElementById(`gameArea${index}`).style.display = "block";
+	document.getElementById(`home_button`).style.display = "block";	
 	openFullscreen();
 
 	activeDivId = index;
@@ -102,6 +106,7 @@ function goHome(){
 	hide(activeDivId); //Hides gameArea0-2 
 	reset(activeDivId); // Resets overlay to block and hides gameContainer0-2
 	activeDivId = null;
+	resetBackgroundMusic();
 	continueGame();
 	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
 	document.getElementById("pause_button").style.display = "none";
@@ -174,6 +179,34 @@ function exitHandler()
 		pauseGame(fullscreen = false);			
 	}
 }
+
+function displayTitle(gameId){
+	var title = document.getElementById("gameTitle");
+	switch(gameId){
+		case 0:
+			title.innerHTML = "Cataphonics";
+			break;
+		case 1:
+			title.innerHTML = "Build Blast";
+			break;
+		case 2:
+			title.innerHTML = "Balloon Catcher";
+			break;
+			
+	}
+	
+	title.style.display = "block";
+}
+
+function removeTitle(){
+	document.getElementById("gameTitle").style.display="none";
+}
+
+function generateRandomNumber(min, max) {
+    
+	var random_number = Math.random() * (max-min) + min;
+	return Math.floor(random_number);
+ }
 //Functions to load before HTML loads
 window.onload = function() {
 	

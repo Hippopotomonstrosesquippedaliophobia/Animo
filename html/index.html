@@ -21,7 +21,7 @@
 						<i class="fas fa-home" onclick="goHome()"></i>
 					</div>
 					<div id="mute_unmute" class="pointer">
-						<img id="muted_audio" src="../img/audio.png" onclick="muteAudio()" style="height:25px; width:25px"></img>
+						<img id="muted_audio" src="../img/audio.png" onclick="toggleMute()" style="height:25px; width:25px"></img>
 					</div>
 					<div id="pause_button" class="pointer">
 						<i class="fas fa-pause" onclick="pauseGame()"></i>
@@ -33,40 +33,10 @@
 					<img id="play_button" src="../img/play.png" onclick="continueGame()" class="center pointer"></img>
 				</div>
 				<div id="home_page">
-					<div class="flip-card pointer" onmouseenter="playSFX(`../music/flip_card.mp3`,0.2)" onClick="playGame(0)">
-						<div class="flip-card-inner">
-							<div class="flip-card-front">
-							  <img src="../img/phonics.png" alt="Avatar" style="width:275px;height:300px;">
-							</div>
-							<div class="flip-card-back">
-							  <h1 id="Game0">Fantastic Phonics</h1> 
-							  <p style="margin: 0 auto; width: 90%">Fill in the blank spaces with the correct phonetical phrase to finish sentences and gain points! </p>
-							</div>
-						</div>
-					</div>
-					<div class="flip-card pointer" onmouseenter="playSFX(`../music/flip_card.mp3`,0.2)" onClick="playGame(1)">
-						<div class="flip-card-inner">
-							<div class="flip-card-front">
-							  <img src="../img/math.png" alt="Avatar" style="width:275px;height:300px;">
-							</div>
-							<div class="flip-card-back">
-							  <h1 id="Game1">Fractioin Build Blast</h1>
-							  <p style="margin: 0 auto; width: 90%">YAY FRACTIONS >W< </p>
-							</div>
-						</div>
-					</div>
-					<div class="flip-card pointer" onmouseenter="playSFX(`../music/flip_card.mp3`,0.2)" onClick="playGame(2)">
-						<div class="flip-card-inner">
-							<div class="flip-card-front">
-							  <img src="../img/balloon.png" alt="Avatar" style="width:275px;height:300px;">
-							</div>
-							<div class="flip-card-back">
-							  <h1> Balloon Catcher </h1> 
-							  <p>Architect & Engineer</p> 
-							  <p style="margin: 0 auto; width: 90%">Addition, subtraction, multiplication; Solve equations and get the high score!</p>
-							</div>
-						</div>
-					</div>
+						<img class = "pointer menuItem" src="../img/leaf.png" alt="Avatar" style="width:275px;height:300px;" onmouseover="playSFX('../music/hover.wav'); displayTitle(0)" onmouseout="removeTitle()">
+						<img class = "pointer menuItem" src="../img/hammer.png" alt="Avatar" style="width:275px;height:300px;" onClick="playGame(1)" onmouseover="playSFX('../music/hover.wav'); displayTitle(1)" onmouseout="removeTitle()"">
+						<img class = "pointer menuItem" src="../img/cloud2.png" alt="Avatar" style="width:275px;height:300px;" onClick="playGame(2)" onmouseover="playSFX('../music/hover.wav'); displayTitle(2)" onmouseout="removeTitle()"">
+						<h1 id = "gameTitle"></h1>
 				</div>
 
 				<!-- MINIGAMES-->
@@ -121,19 +91,19 @@
 												<div class="sand" id="sand">
 												<div class="sandy">
 													<img id= "sand1" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="game1.DragStart(event)">
-													<span class="chris-span"><sup id="sn1"></sup> <sub class="s_denom"></sub></span>		
+													<span class="chris-span"><sup id="sn1"></sup> <sub id="sd1" class="s_denom"></sub></span>		
 												</div>
 												<div class="sandy">
 													<img id ="sand2" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="game1.DragStart(event)">
-													<span class="chris-span"><sup id="sn2"></sup> <sub class="s_denom"></sub></span>		
+													<span class="chris-span"><sup id="sn2"></sup> <sub id="sd2" class="s_denom"></sub></span>		
 												</div>
 												<div>
 													<img id ="sand3" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="game1.DragStart(event)">
-													<span class="chris-span"><sup id="sn3"></sup> <sub class="s_denom"></sub></span>		
+													<span class="chris-span"><sup id="sn3"></sup> <sub id="sd3" class="s_denom"></sub></span>		
 												</div>
 												<div>
 													<img id ="sand4" class="chris-img" draggable="true" src="../img/christopher/sand.png" ondragstart="game1.DragStart(event)">
-													<span class="chris-span"><sup id="sn4"></sup> <sub class="s_denom"></sub></span>		
+													<span class="chris-span"><sup id="sn4"></sup> <sub id="sd1" class="s_denom"></sub></span>		
 												</div>
 											</div>
 											<div class="lime" id ="lime">
@@ -233,10 +203,10 @@
 					</div>
 
 					<div id="gameOverOverlay2" class="overlay" style="display:none;">
-						<div id="gameOverMenu2" style="display:block">
+						<div id="gameOverMenu2" class="pauseMenu" style="display:block">
 							<h1 id="gameOverScore2"></h1>
-							<button class="eightbit-btn" onclick="game2.offOverlay()">Restart</button>
-							<button class="eightbit-btn" onclick="homeBtnClick()">Home</button>
+							<button class="eightbit-btn" onclick="game2.offOverlay()" style="margin:20px 25px">Restart</button>
+							<button class="eightbit-btn" onclick="homeBtnClick()" style="margin:20px 65px">Home</button>
 						</div>
 					</div>
 
@@ -262,16 +232,18 @@
 				</div>
 				<!---------------------------------------------------------------------------------->
 				<div id="menu2" class="pauseMenu">
+					<h1>PAUSE</h1>
 					<button id="ContinueBtn" class="eightbit-btn" style="margin:30px 10px;" onclick="continueBtnClick()">Continue</button><br>
 					<button class="eightbit-btn" style="margin:30px 70px;" onclick="homeBtnClick()">Home</button>
 				</div>
 			</div>	
 		</div>
 		<div id="menu" class="pauseMenu">
+			<h1>PAUSE</h1>
 			<button id="ContinueBtn" class="eightbit-btn" style="margin:30px 10px;" onclick="continueBtnClick(false)">Continue</button><br>
 			<button class="eightbit-btn" style="margin:30px 70px;" onclick="homeBtnClick(false)">Home</button>
 		</div>
-		<audio id="background_music" src="../music/background.mp3"  autoplay="true" controls loop="loop">
+		<audio id="background_music" src="../music/backdrop.mp3"  autoplay="true" controls loop="loop">
 			<p>If you are reading this, it is because your browser does not support the audio element.</p>
 		</audio>	
 		<!--fix audio autoplay on this-->

@@ -1,4 +1,48 @@
-class gameArea1{
+class Fraction{
+
+	constructor(denominator=null, numerator=null){
+		if(numerator!=null && denominator!= null){
+			this.numerator = numerator;
+			this.denominator = denominator;
+		}
+		else if(denominator!=null){			
+			this.denominator = denominator;
+			this.numerator = generateRandomNumber(1, this.denominator);
+	
+		}
+		else{
+			this.denominator;
+			this.numerator;		
+		}
+	}
+
+	lcm(a, b) 
+    { 
+        return (a*b)/this.gcd(a, b); 
+	} 
+	
+	gcd(a, b) 
+	{ 
+		if (b == 0) 
+			return a; 
+		return this.gcd(b, a % b);  		
+	} 
+
+	generateAnswer(){
+		var answer = new Fraction();
+		var hcf = this.gcd(this.numerator, this.denominator)
+		if(hcf == 1){
+			answer.denominator = this.denominator;
+			answer.numerator = this.denominator - this.numerator;
+			return answer;
+		}
+		answer.denominator = this.denominator / hcf;
+		answer.numerator = (this.denominator - this.numerator)/hcf;
+		return answer;
+	}
+}
+
+class gameArea1{	
 
 	constructor(){
 		this.line = 0;
@@ -6,21 +50,23 @@ class gameArea1{
 		this.correct = 0;
 		this.subRound = 0;
 		this.id;
+		this.spos;
+		this.lpos;
+		this.cpos;
 	}
+	
 
 	offOverlay(){
 		document.getElementById(`overlay1`).style.display = "none";
 		document.getElementById(`gameContainer1`).style.display = "block";	
 		document.getElementById("home_button").style.display = "block";
 		
-		setBackgroundMusic("../music/background_music2.mp3");
 	}	
 
 	static convo(game){
 		game.line+=1;
 		var ronaldo = document.getElementById('ronaldo-talk');
 		var stumpy = document.getElementById('stumpy-talk');
-		console.log(game);
 		if(game.line==1)
 		{
 			setTimeout(function(){
@@ -128,130 +174,90 @@ class gameArea1{
 	}
 
 	load(fisrtLoad=true){
-		//setTimeout(convo,2000);
-		// if(fisrtLoad){
-		// 	var talk=setInterval(gameArea1.convo,3000, this);
-		// 	document.getElementById("gameContainer1").addEventListener("click", function(){
-		// 		gameArea1.stopFunction(talk)});
-		// 	setTimeout(gameArea1.stopFunction,40000,talk);
-		// }
+		
+		setBackgroundMusic("../music/background_music2.mp3");
+		setTimeout(this.convo,2000);
+		if(fisrtLoad){
+			var talk=setInterval(gameArea1.convo,3000, this);
+			document.getElementById("gameContainer1").addEventListener("click", function(){
+				gameArea1.stopFunction(talk)});
+			setTimeout(gameArea1.stopFunction,40000,talk);
+		}
 
-		var s_denominator = Math.floor((Math.random()*10)+1);
-		var l_denominator = Math.floor((Math.random()*10)+1);
-		var c_denominator = Math.floor((Math.random()*10)+1);
-		var s_numerator ;
-		var l_numerator;
-		var c_numerator;
-		//
+		var sandQuestion = new Fraction(generateRandomNumber(2,10));
+		var sandAnswer = sandQuestion.generateAnswer();
+		var s_denominator = sandAnswer.denominator > sandQuestion.denominator ? sandAnswer.denominator : sandQuestion.denominator;
+
+		var limeQuestion = new Fraction(generateRandomNumber(2,10));
+		var limeAnswer = limeQuestion.generateAnswer();
+		var l_denominator = limeAnswer.denominator > limeQuestion.denominator ? limeAnswer.denominator : limeQuestion.denominator;
+
+		var cementQuestion = new Fraction(Math.floor(generateRandomNumber(2,10)));
+		var cementAnswer = cementQuestion.generateAnswer();
+		var c_denominator = cementAnswer.denominator > cementQuestion.denominator ? cementAnswer.denominator : cementQuestion.denominator;
+		
 		var s_L,c_L,l_L,s_U,l_U,c_U;
 
 		//sand denominators
-		var sand_known = document.getElementById("sand-known-d").innerHTML=s_denominator;
-		var sand_unknown= document.getElementById("sand-unknown-d").innerHTML=s_denominator;
-		var sand_answer = document.getElementById("sand-answer-d").innerHTML=s_denominator;
+		document.getElementById("sand-known-d").innerHTML = sandQuestion.denominator;
+		document.getElementById("sand-unknown-d").innerHTML="?";
+		document.getElementById("sand-answer-d").innerHTML = s_denominator;
 
 		//lime denominators
-		var lime_known = document.getElementById("lime-known-d").innerHTML=l_denominator;
-		var lime_unknown= document.getElementById("lime-unknown-d").innerHTML=l_denominator;
-		var lime_answer = document.getElementById("lime-answer-d").innerHTML=l_denominator;
+		document.getElementById("lime-known-d").innerHTML=limeQuestion.denominator;
+		document.getElementById("lime-unknown-d").innerHTML="?";
+		document.getElementById("lime-answer-d").innerHTML=l_denominator;
 
 		
 		//cement denominators
-		var cement_known = document.getElementById("cement-known-d").innerHTML=c_denominator;
-		var cement_unknown= document.getElementById("cement-unknown-d").innerHTML=c_denominator;
-		var cement_answer = document.getElementById("cement-answer-d").innerHTML=c_denominator;
+		document.getElementById("cement-known-d").innerHTML=cementQuestion.denominator;
+		document.getElementById("cement-unknown-d").innerHTML="?";
+		document.getElementById("cement-answer-d").innerHTML=c_denominator;
 
-		var sand_known_n = document.getElementById("sand-known-n").innerHTML= s_denominator-(Math.floor(Math.random()*s_denominator));
-		var lime_known_n = document.getElementById("lime-known-n").innerHTML= l_denominator-(Math.floor(Math.random()*l_denominator));
-		var cement_known_n = document.getElementById("cement-known-n").innerHTML= c_denominator-(Math.floor(Math.random()*c_denominator));
+		//Assinging question denominators
+		document.getElementById("sand-known-n").innerHTML= sandQuestion.numerator;
+		document.getElementById("lime-known-n").innerHTML= limeQuestion.numerator;
+		document.getElementById("cement-known-n").innerHTML= cementQuestion.numerator;
 
-		var sand_ans_n = document.getElementById("sand-answer-n").innerHTML= s_denominator;
-		var lime_ans_n = document.getElementById("lime-answer-n").innerHTML= l_denominator;
-		var cement_ans_n = document.getElementById("cement-answer-n").innerHTML= c_denominator;
+		//Assinging denominator of final fraction
+		document.getElementById("sand-answer-n").innerHTML= s_denominator;
+		document.getElementById("lime-answer-n").innerHTML= l_denominator;
+		document.getElementById("cement-answer-n").innerHTML= c_denominator;
 
-		var sand_unknown_n = document.getElementById("sand-unknown-n").innerHTML="?";
-		var lime_unknown_n = document.getElementById("lime-unknown-n").innerHTML="?";
-		var cement_unknown_n = document.getElementById("cement-unknown-n").innerHTML="?";
+		document.getElementById("sand-unknown-n").innerHTML="?";
+		document.getElementById("lime-unknown-n").innerHTML="?";
+		document.getElementById("cement-unknown-n").innerHTML="?";
 
 		//s -> sand , l -> lime , c -> cement
 		// _L  -> denominator , _U -> numerator
-		for (var i=1;i<8;i+=2){
-			//denominator assignment
-			s_L=document.getElementById("sand").childNodes[i].childNodes[3].childNodes[2];
-			l_L=document.getElementById("lime").childNodes[i].childNodes[3].childNodes[2];
-			c_L=document.getElementById("cement").childNodes[i].childNodes[3].childNodes[2];
-
-			s_L.innerHTML=s_denominator;
-			l_L.innerHTML=l_denominator;
-			c_L.innerHTML=c_denominator;	
-		}
-
-
-		var sArray = [];
-		var lArray = [];
-		var cArray = [];
-		var s_summation = false;
-		var l_summation = false;
-		var c_summation = false;
-
-		for (var j = 1;j<5; j++)
-		{
+		this.spos = Math.floor(generateRandomNumber(1,4));
+		this.lpos = Math.floor(generateRandomNumber(1,4));
+		this.cpos =  Math.floor(generateRandomNumber(1,4));
+		for (var i=1;i<5;i++){
 			
-			s_numerator =s_denominator-(Math.floor((Math.random()*10)+1));
-			l_numerator =l_denominator-(Math.floor((Math.random()*10)+1));
-			c_numerator =c_denominator-(Math.floor((Math.random()*10)+1));
+			var j = (2*i)-1;
+			
+			s_L=document.getElementById("sand").childNodes[j].childNodes[3].childNodes[2];
+			l_L=document.getElementById("lime").childNodes[j].childNodes[3].childNodes[2];
+			c_L=document.getElementById("cement").childNodes[j].childNodes[3].childNodes[2];
 
-			s_U=document.getElementById("sn"+j);
-			l_U=document.getElementById("ln"+j);
-			c_U=document.getElementById("cn"+j);
+			s_U=document.getElementById("sn"+i);
+			l_U=document.getElementById("ln"+i);
+			c_U=document.getElementById("cn"+i);
+			 
+			var sandRando = new Fraction(generateRandomNumber(2,10));			
+			var limeRando = new Fraction(generateRandomNumber(2,10));			
+			var cementRando = new Fraction(generateRandomNumber(2,10));
 
-			s_U.innerHTML=("\t"+Math.abs(s_numerator));
-			l_U.innerHTML=Math.abs(l_numerator);
-			c_U.innerHTML=Math.abs(c_numerator);
+			//denominator assignment
+			s_L.innerHTML = i==this.spos? sandAnswer.denominator : sandRando.denominator;			
+			l_L.innerHTML = i==this.lpos? limeAnswer.denominator : limeRando.denominator;
+			c_L.innerHTML = i==this.cpos? cementAnswer.denominator : cementRando.denominator;
 
-		////////////////////////////////////////////////////////////////////////////////////////////
-		//
-		//		logic to ensure there is at least one number that will make the sum correct
-		//
-		////////////////////////////////////////////////////////////////////////////////////////////
-
-			if(s_numerator == (sand_ans_n-sand_known_n))
-			{
-				s_summation=true;
-			}
-			if(j==4&&s_summation==false)
-			{
-				var rand = Math.floor((Math.random()*4)+1);
-				document.getElementById('sn'+rand).innerHTML=sand_ans_n-sand_known_n;
-				console.log("there was no match for sand, match created and placed at "+rand+"\n");
-			}	
-
-			if(l_numerator == (lime_ans_n-lime_known_n))
-			{
-				l_summation=true;
-			}
-			if(j==4&&l_summation==false)
-			{
-				var rand = Math.floor((Math.random()*4)+1);
-				document.getElementById('ln'+rand).innerHTML=lime_ans_n-lime_known_n;
-				console.log("there was no match for lime, match created and placed at "+rand+"\n");
-			}
-
-			if(c_numerator == (cement_ans_n-cement_known_n))
-			{
-				c_summation=true;
-			}
-			if(j==4&&c_summation==false)
-			{
-				var rand = Math.floor((Math.random()*4)+1);
-				document.getElementById('cn'+rand).innerHTML=cement_ans_n-cement_known_n;
-				console.log("there was no match for cement, match created and placed at "+rand+"\n");
-			}
-
-
+			s_U.innerHTML = i==this.spos? sandAnswer.numerator : sandRando.numerator;
+			l_U.innerHTML = i==this.lpos? limeAnswer.numerator : limeRando.numerator;
+			c_U.innerHTML = i==this.cpos? cementAnswer.numerator : cementRando.numerator;
 		}
-
-
 		return;
 	}
 
@@ -290,33 +296,24 @@ class gameArea1{
 			this.subRound+=1;
 			
 			var current = (id_p+"-drop");
-
-			
-
-
 			output.innerHTML="You're good to go buddy";
 			output.style.display="none";
 			//gets the id of the element whose picture is being dragged
 			var dataId= document.getElementById(this.id).parentNode.childNodes[3].firstChild.id;
 			
+			
 			//stores the data in the dataId inner html
-			var newData=document.getElementById(dataId).innerHTML;
+			 var newData=document.getElementById(dataId).innerHTML;
+			 var pos;
+			 if(id_p == "sand") pos = this.spos;
+			 if(id_p == "lime") pos = this.lpos;
+			 if(id_p == "cement") pos = this.cpos;
 
-			//changes the display of the unknown to newData, that being the dragged element's numerator 
-
-			document.getElementById(id_p+"-unknown-n").innerHTML=newData;
-
-			var known_numerator = parseInt(document.getElementById(id_p+"-known-n").innerHTML);
-			var user_guess = parseInt(document.getElementById(id_p+"-unknown-n").innerHTML);
-			var answer = document.getElementById(id_p+"-answer-n").innerHTML;
-
-
-			if((known_numerator+user_guess)==answer)
-			{
+			 var droppedId = document.getElementById(this.id).id.match(/\d+/)[0];
+			 if (droppedId == pos){
 				output.style.display="initial"
 				output.innerHTML="that is right";
 				this.correct++;
-				//console.log("correct = "+correct);
 			}
 			else
 			{
@@ -398,6 +395,7 @@ class gameArea1{
 			document.getElementById("cement").style.display="none";
 			setTimeout(GameFinish,2000);
 		}
+		document.getElementById("stumpy-talk").style.display="none";
 	}
 
 	UpdateBackground(){	
@@ -425,6 +423,11 @@ class gameArea1{
 		this.wall = 0;
 		this.correct = 0;
 		this.subRound = 0;
+
+		document.getElementById(`overlay1`).style.display = "block";
+		document.getElementById(`gameContainer1`).style.display = "none";
+
 		return;
 	}
 }
+
