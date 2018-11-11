@@ -1,12 +1,44 @@
-const NumberOfGameQuestions = 5;
+const NumberOfGameQuestions = 2;
 const NumberOfAllQuestions = 10;
 var currentQuestion;
 var currentQCount;
 var questionStore;
 var rightOrWrong = [];
 var chosenAnswer = [];
+var answers =[];
 var timeTaken = 0;
 var overAllScore;
+var caterpillars;
+
+class Caterpillar{
+	constructor(word){
+		this.word = word;
+		var manipArray = word.split('{');
+		var splitArray = manipArray[1].split('}');
+		manipArray.pop();			
+		this.answer = (splitArray[0]);
+		
+		var  manipArray = manipArray.concat(splitArray);
+		var letters = [];
+		for (var i = 0; i < manipArray.length; i++) {
+			if(manipArray[i]==this.answer){
+				letters.push(" ");
+				continue;
+			}
+			for(var j=0; j<manipArray[i].length; j++){
+				letters.push(manipArray[i].charAt(j));
+			}
+		}
+		this.letters = letters;
+
+		for(var i=0; i<letters.length; i++){
+			if(letters[i]==' '){
+				this.missingPos = i;
+			}
+		}
+
+	}
+}
 
 function resetcounters(){
 	var currentQuestion = 0;
@@ -30,25 +62,35 @@ function offOverlay0(){
 
 function gameZeroLoad(){
 	//Aesthetic Setup
-	document.getElementById("game_container").style.backgroundImage = "url('../img/phonics/grassy3.gif')";
+	document.getElementById("game_container").style.backgroundImage = "url('../img/phonics/sky.png')";
 	document.getElementById("caterpillarHead").style.display = "block";
-	//musicChange = new Audio('../music/grassyZelda.mp3').play();
+	setBackgroundMusic('../music/background0.mp3');
 
+	currentQCount = 0;
+	caterpillars= []; 
+	getQuestions().forEach(function(response){
+		caterpillars.push(new Caterpillar(response.word));
+	})
+	document.getElementById('question0Caterpillar').appendChild(makeUL(caterpillars[currentQCount].letters));
+	var options = getOptions();
+	options.push(caterpillars[0].answer);
+	options=(shuffle(options));
+	document.getElementById('question0Options').appendChild(makeOptions(options));
+	//showResults();
 	//Logical Setup
 	clearInterval(timeTaken);//Reset clock everytime 
-	currentQCount = -1;
+	// currentQCount = -1;
 	resetcounters();
-	questionStore = getQuestions();	
-	currentQuestion = questionStore[currentQCount];
-	incrementQuestions();
+
 }
 
 function incrementQuestions(){
-	questionReset();
+	clearQuestion();
+	//questionReset();
 	if (currentQCount < NumberOfGameQuestions - 1) {
 		//Ensuring Questions are not equal to the max set questions
-		currentQuestion = questionStore[++currentQCount];
-		nextQuestion(currentQuestion);
+		currentQCount++;
+		nextQuestion(currentQCount);
 	}else{
 		//Prepare Results area for text appending	
 		document.getElementById("caterpillarHead").style.display = "none";	
@@ -63,22 +105,28 @@ function incrementQuestions(){
 		
 	}
 }
-function nextQuestion(thequestion){	
-	document.getElementById(`questionText0`).innerHTML = thequestion.Question.replace('{_}', '___');
-	document.getElementById('question0Options').appendChild(makeUL(thequestion.Options));
-	//When the person answers the question, the array could be incremented but I'm tired.
-	//Imma tag you in Brons
+function nextQuestion(currentQCount){	
+	var options = getOptions();
+	options.push(caterpillars[0].answer);
+	options=(shuffle(options));
+	document.getElementById('question0Options').appendChild(makeOptions(options));
+	document.getElementById('question0Caterpillar').appendChild(makeUL(caterpillars[currentQCount].letters));
+}
+
+function clearQuestion(){
+	document.getElementById('question0Caterpillar').firstChild.remove();
+	document.getElementById('question0Options').firstChild.remove();
 }
 
 // Gets a list of questions from the database
 function getQuestions(){
-	var randomNums = getRandomNumbers();
+	var randomNums = getRandomNumbers(NumberOfAllQuestions,NumberOfGameQuestions);
 	var questions = new Array();
 
 	// Needs more questions to be added for now
 	//---------------------------------------------------------------------------------
 	randomNums.forEach(function(callNum){
-		questions.push(getJson(`Phonics/${callNum}`));
+		questions.push(getJson(`Phonics/${2}`));
 	});
 	//---------------------------------------------------------------------------------
 	// Use this line instead when testing or LIVE to simulate random question calls 
@@ -89,18 +137,29 @@ function getQuestions(){
 	return questions;
 }
 
+function getOptions(){
+	var callNums = getRandomNumbers(4,3);
+	var options = new Array();
+	callNums.forEach(function(callnum){
+		options.push(getJson(`Options/${callnum}`));
+	});
+	return options;
+}
+
 // Gets a list of random numbers. This'll be used to get the random questions from the DB.
-function getRandomNumbers(){
-	var callNums = [getRandomInt(NumberOfAllQuestions)];
+function getRandomNumbers(max, amountOfNums){
+	if(amountOfNums>max){
+		console.log("Bad function call at: getRandomNumbers()");
+		return;
+	}
+	var callNums = [getRandomNumberUpTo(max)];
 
 	do{
 		do {
-			var callNum = getRandomInt(NumberOfAllQuestions); 			
+			var callNum = getRandomNumberUpTo(max); 			
 		}while(callNums.includes(callNum));// Making sure there isn't a duplicate
 		callNums.push(callNum);
-	}while(callNums.length!= NumberOfGameQuestions);
-
-	console.log('CallNums:', callNums);	
+	}while(callNums.length!= amountOfNums);
 
 	return callNums;
 }
@@ -109,91 +168,113 @@ function makeUL(array) {
     // Create the list element:
 	var list = document.createElement('ul');
 	list.style.marginTop = "70px";
-	list.id = "question0AnsOptions"
-
-	/**var head = document.createElement('img');
-	head.src= "../img/phonics/SegHead.png";
-	head.setAttribute('width', '220px');
-	head.style.marginTop = "-50px";	
-	head.style.cssFloat = "left";
-	head.style.marginLeft= "-112px";
-	head.style.position= "absolute";
-	head.setAttribute('z-index', '1');
-	head.setAttribute("id", "caterpillarHead"); 
-	document.getElementById("question0Options").appendChild(head);*/
+	list.id = "question0CaterpillarBody";
 	
 	var randomizeColour = [];
-	
 	for(var i = 0; i < array.length; i++) {
         // Create the list item:
 		var item = document.createElement('li');
-
-		// I'm putting in a button but depending on the mechanics we agree on this is subject to change
-		// Feel free to experiment with flip cards and stuff
-		var button = document.createElement('div');
-		button.style.marginleft = "-200px";
-		button.style.marginRight = "-10px";
-		button.setAttribute("id", "btnID" + i); //Adds id to button for referencing
-		button.classList.add('btnCLASS'+ i); //Adds class to button for referencing
-		button.classList.add('object' + i);
-		button.style.width='200px';
-		button.style.height='200px';
-		button.style.cssFloat = "left";		
-		button.style.cursor = "pointer";
+		var body = document.createElement('div');
+		body.style.marginleft = "-210px";
+		body.style.marginRight = "-20px";
+		body.setAttribute("id", "bodyID" + i); //Adds id to body for referencing
+		//body.classList.add('body'+ i); //Adds class to body for referencing
+		body.classList.add('object' + i);
+		body.style.width='200px';
+		body.style.height='200px';
+		body.style.cssFloat = "left";	
 		index = 4000 - (100 + i);
-		button.style.zIndex = index;
+		body.style.zIndex = index;
         // Add it to the list:
 		list.appendChild(item);	
 				
-		randomizeColour[i] = getRandomInt(2);
+		randomizeColour[i] = getRandomNumberUpTo(2);
 		
 		//Randomize Caterpillar colour pallette 
-		console.log("randomizeColour["+i+"] "+randomizeColour[i]);
 
 		if (randomizeColour[i] == 1){
 			//button.src = "../img/phonics/SegGrn.png";
-			button.style.backgroundImage = 'url("../img/phonics/greenbody.png")';
+			body.style.backgroundImage = 'url("../img/phonics/greenbody.png")';
 		}else{
 			//button.src = "../img/phonics/SegYel.png";
-			button.style.backgroundImage = 'url("../img/phonics/yellowbody.png")';
+			body.style.backgroundImage = 'url("../img/phonics/yellowbody.png")';
 		}	
 		
 		//button.style.backgroundColor= "red";
-		button.style.backgroundSize = "100% 100%";
-		bttnsID = "btnID" + i;
+		body.style.backgroundSize = "100% 100%";
+		bodyID = "bodyID" + i;
 
-		//Adds sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
-		//-------------------------------------------------
-		button.addEventListener('mouseover', function(){
-			playPhoneticSound(this.id);			
-		});
-		button.onclick = function(){ checkAnswer(this.id);};
-		//Added sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
-		//-------------------------------------------------
+		
 		var textNode = document.createElement('p');
 		textNode.setAttribute('id','answerText'+i);
 		textNode.innerHTML = array[i];
-		textNode.style.marginLeft = "66px";
+		textNode.style.marginLeft = "20px";
 		textNode.style.marginTop = "76px";
 		textNode.style.fontSize = "40px";
-		button.appendChild(textNode);
+		// textNode.style.fontFamily="Press Start 2P, cursive";
+		body.appendChild(textNode);
 		//button.appendChild(document.createTextNode(array[i]));
 		// Set the list item's contents:
-		item.appendChild(button);		
+		item.appendChild(body);
     }
 
-	
     // Finally, return the constructed list:
     return list;
 }
 
-function checkAnswer(id){
-	chosenAnswer[currentQCount] = document.getElementById(id).innerText;
+function makeOptions(array){
+	var list = document.createElement('ul');
+	list.style.marginTop = "70px";
+	list.id = "question0OptionsList";
+	for(var i = 0; i < array.length; i++) {
+        // Create the list item:
+		var item = document.createElement('li');
+		var option = document.createElement('div');
+		option.style.width='200px';
+		option.style.height='200px';
+        // Add it to the list:
+		list.appendChild(item);	
+				
+		var randomizeColour = getRandomNumberUpTo(2);
+		
+		//Randomize Caterpillar colour pallette 
+
+		if (randomizeColour == 1){
+			option.style.backgroundImage = 'url("../img/phonics/greenbody.png")';
+		}else{
+			option.style.backgroundImage = 'url("../img/phonics/yellowbody.png")';
+		}	
+		
+		option.style.backgroundSize = "100% 100%";
+		
+		var textNode = document.createElement('h1');
+		textNode.innerHTML = array[i];
+		textNode.style.fontSize = "40px";
+		option.appendChild(textNode);
+		// Set the list item's contents:
+		//Adds sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
+	//-------------------------------------------------
+	option.addEventListener('mouseenter', function(){playPhoneticSound(this.childNodes[0].innerHTML);});
+	option.onclick = function(){checkAnswer(this.childNodes[0].innerHTML);};
+	//Added sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
+	//-------------------------------------------------
+		item.appendChild(option);
+	}
+	
+    // Finally, return the constructed list:
+	return list;
+	
+}
+
+function checkAnswer(userAnswer){
+	chosenAnswer[currentQCount] = userAnswer;
+	
+	answer = caterpillars[currentQCount].answer;
+	answers[currentQCount] = answer;
 
 	//get answer from global variable of current Question
-	answer = currentQuestion.Answer;
 
-	if (chosenAnswer[currentQCount] == currentQuestion.Options[answer]) {
+	if (userAnswer== answer) {
 		//Correct Answer
 		rightOrWrong[currentQCount] = 1;
 		console.log("Ding!");
@@ -203,27 +284,28 @@ function checkAnswer(id){
 		console.log("bleeehh");
 	}
 	//Next Question
+	document.getElementById(`bodyID${caterpillars[currentQCount].missingPos}`).firstChild.innerHTML=userAnswer;
 	animateNextQuestion();
 }
 
 function animateNextQuestion(){
 	//Stops Clicking
-	for (i = 0; i < currentQuestion.Options.length; i ++){
-		buttonID = "btnID" + i;
-		document.getElementById(buttonID).style.cursor = "initial";
-		document.getElementById(buttonID).onclick = function() {
-		return false;
-	}
-	}
+	// for (i = 0; i < currentQuestion.Options.length; i ++){
+	// 	bodyID = "body" + i;
+	// 	document.getElementById(bodyID).style.cursor = "initial";
+	// 	document.getElementById(bodyID).onclick = function() {
+	// 	return false;
+	// }
+	
 	
 
 	//head = document.getElementById("testtttttttt"); //was testing why it was not moving
 	head = document.getElementById("caterpillarHead");
-	body = document.getElementById("question0AnsOptions");
+	body = document.getElementById("question0Caterpillar");
 
 	var posHead = -60;
-	var posBody = 0;
-	var id = setInterval(frame, 1);
+	var posBody = 50;
+	var id = setInterval(frame, 0.1);
 	
 	function frame() {
 		if (posHead == -900) {
@@ -233,14 +315,14 @@ function animateNextQuestion(){
 			posHead = -60;
 			head.style.marginLeft = posHead + 'px';
 			incrementQuestions();
+			
+			body.style.marginLeft ='50px';
+			//body.style.marginleft = posBody + 'px';
 		} else {
 			posHead--; 
 			posBody--;
 			head.style.marginLeft = posHead + 'px';
 			body.style.marginLeft = posBody + 'px';
-			console.log("head: "+posHead); 
-			console.log("body: "+posBody);
-
 		}
 	}
 }
@@ -253,39 +335,20 @@ function getOffset(el) {
   };
 }
 
-function playPhoneticSound(bttnsID){
-	var elem = document.getElementById(bttnsID);
-	var txt =  elem.innerText;
-	switch(txt){
-		case "a":
-			var audio = document.getElementById("ah");
-			audio.play();
-		break;
-		case "e":
-			var audio = document.getElementById("eh");
-			audio.play();
-		break;
-		case "th":
-			var audio = document.getElementById("th");
-			audio.play();
-		break;
-		default:
-			//console.log("No response to hover");
-	}
+function playPhoneticSound(sound){
+	var src = `../music/phonics/${sound}.mp3`;
+	playSFX(src);
 }
 
 function showResults(){	
 	head = document.getElementById("caterpillarHead");
 	head.style.display = "none";
-	document.getElementById("questionText0").innerHTML = "";
-	document.getElementById("question0Options").innerHTML = "";
-	questionArea = document.getElementById("question0");
-	questionArea.style.width = "400px";
-	questionArea.style.marginLeft = "29%";
+	document.getElementById("question0Options").style.display = "none";
+	
 	
 	headerResults = document.getElementById("resultsText0");
-	headerResults.innerHTML = "Results";
 	headerResults.style.opacity = 1;
+	document.getElementById("results").style.display ="block";
 
 	document.getElementById("shortHR").style.width = "150px";
 
@@ -296,8 +359,6 @@ function showResults(){
 
 
 	//Display User's Score
-	var scoreReview = document.createElement('div');
-	scoreReview.className += "scoreInfo";
 	timeTaken = document.getElementById("seconds").textContent;
 
 	overAllScore = 0; 
@@ -307,12 +368,13 @@ function showResults(){
 			overAllScore = overAllScore + 1;
 		}
 	}
-	scoreReview.innerHTML = '<div style="padding-bottom: 10px; height: 33px;"><h4 style="float:left">Your score is:</h4> <p style="float:right; padding-right: 35px;">'+overAllScore+'/'+NumberOfGameQuestions+' </p></div><br><div style="padding-bottom: 10px;"><h4 style="float: left">Time Taken: </h4> <p style="float: right; padding-right:35px">' +timeTaken+' seconds</p></div>' ;
-
-	review.appendChild(scoreReview);	
+	document.getElementById("score0").innerHTML=`${overAllScore}/${NumberOfGameQuestions}`;
+	document.getElementById("timeTaken0").innerHTML=`${timeTaken} seconds`;
 
 	var openReview = document.createElement('div');
-	openReview.innerHTML = '<input type="checkbox" id="toggle" /><label for="toggle"><div class="expand" style="width: 100%; margin-top: 71px; margin-left: 19%; padding-bottom: 20px;"><div class="changeArrow arrow-up">↑</div><div class="changeArrow arrow-dn">↓</div><b>Click here to review your answers</b></div></label><div class="fieldsetContainer"><fieldset id="fdstLorem"></fieldset></div>';
+	openReview.id="reviewAccordian";
+	openReview.style.display="block";
+	openReview.innerHTML = '<input type="checkbox" id="toggle" /><label for="toggle"><div class="expand" styele="margin-bottom:10px;"><div class="changeArrow arrow-up">↑</div><div class="changeArrow arrow-dn">↓</div><b>Click here to review your answers</b></div></label><div class="fieldsetContainer"><fieldset id="fdstLorem"></fieldset></div>';
 	review.appendChild(openReview);
 	
 	for (i = 0; i < NumberOfGameQuestions; i++){
@@ -333,12 +395,12 @@ function showResults(){
 		}		
 
 		var acc = document.getElementsByClassName("accordion");
-
+		console.log(chosenAnswer[i])
 		reviewQuestion.innerHTML = '<p>Question ' + questionNum + ': ' + pointGiven + '</p>';
-		reviewableContent.innerHTML = '<p> ' + questionStore[i].Question + '</p> <br> Your answer: '+ chosenAnswer[i] +' <br> <p style="padding-bottom: 10px">Answer: ' + questionStore[i].Options[[questionStore[i].Answer]] +' </p>';
+		reviewableContent.innerHTML = '<p> ' + caterpillars[i].word + '</p> <br> Your answer: '+ chosenAnswer[i] +' <br> <p style="padding-bottom: 10px">Answer: ' + caterpillars[i].answer +' </p>';
 		
 		//Show easily right questions and wrong ones
-		if (chosenAnswer[i] == questionStore[i].Options[[questionStore[i].Answer]]){
+		if (chosenAnswer[i] == caterpillars[i].answer){
 			reviewQuestion.style.backgroundColor = "#e6ffcc"; // green
 		}else{
 			reviewQuestion.style.backgroundColor = "#ffcccc"; //red
@@ -370,9 +432,10 @@ function gameZeroReset(){
 	document.getElementById("game_container").style.backgroundImage = "url('../img/background_waterfall.gif')";
 	document.getElementById(`overlay0`).style.display = "block";
 	document.getElementById(`gameContainer0`).style.display = "none";
+	clearInterval(timeTaken);
 
 	for (i = 0; i < NumberOfGameQuestions; i++){
-		document.getElementById("question0Options").innerHTML = ""; //CHANGE TO i or the game will go blank when a question is called
+		document.getElementById("question0Caterpillar").innerHTML = ""; //CHANGE TO i or the game will go blank when a question is called
 	}
 }
 
@@ -389,11 +452,11 @@ function questionReset(){
 	review.innerHTML = "";
 	review.style.display = "none"; 
 
-	questionArea = document.getElementById("question0");
-	questionArea.style.width = "900px"
-	questionArea.style.marginLeft= "4.7%";
+	// questionArea = document.getElementById("question0");
+	// questionArea.style.width = "900px"
+	// questionArea.style.marginLeft= "4.7%";
 		 	
-	document.getElementsByClassName("scoreInfo").innerHTML = ""; //Resets Result info
+	//document.getElementsByClassName("scoreInfo").innerHTML = ""; //Resets Result info
 
 	for (i = 0; i < NumberOfGameQuestions; i++){
 		document.getElementById("question0Options").innerHTML = ""; 

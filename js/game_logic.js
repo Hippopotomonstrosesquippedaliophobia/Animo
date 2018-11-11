@@ -9,8 +9,6 @@ function startGame(){
 	//document.getElementById("home_button").style.display = "none"; // Hides Home button 
 	// muteAudio();
 
-	var test = new Fraction(6);
-	console.log(test, test.generateAnswer());
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
 		
@@ -83,9 +81,7 @@ function continueGame(){
 	document.getElementById("home_page").style.display = "block";	
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
+
 
 function reset(id){
 	switch(id){
@@ -207,7 +203,22 @@ function generateRandomNumber(min, max) {
     
 	var random_number = Math.random() * (max-min) + min;
 	return Math.floor(random_number);
- }
+}
+
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
+
+function getRandomNumberUpTo(max) {
+	return Math.floor(Math.random() * Math.floor(max));
+  }
 //Functions to load before HTML loads
 window.onload = function() {
 	
