@@ -42,7 +42,7 @@
 				<!-- MINIGAMES-->
 				
 				<div id="gameArea0" style="height: inherit; width:inherit">
-					<div id="overlay0" class="rounded_corners fade-in overlay" onclick="offOverlay0()">		
+					<div id="overlay0" class="rounded_corners fade-in overlay" onclick="game0.offOverlay()">		
 						<div style="margin-left: 450px; margin-top: 530px; position: absolute; color: white">Click anywhere to continue</div>				
 						<center>
 							<h1 style="margin-top: 180px; font-family: Verdana,sans-serif; color: white">INSTRUCTIONS</h1>
@@ -71,8 +71,10 @@
 											<td><p id="timeTaken0" style="font-family: 'Press Start 2P', cursive; font-size: 15px""></p></td>
 										</tr>
 									</table>
-								</div>
+								</div>								
 							</div>
+							<button class="eightbit-btn" style="width:100px; font-size: 15px;">Restart</button> 
+							<button class="eightbit-btn" style="width:100px; font-size: 15px;" onclick="homeBtnClick()">Home</button>
 						</div>
 						<div id="question0Caterpillar" style="margin-left: 50px"></div>
 						<div id="question0Options"></div>				
@@ -92,7 +94,7 @@
 						<div id="gameContainer1">
 						
 							<div class = "chris-wrapper">
-								<img id = "backwall" src="../img/christopher/Wall.png">
+								<!-- <img id = "backwall" src="../img/christopher/Wall.png"> -->
 								<img id="ronaldo" src="../img/christopher/ronaldo.png">
 								<span id="ronaldo-talk"></span>
 								<img id="stumpy" src="../img/christopher/stumpy1.png">

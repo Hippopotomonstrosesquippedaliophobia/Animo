@@ -53,6 +53,7 @@ class gameArea1{
 		this.spos;
 		this.lpos;
 		this.cpos;
+		this.talk;
 	}
 	
 
@@ -166,6 +167,7 @@ class gameArea1{
 
 	//stop the interval from repeating in the gameload after the dialog is complete
 	static stopFunction(text) {
+		console.log(text);
 		clearInterval(text);
 		document.getElementById('ronaldo').style.display="none";
 		document.getElementById('ronaldo-talk').style.display="none";
@@ -173,15 +175,26 @@ class gameArea1{
 		document.getElementById("gameContainer1").removeEventListener("click", function(){});
 	}
 
+	pause(){
+		clearInterval(this.talk);
+	}
+
+	resume(){
+		if(this.line<=11);		
+		this.talk=setInterval(gameArea1.convo,3000, this);
+	}
+
 	load(fisrtLoad=true){
 		
-		setBackgroundMusic("../music/background_music2.mp3");
+		
 		setTimeout(this.convo,2000);
 		if(fisrtLoad){
-			var talk=setInterval(gameArea1.convo,3000, this);
+			var talk = this.talk=setInterval(gameArea1.convo,3000, this);
 			document.getElementById("gameContainer1").addEventListener("click", function(){
 				gameArea1.stopFunction(talk)});
-			setTimeout(gameArea1.stopFunction,40000,talk);
+			setTimeout(gameArea1.stopFunction,40000,this.talk);
+			setBackgroundMusic("../music/background_music2.mp3");
+			setBackgorundImage("../img/christopher/wall.png");
 		}
 
 		var sandQuestion = new Fraction(generateRandomNumber(2,10));
@@ -400,12 +413,12 @@ class gameArea1{
 
 	UpdateBackground(){	
 		this.wall++;
-		document.getElementById('backwall').src="../img/christopher/Wall"+this.wall+".png";
+		setBackgorundImage("../img/christopher/Wall"+this.wall+".png");
 	}
 
 	DestroyWallBackground(){
 		this.wall--;
-		document.getElementById('backwall').src="../img/christopher/wall"+this.wall+".png";
+		setBackgorundImage("../img/christopher/wall"+this.wall+".png");
 	}
 
 	GameFinish(){
@@ -423,7 +436,9 @@ class gameArea1{
 		this.wall = 0;
 		this.correct = 0;
 		this.subRound = 0;
-
+		gameArea1.stopFunction(this.talk);
+		clearInterval(this.talk);
+		console.log(this.talk);
 		document.getElementById(`overlay1`).style.display = "block";
 		document.getElementById(`gameContainer1`).style.display = "none";
 

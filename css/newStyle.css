@@ -54,12 +54,15 @@
 	border-radius: 53%;
 	padding: 3%;
 	display: none;
+	width: auto;
+	height: auto;
+	max-width: 600px;
 }
 
 #stumpy
 {
 	position: absolute;
-	top:12%;
+	bottom:25px;
 	left:-15%;
 }
 #stumpy-talk
@@ -67,9 +70,11 @@
 	font-size: 20px;
 	color: black;
 	position: absolute;
-	top:5%;
-	left: -5%;
-	width: 50%;
+	top:30%;
+	left: 5%;
+	width: auto;
+	height: auto;
+	max-width: 600px;
 	background-color: white;
 	border-radius: 53%;
 	padding: 3%;
@@ -79,9 +84,9 @@
 	display: grid;
 }
 .chris-lower{
+	margin-left: 200px;
 	display: grid;
-	grid-template-columns: 65% 35%;
-	
+	grid-template-columns: 65% 35%;	
 }
 
 .left{
@@ -100,16 +105,18 @@
 }
 
 .sand{
+	margin-top:100px;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-
 }
 .lime{
+	margin-top:100px;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	display: none;
 }
 .cement{
+	margin-top:100px;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	display: none;
@@ -118,6 +125,8 @@
 
 .right
 {
+	
+	margin-top:150px;
 	display: grid;
 	grid-template-rows: 16fr 11fr;
 	font-size: 20px;
@@ -226,6 +235,10 @@ sub{
 	display: inline-block;
 	padding: 0px 20px 0px 20px;
 	font-family: sans-serif;
+}
+#answer-box
+{	
+	padding-top:50px;
 }
 #answer-box > div > span > sup
 {

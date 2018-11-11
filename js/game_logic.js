@@ -1,6 +1,7 @@
 var activeDivId;
 var game2 = new gameArea2();
 var game1 = new gameArea1();
+var game0 = new gameArea0();
 
 function startGame(){
 	var divCount = 2; //Set this to the amount of divs there are (levels) (-1 because starts at 0)
@@ -28,7 +29,7 @@ function playGame(index){
 	activeDivId = index;
 	switch (activeDivId){
 		case 0:
-			gameZeroLoad();
+			game0.load();
 			break;
 		case 1:
 			game1.load();
@@ -68,6 +69,9 @@ function showPage() {
   document.getElementById("start_page").style.display = "block";
 }
 
+function setBackgorundImage(src){
+	document.getElementById("game_container").style.backgroundImage = `url(${src})`;
+}
 	
 function continueGame(){
 	//If music isnt playing already, play music
@@ -86,7 +90,7 @@ function continueGame(){
 function reset(id){
 	switch(id){
 		case 0:
-			gameZeroReset();
+			game0.reset();
 			break;
 		case 1:
 			game1.reset();
@@ -104,7 +108,7 @@ function goHome(){
 	activeDivId = null;
 	resetBackgroundMusic();
 	continueGame();
-	resetcounters();
+	document.getElementById("game_container").style.backgroundImage = "url(../img/background_waterfall.gif)";
 	document.getElementById("home_button").style.display = "none"; //Hide home button since you are now home
 	document.getElementById("pause_button").style.display = "none";
 }
@@ -127,6 +131,7 @@ function pauseGame(fullscreen=true) {
 	//document.getElementById("game_container").style.zIndex = 1;
 	var menu = fullscreen ? "menu2" : "menu"
 	if(activeDivId==2) game2.pause();
+	if(activeDivId==1) game1.pause();
 	document.getElementById(menu).style.display = "block";
 }
 
@@ -145,7 +150,7 @@ function continueBtnClick(fullscreen=true){
 			
 			break;
 		case 1:
-			
+			game1.resume();
 			break;
 		case 2:
 			game2.resume();
