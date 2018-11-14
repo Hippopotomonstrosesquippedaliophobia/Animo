@@ -8,9 +8,8 @@
 	max-height: 95%;
 	position: relative;
 	left:-2%;
-
-
 }
+
 #chris-gameplay
 {
 	width: 100%;
@@ -20,6 +19,7 @@
 	position: absolute;
 	top: 5%;
 }
+
 #backwall
 {
 	float: right;

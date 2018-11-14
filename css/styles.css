@@ -69,6 +69,7 @@ audio {
 	margin-top: -10px;
 }
 #home_button{
+  margin-left: 20px;
   font-size: 20px;
   width: 70px;
   z-index: 1000;
@@ -153,6 +154,7 @@ audio {
   overflow: auto;
 }
 #gameArea0{
+  margin-top: 10px;
 	display: none;
 }
 #gameContainer0{
@@ -175,7 +177,16 @@ audio {
   float: left;
   margin: 50px;
 }
-
+.caterpillarAnswer{
+  width: 200px !important;
+  height: 200px !important;
+  transition: all 0.1s ease-in-out;
+}
+.caterpillarAnswer:hover {
+  width: 230px !important;
+  height: 230px !important;
+  transition: all 0.1s ease-in-out;
+}
 #question0OptionsList li::after{
   content: "";
   clear: both;
@@ -271,6 +282,11 @@ audio {
 #question0Caterpillar li {
   list-style: none;
   margin-right: -10px
+}
+
+#changeFont{
+  font-family: 'Press Start 2P';
+  font-size: 10px;
 }
 
 .accordion {
