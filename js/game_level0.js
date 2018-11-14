@@ -75,7 +75,8 @@ class gameArea0{
 		this.caterpillars = tempPillars;
 		document.getElementById('question0Caterpillar').appendChild(this.makeUL(this.caterpillars[this.currentQCount].letters));
 		var options = this.getOptions();
-		options.push(this.caterpillars[0].answer);
+		options.push(this.caterpillars[this.currentQCount].answer);
+		console.log(options);
 		options=(shuffle(options));
 		document.getElementById('question0Options').appendChild(this.makeOptions(options));
 		document.getElementById('question0Options').style.display="block";
@@ -110,7 +111,7 @@ class gameArea0{
 
 	nextQuestion(currentQCount){	
 		var options = this.getOptions();
-		options.push(this.caterpillars[0].answer);
+		options.push(this.caterpillars[this.currentQCount].answer);
 		options=(shuffle(options));
 		document.getElementById('question0Options').appendChild(this.makeOptions(options));
 		document.getElementById('question0Caterpillar').appendChild(this.makeUL(this.caterpillars[currentQCount].letters));
@@ -132,7 +133,7 @@ class gameArea0{
 		// Needs more questions to be added for now
 		//---------------------------------------------------------------------------------
 		randomNums.forEach(function(callNum){
-			questions.push(getJson(`Phonics/${2}`));
+			questions.push(getJson(`Phonics/${callNum}`));
 		});
 		//---------------------------------------------------------------------------------
 		// Use this line instead when testing or LIVE to simulate random question calls 
