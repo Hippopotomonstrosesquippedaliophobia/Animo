@@ -136,7 +136,7 @@ class gameArea0{
 		// Needs more questions to be added for now
 		//---------------------------------------------------------------------------------
 		randomNums.forEach(function(callNum){
-			questions.push(getJson(`Phonics/${2}`));
+			questions.push(getJson(`Phonics/${callNum}`));
 		});
 		//---------------------------------------------------------------------------------
 		// Use this line instead when testing or LIVE to simulate random question calls 
