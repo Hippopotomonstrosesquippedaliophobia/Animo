@@ -55,38 +55,43 @@ class gameArea0{
 
 		clearInterval(this.timeTaken);//Reset clock everytime 
 		this.timeTaken = window.setInterval((function(){
-							var start = Date.now();
-							var secondsCounter = document.getElementById('seconds');
-							return function() {
-								secondsCounter.innerHTML = Math.floor((Date.now()-start)/1000);
-							};
-						}()), 1000);	
+			var start = Date.now();
+			var secondsCounter = document.getElementById('seconds');
+			return function() {
+				secondsCounter.innerHTML = Math.floor((Date.now()-start)/1000);
+			};
+		}()), 1000);	
 	}
 
 	load(){
 		//Aesthetic Setup
 		document.getElementById("game_container").style.backgroundImage = "url('../img/phonics/sky.png')";
 		document.getElementById("caterpillarHead").style.display = "block";
+
+		//Change music
 		setBackgroundMusic('../music/background0.mp3'); 
+
 		var tempPillars =[];
 		this.getQuestions().forEach(function(response){			
 			tempPillars.push(new Caterpillar(response.word));
 		});
 		this.caterpillars = tempPillars;
+
+		//Add Options to Caterpillar etc: Set up question
 		document.getElementById('question0Caterpillar').appendChild(this.makeUL(this.caterpillars[this.currentQCount].letters));
 		var options = this.getOptions();
 		options.push(this.caterpillars[0].answer);
 		options=(shuffle(options));
 		document.getElementById('question0Options').appendChild(this.makeOptions(options));
+
+		//Display it to screen		
 		document.getElementById('question0Options').style.display="block";
 	
 		clearInterval(this.timeTaken);//Reset clock everytime 
 		this.resetcounters();
-
 	}
 
-	incrementQuestions(){
-		
+	incrementQuestions(){		
 		this.clearQuestion();
 		//questionReset();
 		if (this.currentQCount < this.NumberOfGameQuestions - 1) {
@@ -121,7 +126,6 @@ class gameArea0{
 			document.getElementById('question0Caterpillar').firstChild.remove();
 		if(document.getElementById('question0Options').firstChild!=null)
 			document.getElementById('question0Options').firstChild.remove();
-
 	}
 
 	// Gets a list of questions from the database
@@ -132,14 +136,13 @@ class gameArea0{
 		// Needs more questions to be added for now
 		//---------------------------------------------------------------------------------
 		randomNums.forEach(function(callNum){
-			questions.push(getJson(`Phonics/${2}`));
+			questions.push(getJson(`Phonics/${callNum}`));
 		});
 		//---------------------------------------------------------------------------------
 		// Use this line instead when testing or LIVE to simulate random question calls 
 		// 	questions.push(getJson(`Phonics/${callNum}`));
 		//	questions.push(getJson(`Phonics/0`));
 		//----------------------------------------------------------------------------------
-
 		return questions;
 	}
 
@@ -231,9 +234,11 @@ class gameArea0{
 		var list = document.createElement('ul');
 		list.style.marginTop = "70px";
 		list.id = "question0OptionsList";
+		
 		for(var i = 0; i < array.length; i++) {
 			// Create the list item:
 			var item = document.createElement('li');
+			item.style.width = "200px";
 			var option = document.createElement('div');
 			option.style.width='200px';
 			option.style.height='200px';
@@ -259,6 +264,9 @@ class gameArea0{
 			// Set the list item's contents:
 			//Adds sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
 			//-------------------------------------------------
+			option.style.cursor= "pointer";
+			option.id = "caterpillarAnswer"+i;			
+			option.classList.add("caterpillarAnswer");
 			option.addEventListener('mouseenter', function(){gameArea0.playPhoneticSound(this.childNodes[0].innerHTML);});
 			var game = this;
 			option.onclick = function(){game.checkAnswer(this.childNodes[0].innerHTML)};
@@ -288,7 +296,7 @@ class gameArea0{
 			this.rightOrWrong[this.currentQCount] = 0;
 		}
 		//Next Question
-		document.getElementById(`bodyID${this.caterpillars[this.currentQCount].missingPos}`).firstChild.innerHTML=userAnswer;
+		document.getElementById(`bodyID${this.caterpillars[this.currentQCount].missingPos}`).firstChild.innerHTML= userAnswer;
 		this.animateNextQuestion();
 	}
 
@@ -330,7 +338,8 @@ class gameArea0{
 		};
 	}
 
-	static playPhoneticSound(sound){
+	static playPhoneticSound(sound, id){
+		//play sound effect
 		var src = `../music/phonics/${sound}.mp3`;
 		playSFX(src);
 	}
@@ -368,7 +377,7 @@ class gameArea0{
 		var openReview = document.createElement('div');
 		openReview.id="reviewAccordian";
 		openReview.style.display="block";
-		openReview.innerHTML = '<input type="checkbox" id="toggle" /><label for="toggle"><div class="expand" styele="margin-bottom:10px;"><div class="changeArrow arrow-up">↑</div><div class="changeArrow arrow-dn">↓</div><b>Click here to review your answers</b></div></label><div class="fieldsetContainer"><fieldset id="fdstLorem"></fieldset></div>';
+		openReview.innerHTML = '<input type="checkbox" id="toggle" /><label for="toggle"><div class="expand" style="margin-bottom:25px;"><div class="changeArrow arrow-up">↑</div><div class="changeArrow arrow-dn">↓</div><b id="changeFont">Click to review your answers</b></div></label><div class="fieldsetContainer"><fieldset id="fdstLorem"></fieldset></div>';
 		review.appendChild(openReview);
 		
 		for (var i = 0; i < game.NumberOfGameQuestions; i++){
@@ -433,6 +442,12 @@ class gameArea0{
 		for (var i = 0; i < this.NumberOfGameQuestions; i++){
 			document.getElementById("question0Caterpillar").innerHTML = ""; //CHANGE TO i or the game will go blank when a question is called
 		}
+	}
+	
+	restart(){
+		//Perform all resets and reload
+		this.reset();
+		this.load();
 	}
 
 	questionReset(){

@@ -224,6 +224,7 @@ function shuffle(a) {
 function getRandomNumberUpTo(max) {
 	return Math.floor(Math.random() * Math.floor(max));
   }
+  
 //Functions to load before HTML loads
 window.onload = function() {
 	
