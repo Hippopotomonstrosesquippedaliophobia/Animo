@@ -85,7 +85,6 @@ class gameArea2 {
 				document.getElementById("userMathAnswer").focus = true;
 				document.getElementById("home_button").style.display = "block";
 				document.getElementById("pause_button").style.display = "block";
-				//document.getElementById(`userMathAnswer`).focus();
 				playSFX("../music/game2/go.wav");
 				game2.balloonFloat();
 			}

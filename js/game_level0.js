@@ -1,6 +1,7 @@
 class Caterpillar{
-	constructor(word){
+	constructor(word, audio){
 		this.word = word;
+		this.audio = audio;
 		var manipArray = word.split('{');
 		var splitArray = manipArray[1].split('}');
 		manipArray.pop();			
@@ -44,8 +45,10 @@ class gameArea0{
 	}
 
 	resetcounters(){
-		var currentQuestion = 0;
-		var currentQCount = 0;
+		this.currentQuestion = 0;
+		this.currentQCount = 0;
+		this.rightOrWrong = [];
+		this.chosenAnswer = [];
 	}
 
 	offOverlay(){
@@ -61,6 +64,9 @@ class gameArea0{
 				secondsCounter.innerHTML = Math.floor((Date.now()-start)/1000);
 			};
 		}()), 1000);	
+		
+		//playSFX(`../music/phonics/screw.mp3`, 1);
+		playSFX(`../music/phonics/${this.caterpillars[0].audio}`, 1);
 	}
 
 	load(){
@@ -73,7 +79,7 @@ class gameArea0{
 
 		var tempPillars =[];
 		this.getQuestions().forEach(function(response){			
-			tempPillars.push(new Caterpillar(response.word));
+			tempPillars.push(new Caterpillar(response.word, response.audio));
 		});
 		this.caterpillars = tempPillars;
 
@@ -99,6 +105,7 @@ class gameArea0{
 			//Ensuring Questions are not equal to the max set questions
 			this.currentQCount++;
 			this.nextQuestion(this.currentQCount);
+			playSFX(`../music/phonics/${this.caterpillars[this.currentQCount].audio}`, 1);
 		}else{
 			//Prepare Results area for text appending	
 			document.getElementById("caterpillarHead").style.display = "none";	
@@ -120,6 +127,7 @@ class gameArea0{
 		options=(shuffle(options));
 		document.getElementById('question0Options').appendChild(this.makeOptions(options));
 		document.getElementById('question0Caterpillar').appendChild(this.makeUL(this.caterpillars[currentQCount].letters));
+		
 	}
 
 	clearQuestion(){
@@ -268,7 +276,7 @@ class gameArea0{
 			option.style.cursor= "pointer";
 			option.id = "caterpillarAnswer"+i;			
 			option.classList.add("caterpillarAnswer");
-			option.addEventListener('mouseenter', function(){gameArea0.playPhoneticSound(this.childNodes[0].innerHTML);});
+			//option.addEventListener('mouseenter', function(){gameArea0.playPhoneticSound(this.childNodes[0].innerHTML);});
 			var game = this;
 			option.onclick = function(){game.checkAnswer(this.childNodes[0].innerHTML)};
 			//Added sound effect on hover buttons for the answers and on click for selection. (on click because buttons might change)
@@ -436,6 +444,10 @@ class gameArea0{
 		document.getElementById(`overlay0`).style.display = "block";
 		document.getElementById(`gameContainer0`).style.display = "none";
 		document.getElementById(`results`).style.display = "none";
+		if(this.currentQCount>=this.NumberOfGameQuestions-1){
+			var accordian = document.getElementById("reviewAccordian");
+			accordian.parentNode.removeChild(accordian);
+		}
 		clearInterval(this.timeTaken);
 		//this.questionReset();
 		this.clearQuestion();
@@ -464,11 +476,6 @@ class gameArea0{
 		review.innerHTML = "";
 		review.style.display = "none"; 
 
-		// questionArea = document.getElementById("question0");
-		// questionArea.style.width = "900px"
-		// questionArea.style.marginLeft= "4.7%";
-				
-		//document.getElementsByClassName("scoreInfo").innerHTML = ""; //Resets Result info
 
 		for (var i = 0; i < this.NumberOfGameQuestions; i++){
 			document.getElementById("question0Options").innerHTML = ""; 

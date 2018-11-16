@@ -28,6 +28,11 @@ class Fraction{
 		return this.gcd(b, a % b);  		
 	} 
 
+	isEqualTo(that){
+		if(this.numerator/this.denominator == that.numerator/that.denominator) return true;
+		return false;
+	}
+
 	generateAnswer(){
 		var answer = new Fraction();
 		var hcf = this.gcd(this.numerator, this.denominator)
@@ -61,7 +66,10 @@ class gameArea1{
 		document.getElementById(`overlay1`).style.display = "none";
 		document.getElementById(`gameContainer1`).style.display = "block";	
 		document.getElementById("home_button").style.display = "block";
+			
+		document.getElementById("sand").style.display = "grid";
 		
+		document.getElementById("sand-drop").style.display="inline";
 	}	
 
 	static convo(game){
@@ -167,7 +175,6 @@ class gameArea1{
 
 	//stop the interval from repeating in the gameload after the dialog is complete
 	static stopFunction(text) {
-		console.log(text);
 		clearInterval(text);
 		document.getElementById('ronaldo').style.display="none";
 		document.getElementById('ronaldo-talk').style.display="none";
@@ -257,10 +264,19 @@ class gameArea1{
 			s_U=document.getElementById("sn"+i);
 			l_U=document.getElementById("ln"+i);
 			c_U=document.getElementById("cn"+i);
-			 
-			var sandRando = new Fraction(generateRandomNumber(2,10));			
-			var limeRando = new Fraction(generateRandomNumber(2,10));			
-			var cementRando = new Fraction(generateRandomNumber(2,10));
+			
+			var sandRando;
+			var limeRando;
+			var cementRando;
+			do{
+				sandRando = new Fraction(generateRandomNumber(2,10));
+			}while(sandRando.isEqualTo(sandAnswer));
+			do{
+				limeRando = new Fraction(generateRandomNumber(2,10));
+			}while(limeRando.isEqualTo(limeAnswer));	
+			do{
+				cementRando = new Fraction(generateRandomNumber(2,10));
+			}while(cementRando.isEqualTo(cementAnswer));
 
 			//denominator assignment
 			s_L.innerHTML = i==this.spos? sandAnswer.denominator : sandRando.denominator;			
@@ -272,10 +288,7 @@ class gameArea1{
 			c_U.innerHTML = i==this.cpos? cementAnswer.numerator : cementRando.numerator;
 		}
 		return;
-	}
-
-	//global variable called id stores the id of the item being dragged
-		
+	}		
 
 	AllowDrop(ev){
 		ev.preventDefault();
@@ -283,7 +296,6 @@ class gameArea1{
 
 	DragStart(ev){
 		this.id=ev.target.id;
-		//alert(id+"hiiii");
 	}
 	
 	Drop(ev){
@@ -334,7 +346,7 @@ class gameArea1{
 				output.innerHTML="hmm I don't know if thats right";
 			}
 
-			if (this.correct== 3 && this.wall<10)
+			if (this.correct== 3 && this.wall<9)
 			{ 
 				this.UpdateBackground();
 			}else if(this.subRound==3 && this.correct!=3 && this.wall>0  ){
@@ -342,11 +354,10 @@ class gameArea1{
 				this.correct=0;
 			}
 			
-			
-			
-			if(this.wall==9)
+			if(this.wall>=9)
 			{
-				return setTimeout(gameArea1.transition,300,'finish',this);
+				setTimeout(gameArea1.transition,300,'finish',this);
+				return;
 			}
 
 			setTimeout(gameArea1.transition,2000,current,this);
@@ -362,73 +373,77 @@ class gameArea1{
 
 	static transition(currentDisplay, game1){
 		if(currentDisplay=="sand-drop")
-			{
-				document.getElementById(currentDisplay).style.display="none";
+		{
+			document.getElementById(currentDisplay).style.display="none";
 
-				document.getElementById("lime-drop").style.display="inline";
+			document.getElementById("lime-drop").style.display="inline";
 
-				document.getElementById('sand').style.display="none";
+			document.getElementById('sand').style.display="none";
 
-				document.getElementById("lime").style.display="grid";
+			document.getElementById("lime").style.display="grid";
 
-				document.getElementById('chris-cart').src="../img/christopher/wheel_barrow_cropped_sand.png";
-			}
+			document.getElementById('chris-cart').src="../img/christopher/wheel_barrow_cropped_sand.png";
+		}
 
 		if(currentDisplay=="lime-drop")
-			{
-				document.getElementById(currentDisplay).style.display="none";
+		{
+			document.getElementById(currentDisplay).style.display="none";
 
-				document.getElementById("cement-drop").style.display="inline";
+			document.getElementById("cement-drop").style.display="inline";
 
-				document.getElementById('lime').style.display="none";
+			document.getElementById('lime').style.display="none";
 
-				document.getElementById("cement").style.display="grid";
+			document.getElementById("cement").style.display="grid";
 
-				document.getElementById('chris-cart').src="../img/christopher/wheel_barrow_cropped_lime.png";
-			}
+			document.getElementById('chris-cart').src="../img/christopher/wheel_barrow_cropped_lime.png";
+		}
 
 		if(currentDisplay=="cement-drop")
-			{
-				document.getElementById(currentDisplay).style.display="none";
+		{
+			document.getElementById(currentDisplay).style.display="none";
 
-				document.getElementById("sand-drop").style.display="inline";
+			document.getElementById("sand-drop").style.display="inline";
 
-				document.getElementById('cement').style.display="none";
+			document.getElementById('cement').style.display="none";
 
-				document.getElementById("sand").style.display="grid";
+			document.getElementById("sand").style.display="grid";
 
-				document.getElementById('chris-cart').src="../img/christopher/wheel_barrow_cropped_cement.png";
+			document.getElementById('chris-cart').src="../img/christopher/wheel_barrow_cropped_cement.png";
 
-				game1.load(false);
-			}
+			game1.load(false);
+		}
 
 		if(currentDisplay == "finish")
 		{
 			document.getElementById("cement-drop").style.display="none";
 			document.getElementById("cement").style.display="none";
-			setTimeout(GameFinish,2000);
+			setTimeout(gameArea1.GameFinish, 1000);
+			return;
 		}
 		document.getElementById("stumpy-talk").style.display="none";
 	}
 
 	UpdateBackground(){	
 		this.wall++;
+		if(this.wall<=0) return;
 		setBackgorundImage("../img/christopher/Wall"+this.wall+".png");
 	}
 
 	DestroyWallBackground(){
 		this.wall--;
+		if(this.wall<=0) return;
 		setBackgorundImage("../img/christopher/wall"+this.wall+".png");
 	}
 
-	GameFinish(){
+	static GameFinish(){
 		document.getElementById('stumpy-talk').style.display="initial";
 		setTimeout(function(){
-			document.getElementById("ronaldo-talk").innerHTML="I see you finally finished";
-		},2000);
-		setTimeout(function(){
 			document.getElementById("stumpy-talk").innerHTML="Good job worker";
-		},1000)		
+		},1000)	
+		setTimeout(function(){
+			document.getElementById("gameOverMenu1").style.display="block";	
+		},2000);
+		
 	}
 
 	reset(){		//Function will be ran when the home button is clicked
@@ -438,11 +453,16 @@ class gameArea1{
 		this.subRound = 0;
 		gameArea1.stopFunction(this.talk);
 		clearInterval(this.talk);
-		console.log(this.talk);
 		document.getElementById(`overlay1`).style.display = "block";
 		document.getElementById(`gameContainer1`).style.display = "none";
+		document.getElementById("gameOverMenu1").style.display="none";	
 
 		return;
+	}
+
+	restart(){
+		this.reset();
+		this.load(true);
 	}
 }
 

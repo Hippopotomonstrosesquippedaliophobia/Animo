@@ -477,7 +477,8 @@ label .arrow-up { display: none; }
   top:0;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0;  
+  background-image: url("../img/pause.jpg");
   /*display: none;*/
   margin: auto;
   z-index: 1100;
@@ -487,9 +488,11 @@ label .arrow-up { display: none; }
   height: 400px;
 }
 
-/* #gameOverOcerlay2{
-
-} */
+#gameScore2{
+  font-family: 'Press Start 2P', cursive;
+  position: absolute;
+  left: 50%;
+}
 /**Game2 SECTION*/
 
 /**Miscellaneous*/

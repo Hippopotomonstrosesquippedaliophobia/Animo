@@ -12,7 +12,6 @@ function startGame(){
 
 	var myVar;
 	myVar = setTimeout(showPage, 0000);	//Set delay to show loader about 3000 = 3secs
-		
 }
 
 function offGameOverlay(){
@@ -23,7 +22,6 @@ function playGame(index){
 	playSFX("../music/select.wav");
 	document.getElementById(`home_page`).style.display = "none";	
 	document.getElementById(`gameArea${index}`).style.display = "block";
-	document.getElementById(`home_button`).style.display = "block";	
 	openFullscreen();
 
 	activeDivId = index;
