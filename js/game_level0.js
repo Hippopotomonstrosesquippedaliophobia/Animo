@@ -31,7 +31,7 @@ class Caterpillar{
 
 class gameArea0{
 	constructor(){
-		this.NumberOfGameQuestions = 2;
+		this.NumberOfGameQuestions = 5;
 		this.NumberOfAllQuestions = 10;
 		this.currentQuestion;
 		this.currentQCount = 0;
