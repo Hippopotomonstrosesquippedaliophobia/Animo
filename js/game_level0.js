@@ -375,6 +375,12 @@ class gameArea0{
 		document.getElementById("score0").innerHTML=`${overAllScore}/${game.NumberOfGameQuestions}`;
 		document.getElementById("timeTaken0").innerHTML=`${timeTaken} seconds`;
 
+		//remove old reviewAccordian
+
+		//document.getElementById("results").childNodes[4].remove();
+		
+		//removeElement("reviewAccordian");
+
 		var openReview = document.createElement('div');
 		openReview.id="reviewAccordian";
 		openReview.style.display="block";
@@ -435,7 +441,7 @@ class gameArea0{
 		document.getElementById("game_container").style.backgroundImage = "url('../img/background_waterfall.gif')";
 		document.getElementById(`overlay0`).style.display = "block";
 		document.getElementById(`gameContainer0`).style.display = "none";
-		document.getElementById(`results`).style.display = "none";
+		document.getElementById(`resultsReview`).style.display = "none";
 		clearInterval(this.timeTaken);
 		//this.questionReset();
 		this.clearQuestion();
@@ -463,6 +469,7 @@ class gameArea0{
 		review.style.opacity = 0;
 		review.innerHTML = "";
 		review.style.display = "none"; 
+		//removeElement("results");
 
 		// questionArea = document.getElementById("question0");
 		// questionArea.style.width = "900px"
