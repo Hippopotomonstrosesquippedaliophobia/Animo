@@ -156,7 +156,7 @@ class gameArea0{
 	}
 
 	getOptions(){
-		var callNums = this.getRandomNumbers(4,3);
+		var callNums = this.getRandomNumbers(11,3);
 		var options = new Array();
 		callNums.forEach(function(callnum){
 			options.push(getJson(`Options/${callnum}`));
