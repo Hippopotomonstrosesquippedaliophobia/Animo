@@ -203,9 +203,9 @@ audio {
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/*::-webkit-scrollbar-thumb {
   background: grey;
-}
+}*/
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
