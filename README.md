@@ -7,7 +7,7 @@ Animo was done for a software engineering school project.
 
 Click here to access the web-application:
 1. https://test-project-3d104.firebaseapp.com/ (Preferred)
-2. https://hippopotomonstrosesquippedaliophobia.github.io/Animo/html/ (Visual bug with "Build Blast" background image)
+2. https://hippopotomonstrosesquippedaliophobia.github.io/Animo/html/ (Visual bug with "Build Blast")
 
 
 This was the readme. Enjoy
