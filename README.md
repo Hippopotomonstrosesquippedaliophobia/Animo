@@ -5,7 +5,9 @@ Animo was done for a software engineering school project.
 
 - This is a fork of the original which was done in a group. -https://github.com/LostIncorporated/Animo
 
-Click here to access the web-application: https://hippopotomonstrosesquippedaliophobia.github.io/Animo/html/
+Click here to access the web-application:
+1. https://test-project-3d104.firebaseapp.com/ (Preferred)
+2. https://hippopotomonstrosesquippedaliophobia.github.io/Animo/html/ (Visual bug with "Build Blast" background image)
 
 
 This was the readme. Enjoy
